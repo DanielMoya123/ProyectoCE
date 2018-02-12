@@ -1,0 +1,151 @@
+%% ---------------------------------------------------------------------------
+%% proposal.tex
+%%
+%% Research Proposal, main document.
+%%
+%% ---------------------------------------------------------------------------
+\documentclass[12pt,letterpaper]{article}
+%\usepackage[english]{babel}     % supports english, but default is
+\usepackage[spanish]{babel}
+% include this if you want to import graphics files with /includegraphics
+\usepackage{anysize}
+\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
+\usepackage{textcomp}
+\usepackage{url}
+\bibliographystyle{unsrt}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{slashbox}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+% Color and strikethrough
+\usepackage{color}
+\usepackage{soul}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+\definecolor{dblue}{RGB}{0,102,153}
+\newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+
+\setlength{\parskip}{1em}
+
+% Nombre del Estudiante
+\newcommand{\scriptAuthor}{Daniel Moya Sánchez}
+
+% Tí­tulo de la tesis
+\newcommand{\scriptTitle}{Plan de Proyecto} 
+
+
+% Keywords
+\newcommand{\scriptKeywords}{key, words, ...}
+
+% Para el PDF (cambiar si se desea otras cosas a lo indicado arriba
+\newcommand{\pdfAuthor}{\scriptAuthor}
+\newcommand{\pdfTitle}{\scriptTitle} 
+\newcommand{\pdfKeywords}{\scriptKeywords}
+
+
+\begin{document}
+ 
+ \graphicspath{{./}{./fig/}}
+
+ \input{./titlepage.tex}
+
+%  \tableofcontents
+
+ \clearpage
+
+% El nombre del proyecto es preciso, conciso y no ambiguo
+\section{Nombre del proyecto}
+
+% Se identifica claramente la institución donde se realizará el proyecto
+\section{Nombre de la institución}
+
+% Se identifica claramente qué información se puede publicar, qué
+% información se puede compartir de manera limitada y qué
+% información se puede compartir si se firma un acuerdo de
+% confidencialidad.
+\section{Requerimientos de confidencialidad}
+
+
+% El problema se describe de manera detallada, identificando los
+% antecedentes, el contexto, usuarios, restricciones así como otros
+% aspectos relevantes para la resolución del mismo.
+
+% OPCIONAL: Se presenta una descripción del estado del arte de
+% las investigaciones sobre el tema en cuestión.
+\section{Descripción del problema}
+
+
+\section{Objetivos}
+
+% El objetivo general es directamente trazable al problema planteado, es claro, conciso.
+\subsection{Objetivo general}
+
+% Los objetivos específicos son suficientes y consistentes con el
+% objetivo general
+\subsection{Objetivos específicos}
+
+
+% La identificación de los involucrados y sus relaciones con el
+% proyecto es detallada. Las relaciones se describen en detalle,
+% señalando cuál es el interés del involucrado.
+\section{Personas involucradas en el proyecto}
+
+
+% Se presenta una descripción de la solución propuesta en
+% correspondencia con el problema planteado y los objetivos.
+% Se utilizan diagramas de bloques u otra información que permita
+% visualizar la estrategia de solución al problema planteado.
+
+% OPCIONAL: Se pressentan varias alternativas de solución a estudiar.
+\section{Descripción de la solución}
+
+
+% Los entregables con consistentes con los objetivos del proyecto y
+% con los productos de un proyecto de ingeniería de software para
+% efectos de desarrollo posterior o mantenimiento.
+% Los entregables tienen un identificador único.
+% Los entregables deben incluir:
+%	- Documento de Requerimientos
+%	- Documento de Diseño
+%	- Plan de pruebas/Resultados de las preubas
+%	- Otra documentación relevante: instrucciones de compilación,
+% manuales de instalación, manual de usuario etc.
+\section{Entregables y criterios de aceptación}
+
+
+% Las cuatro áreas analizadas (personal, herramientas, procesos,
+% insumos) son analizadas en detalle, identificando los riesgos más
+% sobresalientes para cada una de esas áreas. Para cada riesgo se
+% indica la probabilidad y el impacto para el proyecto.
+\section{Análisis de riesgos}
+
+% Las actividades propuestas son consistentes con los objetivos
+% específicos.
+% Las estimaciones de esfuerzos son proporcionales con la
+% complejidad o el tamaño de las mismas.
+% Se asigna un identificador único (código) a cada actividad.
+\section{Actividades y presupuesto de esfuerzo}
+
+% El cronograma incluye todas las actividades y las mismas no
+% guardan una consistecia lógica para la construcción de los
+% entregables.
+% Se incluyen hitos para los entregables más sobresalientes.
+% El nivel de granularidad de las actividades ofrece suficiente detalle.
+% Al menos una actividad por semana.
+\section{Cronograma}
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
+
+
+
+\end{document}
+
