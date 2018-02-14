@@ -5,8 +5,8 @@
 %%
 %% ---------------------------------------------------------------------------
 \documentclass[12pt,letterpaper]{article}
-%\usepackage[english]{babel}     % supports english, but default is
-\usepackage[spanish]{babel}
+\usepackage[english]{babel}     % supports english, but default is
+% \usepackage[spanish]{babel}
 % include this if you want to import graphics files with /includegraphics
 \usepackage{anysize}
 \marginsize{2.5cm}{2.5cm}{1cm}{1cm}
@@ -38,7 +38,7 @@
 \newcommand{\scriptAuthor}{Daniel Moya Sánchez}
 
 % Tí­tulo de la tesis
-\newcommand{\scriptTitle}{Plan de Proyecto} 
+\newcommand{\scriptTitle}{Project Plan} 
 
 
 % Keywords
@@ -61,17 +61,17 @@
  \clearpage
 
 % El nombre del proyecto es preciso, conciso y no ambiguo
-\section{Nombre del proyecto}
+\section{Name of the project}
 
-El nombre del proyecto es: Diseño de ASIPs para computación aproximada
+Design of Application Specific Instruction Set Processors (ASIPs) for Approximate Computing
 
 
 % Se identifica claramente la institución donde se realizará el proyecto
-\section{Nombre de la institución}
+\section{Name of the institution}
 
-Se estará trabajando de forma simultánea en dos instituciones: en el Laboratorio Sistemas Embebidos y Electrónica Digital
-(SEED-Lab) del Instituto Tecnológico de Costa Rica; por otro lado a través de conexiones remotas en Chair for Embedded System (CES), Kalrsruhe Institute
-of Technology (KIT), Alemania.
+Chair for Embedded System (CES), Kalrsruhe Instituteof Technology (KIT), Germany, and 
+Laboratorio Sistemas Embebidos y Electrónica Digital
+(SEED-Lab) del Instituto Tecnológico de Costa Rica
 
 
 
@@ -79,9 +79,11 @@ of Technology (KIT), Alemania.
 % información se puede compartir de manera limitada y qué
 % información se puede compartir si se firma un acuerdo de
 % confidencialidad.
-\section{Requerimientos de confidencialidad}
+\section{Confidentiality requirements}
 
-Dada la naturaleza académica del proyecto, no se tendrá ningún tipo de requerimiento de confidencialidad. Esto implica,
+Due to the academic nature of the project, there are no confidentiality requirements, however,
+there will not be published results during the development of the project but until the end of the work.
+
 
 
 
@@ -91,38 +93,52 @@ Dada la naturaleza académica del proyecto, no se tendrá ningún tipo de requerimi
 
 % OPCIONAL: Se presenta una descripción del estado del arte de
 % las investigaciones sobre el tema en cuestión.
-\section{Descripción del problema}
+\section{Problem description}
+
+
 Diseñar ASIPs aproximados para un conjunto de aplicaciones tolerantes a
 errores.
 
+Design Compiler and Prime Time, Synopsys
 
-\section{Objetivos}
+ModelSim, Mentor Graphics
+
+ISE, Xilinx + tarjeta Virtex-IV/V
+
+ASIPMeister
+
+CoSy compiler
+
+
+
+\section{Objectives}
 
 % El objetivo general es directamente trazable al problema planteado, es claro, conciso.
-\subsection{Objetivo general}
-Se pretende explorar el diseño de Application-Specific Instruction
-Set Processors (ASIP) para ser utilizados con aplicaciones tolerantes a errores.
-Mediante el uso de instrucciones aproximadas, se busca evaluar la
-tolerancia a errores de un conjunto de aplicaciones y los compromisos que
-se se alcanzan en términos de error vs. area, potencia y tiempo de
-ejecución.
+\subsection{General objectives}
+To explore the design of Application-Specific Instruction
+Set Processors (ASIP) to be used in error tolerant applications.
+
 
 
 
 % Los objetivos específicos son suficientes y consistentes con el
 % objetivo general
-\subsection{Objetivos específicos}
+\subsection{Specific objectives}
 
-El proyecto tiene los siguientes objetivos específicos. 
+The project has the following specific objectives:
 \begin{enumerate}
- \item Definir un conjunto de aplicaciones tolerantes a error.
+ \item To select 3 error tolerant applications to be evaluated. 
  
- \item Desarrollar instancias para hardware approximado.
+ \item To develop at least 3 instances of approximated hardware for tolerant error sections for each of the selected applications. 
  
- \item Desarrollar configuraciones de ASIPs aproximado.
  
- \item Realizar comparaciones, en términos de tiempo de ejecución, area y
-potencia para las versiones de ASIP aproximado.
+ \item To develop ASIPs configurations using specific approximated instruction.
+ 
+
+ \item To evaluate, with the use of approximated instructions, a set of applications in terms of execution time, 
+ area and power consumption vs the error achieved for the approximated ASIP.
+ 
+
 \end{enumerate}
 
 
@@ -130,7 +146,7 @@ potencia para las versiones de ASIP aproximado.
 % La identificación de los involucrados y sus relaciones con el
 % proyecto es detallada. Las relaciones se describen en detalle,
 % señalando cuál es el interés del involucrado.
-\section{Personas involucradas en el proyecto}
+\section{Project stakeholders}
 
 
 % Se presenta una descripción de la solución propuesta en
@@ -139,7 +155,7 @@ potencia para las versiones de ASIP aproximado.
 % visualizar la estrategia de solución al problema planteado.
 
 % OPCIONAL: Se pressentan varias alternativas de solución a estudiar.
-\section{Descripción de la solución}
+\section{Solution description}
 
 
 % Los entregables con consistentes con los objetivos del proyecto y
@@ -152,19 +168,19 @@ potencia para las versiones de ASIP aproximado.
 %	- Plan de pruebas/Resultados de las preubas
 %	- Otra documentación relevante: instrucciones de compilación,
 % manuales de instalación, manual de usuario etc.
-\section{Entregables y criterios de aceptación}
+\section{Deliverables and criteria of acceptance}
 
-Los entregables esperados son los siguientes:
+The expected deliverables are the following:
 
 \begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
- Nombre & Descripción & Criterios de aceptación \\
+Name & Description & Criteria of acceptance \\
  \hline
- Requerimiento 1.1 & Instancias de hardware aproximado (ID) & [criterio] \\ 
- Requerimiento 2.1 & Configuración de ASIPs aproximados & [criterio] \\ 
- Requerimiento 3.1 & Datos de tiempo de ejecución, área y potencia & [criterio] \\
- Requerimiento 4.1 & Comparación y análisis de los resultados obtenidos & [criterio] \\
+ Requirement 1.1 & Instances of approximated hardware & [criterio] \\ 
+ Requirement 2.1 & Configuration of approximated ASIPs & [criterio] \\ 
+ Requirement 3.1 & Data of execution time, area and power & [criterio] \\ %Plan de prueba
+ Requirement 4.1 & Comparison and analysis of the obtained results & [criterio] \\ %Plan Prueba
  \hline
 \end{tabular}
 \end{center}
@@ -176,11 +192,11 @@ Los entregables esperados son los siguientes:
 % insumos) son analizadas en detalle, identificando los riesgos más
 % sobresalientes para cada una de esas áreas. Para cada riesgo se
 % indica la probabilidad y el impacto para el proyecto.
-\section{Análisis de riesgos}
+\section{Risky Analysis}
 \begin{center}
 \begin{tabular}{ |c|c|c|c| } 
  \hline
- Riesgo & Probabilidad de ocurrencia & Impacto (horas) & Exposición a riesgo (horas) \\
+ Riesgo & Probability of occurrence & Impact (hours) & Risk exposure (hours) \\
  \hline
  Riesgo X & 0.5 & 8 & 4\\ 
  \hline
@@ -195,7 +211,7 @@ Los entregables esperados son los siguientes:
 % Las estimaciones de esfuerzos son proporcionales con la
 % complejidad o el tamaño de las mismas.
 % Se asigna un identificador único (código) a cada actividad.
-\section{Actividades y presupuesto de esfuerzo}
+\section{Activities and effort budget}
 
 % El cronograma incluye todas las actividades y las mismas no
 % guardan una consistecia lógica para la construcción de los
@@ -203,7 +219,7 @@ Los entregables esperados son los siguientes:
 % Se incluyen hitos para los entregables más sobresalientes.
 % El nivel de granularidad de las actividades ofrece suficiente detalle.
 % Al menos una actividad por semana.
-\section{Cronograma}
+\section{Schedule}
 
 % Referencias del Background y el Related Work
 \bibliographystyle{sty/plainurl}
