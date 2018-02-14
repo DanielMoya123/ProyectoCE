@@ -8,6 +8,11 @@
 \usepackage[english]{babel}     % supports english, but default is
 % \usepackage[spanish]{babel}
 % include this if you want to import graphics files with /includegraphics
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+\usepackage[table]{xcolor}
+
 \usepackage{anysize}
 \marginsize{2.5cm}{2.5cm}{1cm}{1cm}
 \usepackage{textcomp}
@@ -21,8 +26,14 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,positioning}
 % Color and strikethrough
+
+
+
 \usepackage{color}
 \usepackage{soul}
+
+\usepackage{array}
+\usepackage{makecell}
 
 \usepackage{sectsty}
 \allsectionsfont{\sffamily}
@@ -30,8 +41,7 @@
 \definecolor{dblue}{RGB}{0,102,153}
 \newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
 
-\usepackage{longtable}
-\usepackage{ifpdf}
+
 
 \setlength{\parskip}{1em}
 
@@ -158,15 +168,15 @@ The project has the following specific objectives:
 Since this is an investigation project, there are only a few stakeholders, which are described below:
 
 \begin{itemize}
- \item Jorge Castro: Main supervisor of the project, has the general idea about the project itself and guides the course of it. 
- Wants to create new knowledge with the use of ASIPs, so that this area grows and future processes of creating approximated applications
+ \item Jorge Castro: He is the supervisor of the project, has the general idea about the project itself and guides the course of it. 
+ He wants to create new knowledge with the use of ASIPs, so that this area grows and future processes of creating approximated applications
  become more automated. 
  
- \item Sajjad Hussain: Works with Jorge Castro on the general guidance of the project, helps with any issue on the server in Germany
- so that the process of using the software platform (ASIPMeister, Dlxsim and other tools) remains smooth and clear. Has the same interest
+ \item Sajjad Hussain: He works with Jorge Castro on the general guidance of the project, helps with any issue on the server in Germany
+ so that the process of using the software platform (ASIPMeister, Dlxsim and other tools) remains smooth and clear. He has the same interest
  as Jorge Castro with the project. 
  
- \item Jeferson González: Supervisor in ITCR, helps with any resource assignation of whether space or resources (like the hardware platform)
+ \item Jeferson González: He is the supervisor in ITCR, helps with any resource assignation of whether space or resources (like the hardware platform)
  as the person in charge of the SEED laboratory.
  
 \end{itemize}
@@ -191,7 +201,7 @@ Since this is an investigation project, there are only a few stakeholders, which
 }  
 \node[mynode] (manufacturer) {Application};  
 \node[mynode, below left =3cm of manufacturer] (section1) {Section 1}; 
-\node[mynode, below=2.11cm of manufacturer] (section2) {Section 2};
+\node[mynode, below=2.16cm of manufacturer] (section2) {Section 2};
 \node[mynode, below right=3cm of manufacturer] (section3) {Section 3};
 
 
@@ -204,6 +214,9 @@ Since this is an investigation project, there are only a few stakeholders, which
 \medskip
 \caption{Structure of the Market} 
 \end{figure}
+
+
+
 % Los entregables con consistentes con los objetivos del proyecto y
 % con los productos de un proyecto de ingeniería de software para
 % efectos de desarrollo posterior o mantenimiento.
@@ -217,8 +230,9 @@ Since this is an investigation project, there are only a few stakeholders, which
 \section{Deliverables and criteria of acceptance}
 
 The expected deliverables are the following:
-
+\begin{table}
 \begin{center}
+\caption{Deliverables with the corresponding criteria of acceptance}
 \begin{tabular}{ |c|c|c| } 
  \hline
 Name & Description & Criteria of acceptance \\
@@ -226,11 +240,12 @@ Name & Description & Criteria of acceptance \\
  Requirement 1.1 & Instances of approximated hardware & [criterio] \\ 
  Requirement 2.1 & Configuration of approximated ASIPs & [criterio] \\ 
  Requirement 3.1 & Data of execution time, area and power & [criterio] \\ %Plan de prueba
- Requirement 4.1 & Comparison and analysis of the obtained results & [criterio] \\ %Plan Prueba
+ Requirement 3.2 & Comparison and analysis of the obtained results & [criterio] \\ %Plan Prueba
  \hline
 \end{tabular}
+\label{tab:del}
 \end{center}
-
+\end{table}
 
 
 
@@ -238,17 +253,22 @@ Name & Description & Criteria of acceptance \\
 % insumos) son analizadas en detalle, identificando los riesgos más
 % sobresalientes para cada una de esas áreas. Para cada riesgo se
 % indica la probabilidad y el impacto para el proyecto.
-\section{Risky Analysis}
+\section{Risky analysis}
+\begin{table}
 \begin{center}
-\begin{tabular}{ |c|c|c|c| } 
+\caption{Risk analysis}
+\begin{tabular}{ | c | c | c | c | } 
  \hline
- Riesgo & Probability of occurrence & Impact (hours) & Risk exposure (hours) \\
+ Risk & \makecell{Probability of \\ occurrence} & \makecell{Impact \\ (hours)} & \makecell{Risk exposure \\ (hours)} \\
  \hline
- Riesgo X & 0.5 & 8 & 4\\ 
+  \makecell{Illness or any special medical condition} & 0.5 & 8 & 4 \\ 
+ \makecell{General server errors (missing files, \\ permissions restrictions, etc)}   & 0.6 & 24 & 14.4 \\
+ \makecell{Delays when acquiring the hardware equipment}   & 0.25 & 8 & 2 \\
  \hline
 \end{tabular}
+\label{tab:risk}
 \end{center}
-
+\end{table}
 
 
 
@@ -259,6 +279,23 @@ Name & Description & Criteria of acceptance \\
 % Se asigna un identificador único (código) a cada actividad.
 \section{Activities and effort budget}
 
+The table \ref{tab:act} takes in consideration a total of 216 engineering hours. 
+
+\begin{table}
+\begin{center}
+\caption{Activities and effort budget}
+\begin{tabular}{ | c | c | c | c | c | } 
+ \hline
+ ID  &Activity & \makecell{Engineering \\ hours} & \makecell{Risk reserve \\ (hours)} & \makecell{Total \\ (hours)} \\
+ \hline
+ 001 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\
+ \hline
+\end{tabular}
+\label{tab:act}
+\end{center}
+\end{table}
+
+
 % El cronograma incluye todas las actividades y las mismas no
 % guardan una consistecia lógica para la construcción de los
 % entregables.
@@ -266,6 +303,24 @@ Name & Description & Criteria of acceptance \\
 % El nivel de granularidad de las actividades ofrece suficiente detalle.
 % Al menos una actividad por semana.
 \section{Schedule}
+
+\begin{table}
+\begin{center}
+\caption{Schedule for the whole project}
+\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c |} 
+ \hline
+   & \multicolumn{16}{|c|}{Week} \\
+ \hline
+ Activity & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
+ \makecell{Reading the corresponding \\ literature about the \\ project and understanding \\ the general idea of ASIPs}
+ & \cellcolor[HTML]{AA0044}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ \makecell{Execution of the laboratory \\ script to get  to know \\ the software tools like \\ ASIPMeister, Dlxsim, etc}
+ & \cellcolor[HTML]{AA0044}  & \cellcolor[HTML]{AA0044}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ \end{tabular}
+\label{tab:schd}
+\end{center}
+\end{table}
+
 
 % Referencias del Background y el Related Work
 \bibliographystyle{sty/plainurl}
