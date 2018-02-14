@@ -19,6 +19,7 @@
 %\usepackage{slashbox}
 \usepackage[latin1]{inputenc}
 \usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
 % Color and strikethrough
 \usepackage{color}
 \usepackage{soul}
@@ -49,6 +50,12 @@
 \newcommand{\pdfTitle}{\scriptTitle} 
 \newcommand{\pdfKeywords}{\scriptKeywords}
 
+
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, top color=white, bottom color=yellow!50,very thick, inner sep=1em, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+} 
 
 \begin{document}
  
@@ -148,6 +155,23 @@ The project has the following specific objectives:
 % señalando cuál es el interés del involucrado.
 \section{Project stakeholders}
 
+Since this is an investigation project, there are only a few stakeholders, which are described below:
+
+\begin{itemize}
+ \item Jorge Castro: Main supervisor of the project, has the general idea about the project itself and guides the course of it. 
+ Wants to create new knowledge with the use of ASIPs, so that this area grows and future processes of creating approximated applications
+ become more automated. 
+ 
+ \item Sajjad Hussain: Works with Jorge Castro on the general guidance of the project, helps with any issue on the server in Germany
+ so that the process of using the software platform (ASIPMeister, Dlxsim and other tools) remains smooth and clear. Has the same interest
+ as Jorge Castro with the project. 
+ 
+ \item Jeferson González: Supervisor in ITCR, helps with any resource assignation of whether space or resources (like the hardware platform)
+ as the person in charge of the SEED laboratory.
+ 
+\end{itemize}
+
+
 
 % Se presenta una descripción de la solución propuesta en
 % correspondencia con el problema planteado y los objetivos.
@@ -157,7 +181,29 @@ The project has the following specific objectives:
 % OPCIONAL: Se pressentan varias alternativas de solución a estudiar.
 \section{Solution description}
 
+\begin{figure}
+\centering
+\begin{tikzpicture}[node distance=1cm, auto]  
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, very thick, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+}  
+\node[mynode] (manufacturer) {Application};  
+\node[mynode, below left =3cm of manufacturer] (section1) {Section 1}; 
+\node[mynode, below=2.11cm of manufacturer] (section2) {Section 2};
+\node[mynode, below right=3cm of manufacturer] (section3) {Section 3};
 
+
+
+\draw[myarrow] (manufacturer.south)  -- ++(0,-1) -|  (section1.north);
+\draw[myarrow] (manufacturer.south)   -|  (section2.north);
+\draw[myarrow] (manufacturer.south)  -- ++(0,-1) -|  (section3.north); 
+ 
+\end{tikzpicture} 
+\medskip
+\caption{Structure of the Market} 
+\end{figure}
 % Los entregables con consistentes con los objetivos del proyecto y
 % con los productos de un proyecto de ingeniería de software para
 % efectos de desarrollo posterior o mantenimiento.
