@@ -36,3 +36,4 @@
 *.[oa]
 Debug/
 *.DS_Store
+*.fuse*
