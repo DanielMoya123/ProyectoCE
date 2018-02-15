@@ -1,4 +1,4 @@
-w%% ---------------------------------------------------------------------------
+%% ---------------------------------------------------------------------------
 %% proposal.tex
 %%
 %% Research Proposal, main document.
@@ -115,7 +115,7 @@ requirements. However, results will not be published until the end of the projec
 % las investigaciones sobre el tema en cuestión.
 \section{Problem description}
 
-An ASIP is a processor that use an application specific instruction set, this means 
+An ASIP is a processor that use an application-specific instruction set, this means 
 that, although it can execute a wide range of applications, it is optimized for a 
 specific one, in which the ASIP can execute with improved performance (for instance, 
 energy consumption or execution time) compared to a General Purpose Proccesor (GPP). 
@@ -228,8 +228,14 @@ are described below:
 
 % OPCIONAL: Se pressentan varias alternativas de solución a estudiar.
 \section{Solution description}
+First, an application that can have a approximated behavior in any of its steps needs to be found, for this, 
+several applications have to be examined and each one needs to have a source code that, without any 
+modifications, executes correctly in standard hardware blocks. Next, a selected application 
+must be studied to determine whether an entire section can be approximated or only a certain operation (e.g. 
+a matrix multiplication) or even both sections. Figure \ref{fig:sol} shows a generic system in which the above
+situation can happen. 
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \begin{tikzpicture}[node distance=1cm, auto]  
 \tikzset{
@@ -266,7 +272,14 @@ are described below:
 \end{tikzpicture} 
 \medskip
 \caption{Expected situation to solve with this project} 
+\label{fig:sol}
 \end{figure}
+
+
+As seen in figure \ref{fig:sol}, that example of an application has three sections, from which the first one (this could be a preprocessing stage)
+can be entirely approximated, the second one is cannot be approximated at all (we can think of this as a critical section of the application)
+and finally, in the third second, three specific instructions can be seen, from which the second one has a approximated version. The specific
+characteristics of the final applications selected have to be determined to execute an analysis similar to the one presented. 
 
 
 
@@ -283,24 +296,21 @@ are described below:
 \section{Deliverables and criteria of acceptance}
 
 The expected deliverables are the following:
-\begin{table}
+\begin{table}[h!]
 \begin{center}
 \caption{Deliverables with the corresponding criteria of acceptance}
 \begin{tabular}{ |c|c|c| } 
  \hline
-Name & Description & Criteria of acceptance \\
- \hline
- Requirement 1.1 & Instances of approximated hardware & [criterio] \\ 
- Requirement 2.1 & Configuration of approximated ASIPs & [criterio] \\ 
+Name & Description & Criteria of acceptance \\ \hline
+ Requirement 1.1 & Instances of approximated hardware & [criterio] \\ \hline
+ Requirement 2.1 & Configuration of approximated ASIPs & [criterio] \\ \hline 
  Requirement 3.1 & \makecell{Comparison and analysis of the \\
- obtained results (execution time,\\ area and power vs error)} & \makecell{Execution of the test \\ plan with satisfying results}  \\ %Plan Prueba
- Requirement 4.1 & Plan Project document & \makecell{Specifications given by the \\ professors for this document} \\
- Requirement 5.1 & Requirements document & \makecell{Specifications given by the \\ professors for this document} \\
- Requirement 6.1 & Design document & \makecell{Specifications given by the \\ professors for this document} \\
- Requirement 7.1 & Test plan document & \makecell{Specifications given by the \\ supervisor for this document} \\
- Requirement 8.1 & Final documentation & \makecell{Specifications given by the \\ professor for this document} \\
-  
- \hline
+ obtained results (execution time,\\ area and power vs error)} & \makecell{Execution of the test \\ plan with satisfying results}  \\ \hline %Plan Prueba
+ Requirement 4.1 & Plan Project document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Requirement 5.1 & Requirements document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Requirement 6.1 & Design document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Requirement 7.1 & Test plan document & \makecell{Specifications given by the \\ supervisor for this document} \\ \hline
+ Requirement 8.1 & Final documentation & \makecell{Specifications given by the \\ professor for this document} \\ \hline
 \end{tabular}
 \label{tab:del}
 \end{center}
@@ -313,17 +323,16 @@ Name & Description & Criteria of acceptance \\
 % sobresalientes para cada una de esas áreas. Para cada riesgo se
 % indica la probabilidad y el impacto para el proyecto.
 \section{Risk analysis}
-\begin{table}
+\begin{table}[h!]
 \begin{center}
 \caption{Risk analysis}
 \begin{tabular}{ | c | c | c | c | } 
  \hline
  Risk & \makecell{Probability of \\ occurrence} & \makecell{Impact \\ (hours)} & \makecell{Risk exposure \\ (hours)} \\
  \hline
-  \makecell{Illness or any special medical condition} & 0.5 & 8 & 4 \\ 
- \makecell{General server errors (missing files, \\ permission restrictions, etc)}   & 0.6 & 24 & 14.4 \\
- \makecell{Delays when acquiring the hardware}   & 0.25 & 8 & 2 \\
- \hline
+  \makecell{Illness or any special medical condition} & 0.5 & 8 & 4 \\ \hline
+ \makecell{General server errors (missing files, \\ permission restrictions, etc)}   & 0.6 & 24 & 14.4 \\ \hline
+ \makecell{Delays when acquiring the hardware}   & 0.25 & 8 & 2 \\ \hline
 \end{tabular}
 \label{tab:risk}
 \end{center}
@@ -340,7 +349,7 @@ Name & Description & Criteria of acceptance \\
 
 The table \ref{tab:act} takes in consideration a total of 216 engineering hours. 
 
-\begin{table}
+\begin{table}[h!]
 \begin{center}
 \caption{Activities and effort budget}
 \begin{tabular}{ | c | c | c | c | c | } 
@@ -348,11 +357,10 @@ The table \ref{tab:act} takes in consideration a total of 216 engineering hours.
  ID  &Activity & \makecell{Engineering \\ hours} & \makecell{Risk reserve \\ (hours)} & \makecell{Total \\ (hours)} \\
  \hline
  001 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\
- 002 & \makecell{Find appropiate error-resiliant applications \\ and identify the sections that can be \\
-  approximated} & 42 & 4 & 46  \\
- 003 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 50 & 3 & 53 \\
- 004 & \makecell{Evaluate the results obtained with \\ a selected test plan} & 35 & 3 & 33 \\
- \hline
+ 002 & \makecell{Find appropiate error-resiliant applications \\ and identify the sections that can be \\ 
+  approximated} & 42 & 4 & 46  \\ \hline
+ 003 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 50 & 3 & 53 \\ \hline
+ 004 & \makecell{Evaluate the results obtained with \\ a selected test plan} & 35 & 3 & 33 \\ \hline
 \end{tabular}
 \label{tab:act}
 \end{center}
@@ -367,7 +375,7 @@ The table \ref{tab:act} takes in consideration a total of 216 engineering hours.
 % Al menos una actividad por semana.
 \section{Schedule}
 
-\begin{table}
+\begin{table}[h!]
 \begin{center}
 \caption{Schedule for the entire project}
 \begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c |} 
@@ -376,17 +384,25 @@ The table \ref{tab:act} takes in consideration a total of 216 engineering hours.
  \hline
  Activity & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
  \makecell{Reading the corresponding \\ literature about the \\ project and understanding \\ the general idea of ASIPs}
- & \cellcolor[HTML]{AA0044}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Execution of the laboratory \\ script to get  to know \\ the software tools like \\ ASIPMeister, Dlxsim, etc}
- & \cellcolor[HTML]{AA0044}  & \cellcolor[HTML]{AA0044}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5} &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Delivery of the ``Plan Project'' \\ document}
- &  & \cellcolor[HTML]{AA0044}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ &  & \cellcolor[HTML]{A5A5A5}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Delivery of the ``Requirements'' \\ document}
- &  &   & \cellcolor[HTML]{AA0044} &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ &  &   & \cellcolor[HTML]{A5A5A5} &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Delivery of the ``Design'' \\ document}
- &  &   &  & \cellcolor[HTML]{AA0044} &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ &  &   &  & \cellcolor[HTML]{A5A5A5} &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+  \makecell{Research of error tolerant \\ applications with desirable \\ features}
+ &  &   &  & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} &  &  &  &  &  &  &  &  &  &  \\ \hline
+   \makecell{Design of blocks with  \\ special approximated \\ instructions}
+ &  &   &  &  &  &  & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} &  &  &  &  &  &  &  \\ \hline
+    \makecell{Putting the blocks together  \\ to build the ASIPs}
+ &  &   &  &  &  &  &  &  &  & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} &  &  &  &  \\ \hline
+     \makecell{Final results comparison} &  &   &  &  &  &  &  &  &  &  &  &
+     \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} &  \\ \hline
   \makecell{Delivery of the ``Final report'' \\ document}
- &  &   &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor[HTML]{AA0044} \\ \hline
+ &  &   &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor[HTML]{A5A5A5} & \cellcolor[HTML]{A5A5A5} \\ \hline
  \end{tabular}
 \label{tab:schd}
 \end{center}
