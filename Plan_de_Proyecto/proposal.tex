@@ -85,10 +85,13 @@ Design of Application Specific Instruction Set Processors (ASIPs) for Approximat
 
 % Se identifica claramente la institución donde se realizará el proyecto
 \section{Name of the institution}
+\begin{itemize}
+	\item Chair for Embedded System (CES), Kalrsruhe Institute of Technology (KIT), 
+	Germany, and 
+	\item Laboratorio Sistemas Embebidos y Electrónica Digital (SEED-Lab) of Instituto 
+	Tecnológico de Costa Rica (ITCR).
+\end{itemize}
 
-Chair for Embedded System (CES), Kalrsruhe Instituteof Technology (KIT), Germany, and 
-Laboratorio Sistemas Embebidos y Electrónica Digital
-(SEED-Lab) of Instituto Tecnológico de Costa Rica (ITCR).
 
 
 
@@ -98,8 +101,8 @@ Laboratorio Sistemas Embebidos y Electrónica Digital
 % confidencialidad.
 \section{Confidentiality requirements}
 
-Due to the academic nature of the project, there are no special confidentiality requirements, however,
-results will not be published until the end of the project's work
+Due to the academic nature of this project, there are no special confidentiality 
+requirements. However, results will not be published until the end of the project's work.
 
 
 
@@ -112,44 +115,51 @@ results will not be published until the end of the project's work
 % las investigaciones sobre el tema en cuestión.
 \section{Problem description}
 
-As the name says it, ASIPs are processors that use an application specific instruction set; this means 
-that, although they can execute a wide range of applications, they are optimized for a specific
-type, in which ASIPs can execute with a greater energy and speed results compared to a General Purpose
-Proccesors (GPP). On the other end, these results are not as good as the ones achieved by Application
-Specific Integrated Circuits (ASICs) but this trade-off comes with a better flexibility of ASIPs
-above ASICs. Optimizations for an ASIP can be seen in different forms, which include: [CITA]
+An ASIP is a processor that use an application specific instruction set, this means 
+that, although it can execute a wide range of applications, it is optimized for a 
+specific one, in which the ASIP can execute with improved performance (for instance, 
+energy consumption or execution time) compared to a General Purpose Proccesor (GPP). 
+Although Application Specific Integrated Circuits (ASICs) present better performance 
+results, ASIPs possess flexibility. Optimizations for an ASIP can be seen in different forms, 
+including [CITA]: 
 
 \begin{itemize}
  \item Instruction extension: Customized instructions can be made to extend the base Instruction Set Architecture (ISA).
  
- \item Inclusion or exclusion of predefined blocks: Not only specific software can be added to extend an architecture
- but also customized hardware in the form of specialized blocks; also, regular blocks that are not used can be excluded.
+ \item Inclusion or exclusion of predefined blocks: Not only specific software can be added 
+ to extend an architecture but also customized hardware in the form of specialized blocks; 
+ also, regular blocks not used can be excluded.
  
- \item Parameterization: Certain variables like cache sizes or number of registers can be customized to adjust for a specific
- application. 
+ \item Parameterization: Certain variables, such as cache sizes or number of registers, can 
+ be customized to adjust for a specific application.
 \end{itemize}
 
-In a summarized way, ASICs represent a hardware solution to a problem which is very limited and have high costs and a high time-to-market
-but achieves the greatest performance, contrary, GPPs are seen as a software solution which are very flexible but are the least efficient. 
-ASIPs are in the middle of these two as they balance flexibility and peformance to have a good trade-off between those variables. 
+ASICs represent a hardware solution to a problem which is very limited and have high 
+costs and a high time-to-market, but achieves the greatest performance. Contrary, GPPs 
+are seen as a software solution which are very flexible but they are the least efficient. 
+ASIPs are in the middle of these two as they balance flexibility and performance to have a 
+good trade-off between those variables. 
 
-ASIPs can also be used to adjust the balance between acceptable amount of error vs the cost (economic, area, execution time) of an
-application; which is is the main focus of study of the project. Since different types of applications vary signifcantly in their requirements and
-specifications (e.g. where the error-resilient section is), different ASIPs have to be build for each one of them so that the best balance between
-cost savings and amount of error is achieved. This project focuses on that goal, to design ASIPs for a set of error-tolerant applications.
+ASIPs can also be used to adjust the balance between acceptable amount of error vs. the 
+cost (economic, area, execution time) of an application; which is is the main focus of 
+study of the project. Since different types of applications vary significantly in their 
+requirements and specifications (e.g. where the error-resilient section is), different ASIPs 
+have to be build for each one of them so that the best balance between cost savings and 
+amount of error is achieved. This project focuses on that goal, to design ASIPs for a set 
+of error-tolerant applications.
 
-The environment in which the ASIPs will be developed consists in several software tools which include Design Compiler and Prime Time, Synopsys, ModelSim, Mentor Graphics,
-ASIPMeister, CoSy compiler, Xilinx ISE and the hardware platform will be a Xilinx Virtex-V board. Regardless these limitations,
-the project will allow for a custom hardware components choice with its design for specific sections. Also, for the
-error tolerant applications found, the software implementation and the tests for the general system will be able to be choosen between different options. 
+The environment in which the ASIPs will be developed consists in several software tools 
+which include Design Compiler and Prime Time from Synopsys, ModelSim from Mentor 
+Graphics,ASIPMeister, CoSy compiler, Xilinx ISE and the hardware platform will be a Xilinx 
+Virtex-V board. Regardless these limitations, the project will allow for a custom hardware 
+components choice with its design for specific sections. Also, for the error tolerant 
+applications found, the software implementation and the tests for the general system will 
+be able to be chosen between different options.
 
-
-Since approximated computing is in its infancy, it still needs a lot of research and testing, so the users of the ASIPs developed will be the same
-groups of investigation of which this project is part of; it is expected that this helps to make approximated computing a more solid tendency. 
-
-
-
-
+Since approximated computing is in its infancy, it still needs a lot of research and testing, 
+so the users of the ASIPs developed will be the same groups of investigation of which this 
+project is part of; it is expected that this helps to make approximated computing a more 
+solid tendency.
 
 
 
@@ -158,30 +168,28 @@ groups of investigation of which this project is part of; it is expected that th
 
 % El objetivo general es directamente trazable al problema planteado, es claro, conciso.
 \subsection{General objectives}
-To explore the design of Application-Specific Instruction
-Set Processors (ASIP) to be used in error tolerant applications.
-
-
+Explore the design of Application-Specific Instruction Set Processors (ASIPs) for 
+error-resilient applications.
 
 
 % Los objetivos específicos son suficientes y consistentes con el
 % objetivo general
 \subsection{Specific objectives}
 
-The project has the following specific objectives:
+This project has the following specific objectives:
+
 \begin{enumerate}
- \item To select 3 error tolerant applications to be evaluated. 
+ \item Select 3 error tolerant applications to be evaluated. 
  
- \item To develop at least 3 instances of approximated hardware for tolerant error sections for each of the selected applications. 
+ \item Develop at least 3 instances of approximated hardware for tolerant error sections 
+ for each of the selected applications. 
  
+ \item Develop ASIPs configurations using specific approximated instructions for the 
+ applications selected.
  
- \item To develop ASIPs configurations using specific approximated instructions.
- 
-
- \item To evaluate, with the use of approximated instructions, a set of applications in terms of execution time, 
- area and power consumption vs its error for the approximated ASIP.
- 
-
+ \item Evaluate the selected applications on the designed ASIPs in terms of execution time, 
+ area, and power consumption regarding the error introduced by the approximate 
+ instructions.
 \end{enumerate}
 
 
@@ -191,19 +199,23 @@ The project has the following specific objectives:
 % señalando cuál es el interés del involucrado.
 \section{Project stakeholders}
 
-Since this is an investigation project, there is only a few stakeholders, who are described below:
+Due to this project belongs to a research project, there is only a few stakeholders, whom 
+are described below:
 
 \begin{itemize}
- \item Jorge Castro: The project's supervisor, has the general idea about the project itself and guides its course.
- He wants to create new knowledge with the use of ASIPs, so that this area grows and future processes of creating approximated applications
- become more automated. 
+ \item Jorge Castro: He is the project's supervisor and he has the general idea about the 
+ project itself and guides its course. He attempts to create new knowledge with the use of 
+ ASIPs for error-tolerant applications, using approximate computing techniques, and that 
+ their design become automated.
  
- \item Sajjad Hussain: He works with Jorge Castro on the general guidance of the project, helps with any issue on the server in Germany
- so that the process of using the software platform (ASIPMeister, Dlxsim, etc.) remains smooth. He has the same interest
- as Jorge Castro with the project.  
+ \item Sajjad Hussain: He works with Jorge Castro on the general guidance of the project. 
+ He supports any issue with the tools in Germany so that the process of using the 
+ developing platform (ASIPMeister, Dlxsim, etc.) remains smooth. He has the same interest 
+ as Jorge Castro regarding the project.  
  
- \item Jeferson González: This project's supervisor at the ITCR, and the person in charge of the SEED laboratory, from where he 
- occasionaly provides some resource (like the equipment in the lab) or guidance.
+ \item Jeferson González: He is the project's supervisor at the ITCR, and the person in 
+ charge of the SEED laboratory, from where he occasionally provides guidance and 
+ collaboration (such as lab equipment).
  
 \end{itemize}
 
