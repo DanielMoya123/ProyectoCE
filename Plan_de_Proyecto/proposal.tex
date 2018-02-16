@@ -140,13 +140,30 @@ are seen as a software solution which are very flexible but they are the least e
 ASIPs are in the middle of these two as they balance flexibility and performance to have a 
 good trade-off between those variables. 
 
-ASIPs can also be used to adjust the balance between acceptable amount of error vs. the 
-cost (economic, area, execution time) of an application; which is is the main focus of 
-study of the project. Since different types of applications vary significantly in their 
-requirements and specifications (e.g. where the error-resilient section is), different ASIPs 
-have to be build for each one of them so that the best balance between cost savings and 
+
+The relationship between GPPs, ASIPs, and ASICs is shown in figure \ref{fig:gpp-asip-asic}.
+Approximate computing can also be implemented on GPPs, due to their extremely flexible nature,
+however, since they execute everything in software, specialized hardware modules cannot help
+the performance of these systems. ASIPs can adjust to specific requirements of
+a given application (through extended instructions) so that the best balance between cost savings and 
 amount of error is achieved. This project focuses on that goal, to design ASIPs for a set 
 of error-tolerant applications.
+
+\begin{figure}
+\begin{center}
+\label{fig:gpp-asip-asic}
+ \includegraphics[width=\linewidth]{GPP-ASIP-ASIC}
+ \caption{Comparison between GPPs, ASIPs, and ASICs}
+ \end{center}
+\end{figure}
+
+%ASIPs can also be used to adjust the balance between acceptable amount of error vs. the 
+%cost (economic, area, execution time) of an application; which is is the main focus of 
+%study of the project. Since different types of applications vary significantly in their 
+%requirements and specifications (e.g. where the error-tolerant section is), different ASIPs 
+%have to be build for each one of them so that the best balance between cost savings and 
+%amount of error is achieved. This project focuses on that goal, to design ASIPs for a set 
+%of error-tolerant applications.
 
 The environment in which the ASIPs will be developed consists of several software tools 
 which include Design Compiler and Prime Time from Synopsys, ModelSim from Mentor 
@@ -287,7 +304,11 @@ Once the approximate parts have been selected, the process of creating the ASIPs
 that the application does not exceed a certain error threshold, but also , that a greater performance in energy, area or execution time is achieved compared to the
 original version. 
 
-Other solutions have proposed, which include <EL CHINO>
+Other solutions have been proposed, which include randomness in programs, inference via probabilistic programming as software solutions;
+approximate computing with GPPs (as discussed in the problem description section) as a different architecture processor solution,
+improvements in the memory, storage, and interconnections for simplier circuits and finally neural accelerators as a different approximate
+computing paradigm. [CITA SURVEY]
+
 
 % Los entregables con consistentes con los objetivos del proyecto y
 % con los productos de un proyecto de ingeniería de software para
@@ -368,11 +389,15 @@ activities for the project.
 \begin{tabular}{ | c | c | c | c | c | } 
  \hline
  ID  &Activity & \makecell{Engineering \\ hours} & \makecell{Risk reserve \\ (hours)} & \makecell{Total \\ (hours)} \\ \hline
- 001 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\ \hline
- 002 & \makecell{Find appropiate error-resiliant applications \\ and identify the sections that can be \\ 
+ 01 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\ \hline
+ 02 & \makecell{Find appropiate error-resiliant applications \\ and identify the sections that can be \\ 
   approximated} & 42 & 4 & 46  \\ \hline
- 003 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 50 & 3 & 53 \\ \hline
- 004 & \makecell{Evaluate the results obtained with \\ a selected test plan} & 35 & 3 & 33 \\ \hline
+ 03 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 50 & 3 & 53 \\ \hline
+ 04 & \makecell{Redact Project Plan document} & 35 & 3 & 33 \\ \hline
+ 05 & \makecell{Redact Requirements document} & 35 & 3 & 33 \\ \hline
+ 06 & \makecell{Redact Design document} & 35 & 3 & 33 \\ \hline
+ 07 & \makecell{Redact Test plan document} & 35 & 3 & 33 \\ \hline
+ 08 & \makecell{Redact Final documentation} & 35 & 3 & 33 \\ \hline
 \end{tabular}
 \label{tab:act}
 \end{center}
