@@ -115,7 +115,7 @@ requirements. However, results will not be published until the end of the projec
 % las investigaciones sobre el tema en cuestión.
 \section{Problem description}
 
-An ASIP is a processor that use an application-specific instruction set, this means 
+An ASIP is a processor that uses an application-specific instruction set, this means 
 that, although it can execute a wide range of applications, it is optimized for a 
 specific one, in which the ASIP can execute with improved performance (for instance, 
 energy consumption or execution time) compared to a General Purpose Proccesor (GPP). 
@@ -135,7 +135,7 @@ including [CITA]:
 \end{itemize}
 
 ASICs represent a hardware solution to a problem which is very limited and have high 
-costs and a high time-to-market, but achieves the greatest performance. Contrary, GPPs 
+costs and a high time-to-market, but achieve the greatest performance. Contrary, GPPs 
 are seen as a software solution which are very flexible but they are the least efficient. 
 ASIPs are in the middle of these two as they balance flexibility and performance to have a 
 good trade-off between those variables. 
@@ -148,19 +148,24 @@ have to be build for each one of them so that the best balance between cost savi
 amount of error is achieved. This project focuses on that goal, to design ASIPs for a set 
 of error-tolerant applications.
 
-The environment in which the ASIPs will be developed consists in several software tools 
+The environment in which the ASIPs will be developed consists of several software tools 
 which include Design Compiler and Prime Time from Synopsys, ModelSim from Mentor 
-Graphics,ASIPMeister, CoSy compiler, Xilinx ISE and the hardware platform will be a Xilinx 
-Virtex-V board. Regardless these limitations, the project will allow for a custom hardware 
+Graphics, ASIPMeister, CoSy compiler, Xilinx ISE and the hardware platform will be a Xilinx 
+Virtex-V board. Regardless of these limitations, the project will allow for a custom hardware 
 components choice with its design for specific sections. Also, for the error tolerant 
 applications found, the software implementation and the tests for the general system will 
 be able to be chosen between different options.
 
-Since approximated computing is in its infancy, it still needs a lot of research and testing, 
-so the users of the ASIPs developed will be the same groups of investigation of which this 
-project is part of; it is expected that this helps to make approximated computing a more 
-solid tendency.
+The environment in which the ASIPs will be developed consists of several software tools 
+which include Design Compiler and Prime Time from Synopsys, ModelSim from Mentor 
+Graphics, ASIPMeister, CoSy compiler, Xilinx ISE and the hardware platform will be a Xilinx 
+Virtex-V board. Despite these restrictions, several different hardware designs can be used
+for specific application sections; as well as the implementation of said applications.
 
+Since approximated computing is still in its infancy, a lot of research and testing is still needed, 
+so the users of the developed ASIPs are the same research groups of which this 
+project is a part of. This project is expected to help make approximated computing a more 
+solid tendency.
 
 
 
@@ -179,17 +184,15 @@ error-resilient applications.
 This project has the following specific objectives:
 
 \begin{enumerate}
- \item Select 3 error tolerant applications to be evaluated. 
+ \item Select 3 error-tolerant applications to be evaluated. 
  
- \item Develop at least 3 instances of approximated hardware for tolerant error sections 
- for each of the selected applications. 
+ \item Develop, for each application, at least 1 instance of approximated hardware for error-tolerant sections. 
  
- \item Develop ASIPs configurations using specific approximated instructions for the 
- applications selected.
+ \item Develop ASIP configurations using specific approximated instructions for the 
+ selected applications.
  
- \item Evaluate the selected applications on the designed ASIPs in terms of execution time, 
- area, and power consumption regarding the error introduced by the approximate 
- instructions.
+ \item Evaluate if the gain of the execution time, area, and power consumption
+ is worth the error introduced by the approximate instructions.
 \end{enumerate}
 
 
@@ -199,7 +202,7 @@ This project has the following specific objectives:
 % señalando cuál es el interés del involucrado.
 \section{Project stakeholders}
 
-Due to this project belongs to a research project, there is only a few stakeholders, whom 
+Due to this project belonging to a research project, there are only a few stakeholders, who 
 are described below:
 
 \begin{itemize}
@@ -228,12 +231,11 @@ are described below:
 
 % OPCIONAL: Se pressentan varias alternativas de solución a estudiar.
 \section{Solution description}
-First, an application that can have a approximated behavior in any of its steps needs to be found, for this, 
-several applications have to be examined and each one needs to have a source code that, without any 
-modifications, executes correctly in standard hardware blocks. Next, a selected application 
-must be studied to determine whether an entire section can be approximated or only a certain operation (e.g. 
-a matrix multiplication) or even both sections. Figure \ref{fig:sol} shows a generic system in which the above
-situation can happen. 
+First, an application that can have an approximated behavior in any of its steps needs to be found, for this, 
+several applications have to be examined and each needs to have source code that, without 
+modifications, executes correctly in standard hardware blocks. Next, the selected application 
+must be studied to determine whether an entire section can be approximated, only a certain operation can be approximated (e.g. 
+a matrix multiplication), or if both can be approximated. Figure \ref{fig:sol} shows a generic system  where the latter is true. 
 
 \begin{figure}[h!]
 \centering
@@ -271,7 +273,7 @@ situation can happen.
  
 \end{tikzpicture} 
 \medskip
-\caption{Expected situation to solve with this project} 
+\caption{A possible situation to solve with this project} 
 \label{fig:sol}
 \end{figure}
 
@@ -282,10 +284,10 @@ and finally, in the third second, three specific instructions can be seen, from 
 characteristics of the final applications selected have to be determined to execute an analysis similar to this one presented. 
 
 Once the approximate parts have been selected, the process of creating the ASIPs begin. These ASIPs are continuously tested to ensure
-that the application does not exceed certain error level but also a greater performance in energy, area or execution time is achieved compared to the
+that the application does not exceed a certain error threshold, but also , that a greater performance in energy, area or execution time is achieved compared to the
 original version. 
 
-Other solutions have proposed, which include
+Other solutions have proposed, which include <EL CHINO>
 
 % Los entregables con consistentes con los objetivos del proyecto y
 % con los productos de un proyecto de ingeniería de software para
@@ -304,14 +306,14 @@ The expected deliverables are presented in table \ref{tab:del}.
 \begin{table}[h!]
 \begin{center}
 \caption{Deliverables with the corresponding criteria of acceptance}
-\begin{tabular}{ |c|c|c| } 
+\begin{tabular}{|c|c|c|} 
  \hline
-Name & Description & Criteria of acceptance \\ \hline
+ Name & Description & Criteria of acceptance \\ \hline
  Requirement 1.1 & Instances of approximated hardware & [criterio] \\ \hline
  Requirement 2.1 & Configuration of approximated ASIPs & [criterio] \\ \hline 
- Requirement 3.1 & \makecell{Comparison and analysis of the \\
+ Requirement 3.1 & \makecell{Comparison and analysis of \\
  obtained results (execution time,\\ area and power vs error)} & \makecell{Execution of the test \\ plan with satisfying results}  \\ \hline %Plan Prueba
- Requirement 4.1 & Plan Project document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Requirement 4.1 & Project Plan document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
  Requirement 5.1 & Requirements document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
  Requirement 6.1 & Design document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
  Requirement 7.1 & Test plan document & \makecell{Specifications given by the \\ supervisor for this document} \\ \hline
@@ -329,7 +331,7 @@ Name & Description & Criteria of acceptance \\ \hline
 % indica la probabilidad y el impacto para el proyecto.
 \section{Risk analysis}
 
-Since most of the work is done from home or the SEED laboratory, a few risks are considered. Table \ref{tab:risk} summarizes
+Since most of the work is done from home or at the SEED laboratory, few risks are considered. Table \ref{tab:risk} summarizes
 this information.
 
 \begin{table}[h!]
@@ -357,7 +359,7 @@ this information.
 \section{Activities and effort budget}
 
 This section takes in consideration a total of 216 engineering hours; this is then distributed
-among all the tasks, considering a risk reserve. The table \ref{tab:act} summarizes all the 
+among all the tasks, considering a risk reserve. Table \ref{tab:act} summarizes all the 
 activities for the project.
 
 \begin{table}[h!]
@@ -395,7 +397,7 @@ Considering the 4 months (16 weeks) of the semester, the project is scheduled as
    & \multicolumn{16}{|c|}{Week} \\
  \hline
  Activity & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
- \makecell{Reading the corresponding \\ literature about the \\ project and understanding \\ the general idea of ASIPs}
+ \makecell{Reading the corresponding \\ literature about the \\ project and understanding \\ the concept of ASIPs}
  & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Execution of the laboratory \\ script to get  to know \\ the software tools like \\ ASIPMeister, Dlxsim, etc}
  & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5} &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
@@ -405,7 +407,7 @@ Considering the 4 months (16 weeks) of the semester, the project is scheduled as
  &  &   & \cellcolor[HTML]{A5A5A5} &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Delivery of the ``Design'' \\ document}
  &  &   &  & \cellcolor[HTML]{A5A5A5} &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
-  \makecell{Research of error tolerant \\ applications with desirable \\ features}
+  \makecell{Research of error-tolerant \\ applications with desirable \\ features}
  &  &   &  & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} &  &  &  &  &  &  &  &  &  &  \\ \hline
    \makecell{Design of blocks with  \\ special approximated \\ instructions}
  &  &   &  &  &  &  & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} & \cellcolor[HTML]{4472C4} &  &  &  &  &  &  &  \\ \hline
