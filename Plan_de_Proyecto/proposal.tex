@@ -277,11 +277,15 @@ situation can happen.
 
 
 As seen in figure \ref{fig:sol}, that example of an application has three sections, from which the first one (this could be a preprocessing stage)
-can be entirely approximated, the second one is cannot be approximated at all (we can think of this as a critical section of the application)
+can be entirely approximated, the second one cannot be approximated at all (we can think of this as a critical section of the application)
 and finally, in the third second, three specific instructions can be seen, from which the second one has a approximated version. The specific
-characteristics of the final applications selected have to be determined to execute an analysis similar to the one presented. 
+characteristics of the final applications selected have to be determined to execute an analysis similar to this one presented. 
 
+Once the approximate parts have been selected, the process of creating the ASIPs begin. These ASIPs are continuously tested to ensure
+that the application does not exceed certain error level but also a greater performance in energy, area or execution time is achieved compared to the
+original version. 
 
+Other solutions have proposed, which include
 
 % Los entregables con consistentes con los objetivos del proyecto y
 % con los productos de un proyecto de ingeniería de software para
@@ -295,7 +299,8 @@ characteristics of the final applications selected have to be determined to exec
 % manuales de instalación, manual de usuario etc.
 \section{Deliverables and criteria of acceptance}
 
-The expected deliverables are the following:
+The expected deliverables are presented in table \ref{tab:del}.
+
 \begin{table}[h!]
 \begin{center}
 \caption{Deliverables with the corresponding criteria of acceptance}
@@ -323,6 +328,10 @@ Name & Description & Criteria of acceptance \\ \hline
 % sobresalientes para cada una de esas áreas. Para cada riesgo se
 % indica la probabilidad y el impacto para el proyecto.
 \section{Risk analysis}
+
+Since most of the work is done from home or the SEED laboratory, a few risks are considered. Table \ref{tab:risk} summarizes
+this information.
+
 \begin{table}[h!]
 \begin{center}
 \caption{Risk analysis}
@@ -347,16 +356,17 @@ Name & Description & Criteria of acceptance \\ \hline
 % Se asigna un identificador único (código) a cada actividad.
 \section{Activities and effort budget}
 
-The table \ref{tab:act} takes in consideration a total of 216 engineering hours. 
+This section takes in consideration a total of 216 engineering hours; this is then distributed
+among all the tasks, considering a risk reserve. The table \ref{tab:act} summarizes all the 
+activities for the project.
 
 \begin{table}[h!]
 \begin{center}
 \caption{Activities and effort budget}
 \begin{tabular}{ | c | c | c | c | c | } 
  \hline
- ID  &Activity & \makecell{Engineering \\ hours} & \makecell{Risk reserve \\ (hours)} & \makecell{Total \\ (hours)} \\
- \hline
- 001 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\
+ ID  &Activity & \makecell{Engineering \\ hours} & \makecell{Risk reserve \\ (hours)} & \makecell{Total \\ (hours)} \\ \hline
+ 001 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\ \hline
  002 & \makecell{Find appropiate error-resiliant applications \\ and identify the sections that can be \\ 
   approximated} & 42 & 4 & 46  \\ \hline
  003 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 50 & 3 & 53 \\ \hline
@@ -374,6 +384,8 @@ The table \ref{tab:act} takes in consideration a total of 216 engineering hours.
 % El nivel de granularidad de las actividades ofrece suficiente detalle.
 % Al menos una actividad por semana.
 \section{Schedule}
+
+Considering the 4 months (16 weeks) of the semester, the project is scheduled as shown in figure \ref{tab:schd}.
 
 \begin{table}[h!]
 \begin{center}
