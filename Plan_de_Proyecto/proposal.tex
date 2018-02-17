@@ -121,7 +121,7 @@ specific one, in which the ASIP can execute with improved performance (for insta
 energy consumption or execution time) compared to a General Purpose Proccesor (GPP). 
 Although Application Specific Integrated Circuits (ASICs) present better performance 
 results, ASIPs possess flexibility. Optimizations for an ASIP can be seen in different forms, 
-including [CITA]: 
+including \cite{henkel2003closing}: 
 
 \begin{itemize}
  \item Instruction extension: Customized instructions can be made to extend the base Instruction Set Architecture (ISA).
@@ -141,7 +141,7 @@ ASIPs are in the middle of these two as they balance flexibility and performance
 good trade-off between those variables. 
 
 
-The relationship between GPPs, ASIPs, and ASICs is shown in figure \ref{fig:gpp-asip-asic}.
+The relationship between GPPs, ASIPs, and ASICs is shown in figure \ref{fig:gaa}.
 Approximate computing can also be implemented on GPPs, due to their extremely flexible nature,
 however, since they execute everything in software, specialized hardware modules cannot help
 the performance of these systems. ASIPs can adjust to specific requirements of
@@ -151,9 +151,8 @@ of error-tolerant applications.
 
 \begin{figure}
 \begin{center}
-\label{fig:gpp-asip-asic}
  \includegraphics[width=\linewidth]{GPP-ASIP-ASIC}
- \caption{Comparison between GPPs, ASIPs, and ASICs}
+ \caption{Comparison between GPPs, ASIPs, and ASICs \cite{henkel2006design}} \label{fig:gaa}
  \end{center}
 \end{figure}
 
@@ -301,13 +300,13 @@ and finally, in the third second, three specific instructions can be seen, from 
 characteristics of the final applications selected have to be determined to execute an analysis similar to this one presented. 
 
 Once the approximate parts have been selected, the process of creating the ASIPs begin. These ASIPs are continuously tested to ensure
-that the application does not exceed a certain error threshold, but also , that a greater performance in energy, area or execution time is achieved compared to the
+that the application does not exceed a certain error threshold, but also, that a greater performance in energy, area or execution time is achieved compared to the
 original version. 
 
-Other solutions have been proposed, which include randomness in programs, inference via probabilistic programming as software solutions;
-approximate computing with GPPs (as discussed in the problem description section) as a different architecture processor solution,
+Other solutions have been proposed, which include randomness in programs and inference via probabilistic programming as software solutions;
+approximate computing with GPPs (as discussed in the problem description section) as a different architecture processor solution;
 improvements in the memory, storage, and interconnections for simplier circuits and finally neural accelerators as a different approximate
-computing paradigm. [CITA SURVEY]
+computing paradigm \cite{xu2018approximate}.
 
 
 % Los entregables con consistentes con los objetivos del proyecto y
@@ -330,15 +329,16 @@ The expected deliverables are presented in table \ref{tab:del}.
 \begin{tabular}{|c|c|c|} 
  \hline
  Name & Description & Criteria of acceptance \\ \hline
- Requirement 1.1 & Instances of approximated hardware & [criterio] \\ \hline
- Requirement 2.1 & Configuration of approximated ASIPs & [criterio] \\ \hline 
- Requirement 3.1 & \makecell{Comparison and analysis of \\
- obtained results (execution time,\\ area and power vs error)} & \makecell{Execution of the test \\ plan with satisfying results}  \\ \hline %Plan Prueba
- Requirement 4.1 & Project Plan document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
- Requirement 5.1 & Requirements document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
- Requirement 6.1 & Design document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
- Requirement 7.1 & Test plan document & \makecell{Specifications given by the \\ supervisor for this document} \\ \hline
- Requirement 8.1 & Final documentation & \makecell{Specifications given by the \\ professor for this document} \\ \hline
+ Deliverable-01 & List of selected approximate applications & \makecell{Approval given by the \\ supervisor} \\ \hline
+ Deliverable-02 & Instances of approximated hardware & \makecell{Approval given by the \\ supervisor} \\ \hline
+ Deliverable-03 & Configuration of approximated ASIPs & \makecell{Approval given by the \\ supervisor} \\ \hline 
+ Deliverable-04 & \makecell{Comparison and analysis of \\
+ obtained results (execution time,\\ area and power vs error)} & \makecell{Execution of the test plan \\ with satisfying results}  \\ \hline %Plan Prueba
+ Deliverable-05 & Project Plan document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Deliverable-06 & Requirements document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Deliverable-07 & Design document & \makecell{Specifications given by the \\ professors for this document} \\ \hline
+ Deliverable-08 & Test plan document & \makecell{Specifications given by the \\ supervisor for this document} \\ \hline
+ Deliverable-09 & Final report & \makecell{Specifications given by the \\ professor for this document} \\ \hline
 \end{tabular}
 \label{tab:del}
 \end{center}
@@ -352,19 +352,22 @@ The expected deliverables are presented in table \ref{tab:del}.
 % indica la probabilidad y el impacto para el proyecto.
 \section{Risk analysis}
 
-Since most of the work is done from home or at the SEED laboratory, few risks are considered. Table \ref{tab:risk} summarizes
+Since most of the work is done from home (\emph{ssh} to the Germany server) or at the SEED laboratory, few risks are considered. Table \ref{tab:risk} summarizes
 this information.
 
 \begin{table}[h!]
 \begin{center}
 \caption{Risk analysis}
-\begin{tabular}{ | c | c | c | c | } 
+\begin{tabular}{ | c | c | c | c | c | } 
  \hline
- Risk & \makecell{Probability of \\ occurrence} & \makecell{Impact \\ (hours)} & \makecell{Risk exposure \\ (hours)} \\
+ Risk & Type & \makecell{Probability of \\ occurrence} & \makecell{Impact \\ (hours)} & \makecell{Risk exposure \\ (hours)} \\
  \hline
-  \makecell{Illness or any special medical condition} & 0.5 & 8 & 4 \\ \hline
- \makecell{General server errors (missing files, \\ permission restrictions, etc)}   & 0.6 & 24 & 14.4 \\ \hline
- \makecell{Delays when acquiring the hardware}   & 0.25 & 8 & 2 \\ \hline
+ \makecell{Illness or any special \\ medical condition} & Personal & 0.5 & 8 & 4 \\ \hline
+ \makecell{Difficulties understanding \\ ASIP-related concepts} & Personal & 0.5 & 8 & 4 \\ \hline
+ \makecell{General server errors \\ (missing files, permission \\ restrictions, etc)} & Tools & 0.75 & 24 & 18 \\ \hline
+ \makecell{Delays when acquiring \\ the hardware platform} &Tools & 0.25 & 8 & 2 \\ \hline
+ \makecell{ASIP configurations that \\ exceed error threshold} & Methods & 0.75 & 8 & 6 \\ \hline
+ \makecell{Delays when acquiring the \\ server environment set} & Inputs & 0.75 & 8 & 6 \\ \hline
 \end{tabular}
 \label{tab:risk}
 \end{center}
@@ -379,7 +382,9 @@ this information.
 % Se asigna un identificador único (código) a cada actividad.
 \section{Activities and effort budget}
 
-This section takes in consideration a total of 216 engineering hours; this is then distributed
+This section takes in consideration a total of 216 engineering hours; this is calculated
+by multiplying the 16 weeks by 12 extra-class hours, and then adding 4 hours times
+6 because of the 6 weeks that there is no class attendance. This hours are then distributed
 among all the tasks, considering a risk reserve. Table \ref{tab:act} summarizes all the 
 activities for the project.
 
@@ -389,19 +394,22 @@ activities for the project.
 \begin{tabular}{ | c | c | c | c | c | } 
  \hline
  ID  &Activity & \makecell{Engineering \\ hours} & \makecell{Risk reserve \\ (hours)} & \makecell{Total \\ (hours)} \\ \hline
- 01 & \makecell{Get to know the software platform} & 24 & 2 & 26 \\ \hline
- 02 & \makecell{Find appropiate error-resiliant applications \\ and identify the sections that can be \\ 
-  approximated} & 42 & 4 & 46  \\ \hline
- 03 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 50 & 3 & 53 \\ \hline
- 04 & \makecell{Redact Project Plan document} & 35 & 3 & 33 \\ \hline
- 05 & \makecell{Redact Requirements document} & 35 & 3 & 33 \\ \hline
- 06 & \makecell{Redact Design document} & 35 & 3 & 33 \\ \hline
- 07 & \makecell{Redact Test plan document} & 35 & 3 & 33 \\ \hline
- 08 & \makecell{Redact Final documentation} & 35 & 3 & 33 \\ \hline
+ 01 & \makecell{Get to know the software platform} & 30 & 2 & 32 \\ \hline
+ 02 & \makecell{Find appropiate error-tolerant applications \\ and identify the sections that can be \\ 
+  approximated} & 30 & 2 & 32  \\ \hline
+ 03 & \makecell{Implement the ASIPs in the error \\ tolerant applications found} & 60 & 4 & 64 \\ \hline
+ 03 & \makecell{Compare execution time, area and power \\ vs error in selected applications} & 38 & 2 & 40 \\ \hline
+ 04 & \makecell{Redact Project Plan document} & 8 & 0 & 8 \\ \hline
+ 05 & \makecell{Redact Requirements document} & 8 & 0 & 8 \\ \hline
+ 06 & \makecell{Redact Design document} & 8 & 0 & 8 \\ \hline
+ 07 & \makecell{Redact Test plan document} & 8 & 0 & 8 \\ \hline
+ 08 & \makecell{Redact Final documentation} & 15 & 1 & 16 \\ \hline \hline
+ \multicolumn{4}{|c|}{Result} & 216 \\ \hline
 \end{tabular}
 \label{tab:act}
 \end{center}
 \end{table}
+
 
 
 % El cronograma incluye todas las actividades y las mismas no
@@ -412,7 +420,9 @@ activities for the project.
 % Al menos una actividad por semana.
 \section{Schedule}
 
-Considering the 4 months (16 weeks) of the semester, the project is scheduled as shown in figure \ref{tab:schd}.
+Considering the 4 months (16 weeks) of the semester, the project is scheduled as shown in figure \ref{tab:schd}, where
+the light blue color represents the initial tasks for the project, blue the development of the project itself and
+gray documentation tasks. 
 
 \begin{table}[h!]
 \begin{center}
