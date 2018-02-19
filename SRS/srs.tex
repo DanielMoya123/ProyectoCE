@@ -1,0 +1,317 @@
+%% ---------------------------------------------------------------------------
+%% proposal.tex
+%%
+%% Research Proposal, main document.
+%%
+%% ---------------------------------------------------------------------------
+\documentclass[12pt,letterpaper]{article}
+\usepackage[english]{babel}     % supports english, but default is
+% \usepackage[spanish]{babel}
+% include this if you want to import graphics files with /includegraphics
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+\usepackage[table]{xcolor}
+
+\usepackage{anysize}
+\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
+\usepackage{textcomp}
+\usepackage{url}
+\bibliographystyle{unsrt}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{slashbox}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+% Color and strikethrough
+
+
+
+\usepackage{color}
+\usepackage{soul}
+
+\usepackage{array}
+\usepackage{makecell}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+\definecolor{dblue}{RGB}{0,102,153}
+\newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
+
+
+
+\setlength{\parskip}{1em}
+
+% Nombre del Estudiante
+\newcommand{\scriptAuthor}{Daniel Moya Sánchez}
+
+% Tí­tulo de la tesis
+\newcommand{\scriptTitle}{Requirements Specification} 
+
+
+% Keywords
+\newcommand{\scriptKeywords}{key, words, ...}
+
+% Para el PDF (cambiar si se desea otras cosas a lo indicado arriba
+\newcommand{\pdfAuthor}{\scriptAuthor}
+\newcommand{\pdfTitle}{\scriptTitle} 
+\newcommand{\pdfKeywords}{\scriptKeywords}
+
+
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, top color=white, bottom color=yellow!50,very thick, inner sep=1em, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+} 
+
+\begin{document}
+ 
+ \graphicspath{{./}{./fig/}}
+
+ \input{./titlepage.tex}
+
+%  \tableofcontents
+
+ \clearpage
+
+\section{Introduction}
+
+
+% Delineate the purpose of the software to be specified.
+\subsection{Purpose}
+
+
+
+% Describe the scope of the software under consideration by
+% a) Identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
+% b) Explaining what the software product(s) will do;
+% c) Describing the application of the software being specified, including relevant benefits, objectives, and
+% goals;
+% d) Being consistent with similar statements in higher-level specifications (e.g., the system requirements
+% specification), if they exist.
+\subsection{Scope}
+
+
+
+
+\subsection{Product overview}
+
+
+% Define the system's relationship to other related products.
+% If the product is an element of a larger system, then relate the requirements of that larger system to the
+% functionality of the product covered by the SRS.
+% If the product is an element of a larger system, then identify the interfaces between the product covered by the
+% SRS and the larger system of which the product is an element.
+% A block diagram showing the major elements of the larger system, interconnections, and external interfaces
+% can be helpful.
+% Describe how the software operates within the following constraints:
+% a) System interfaces;
+% b) User interfaces;
+% c) Hardware interfaces;
+% d) Software interfaces;
+\subsubsection{Product perspective}
+
+
+
+% Provide a summary of the major functions that the software will perform. For example, an SRS for an
+% accounting program may use this part to address customer account maintenance, customer statement, and
+% invoice preparation without mentioning the vast amount of detail that each of those functions requires.
+% Sometimes the function summary that is necessary for this part can be taken directly from the section of the
+% higher-level specification (if one exists) that allocates particular functions to the software product.
+% Note that for the sake of clarity
+% a) The product functions should be organized in a way that makes the list of functions understandable to the
+% acquirer or to anyone else reading the document for the first time.
+% b) Textual or graphical methods can be used to show the different functions and their relationships. Such a
+% diagram is not intended to show a design of a product, but simply shows the logical relationships among
+% variables.
+\subsubsection{Product functions}
+
+
+
+% Describe those general characteristics of the intended groups of users of the product including characteristics
+% that may influence usability, such as educational level, experience, disabilities, and technical expertise. This
+% description should not state specific requirements, but rather should state the reasons why certain specific
+% requirements are later specified in specific requirements in subclause 9.5.9.
+\subsubsection{User characteristics}
+
+
+
+% Provide a general description of any other items that will limit the supplier's options, including
+% a) Regulatory policies;
+% b) Hardware limitations (e.g., signal timing requirements);
+% c) Interfaces to other applications;
+% d) Parallel operation;
+% e) Audit functions;
+% f) Control functions;
+% g) Higher-order language requirements;
+% h) Signal handshake protocols (e.g., XON-XOFF, ACK-NACK);
+% i) Quality requirements (e.g., reliability)
+% j) Criticality of the application;
+% k) Safety and security considerations.
+% l) Physical/mental considerations
+\subsubsection{Limitations}
+
+\subsection{Definitions}
+
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
+
+
+\section{Specific Requirements}
+
+
+
+% Define all inputs into and outputs from the software system. The description should complement the interface
+% descriptions in 9.5.3.3.1 through 9.5.3.3.5, and should not repeat information there.
+% Each interface defined should include the following content:
+% a) Name of item;
+% b) Description of purpose;
+% c) Source of input or destination of output;
+% d) Valid range, accuracy, and/or tolerance;
+% e) Units of measure;
+% f) Timing;
+% g) Relationships to other inputs/outputs;
+% h) Screen formats/organization;
+% i) Window formats/organization;
+% j) Data formats;
+% k) Command formats;
+% l) Endmessages.
+\subsection{External interfaces}
+
+
+
+
+% Define the fundamental actions that have to take place in the software in accepting and processing the inputs
+% and in processing and generating the outputs, including
+% a) Validity checks on the inputs
+% b) Exact sequence of operations
+% c) Responses to abnormal situations, including
+%   1) Overflow
+%   2) Communication facilities
+%   3) Error handling and recovery
+% d) Effect of parameters
+% e) Relationship of outputs to inputs, including
+%   1) Input/output sequences
+%   2) Formulas for input to output conversion
+% It may be appropriate to partition the functional requirements into subfunctions or subprocesses. This does
+% not imply that the software design will also be partitioned that way.
+\subsection{Functions}
+
+
+
+% Define usability (quality in use) requirements. Usability requirements and objectives for the software system
+% include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
+\subsection{Usability requirements}
+
+
+
+% Specify both the static and the dynamic numerical requirements placed on the software or on human
+% interaction with the software as a whole.
+% Static numerical requirements may include the following:
+% a) The number of terminals to be supported;
+% b) The number of simultaneous users to be supported;
+% c) Amount and type of information to be handled.
+% Static numerical requirements are sometimes identified under a separate section entitled Capacity.
+% Dynamic numerical requirements may include, for example, the numbers of transactions and tasks and the
+% amount of data to be processed within certain time periods for both normal and peak workload conditions.
+% The performance requirements should be stated in measurable terms.
+% For example,
+% 95 % of the transactions shall be processed in less than 1 second.
+% rather than,
+% An operator shall not have to wait for the transaction to complete.
+\subsection{Performance requirements}
+
+
+%Specify the logical requirements for any information that is to be placed into a database, including:
+% a) Types of information used by various functions;
+% b) Frequency of use;
+% c) Accessing capabilities;
+% d) Data entities and their relationships;
+% e) Integrity constraints;
+% f) Data retention requirements.
+\subsection{Logical database requirements}
+
+
+
+% Specify constraints on the system design imposed by external standards, regulatory requirements, or project
+% limitations.
+\subsection{Design constraints}
+
+
+% Specify the required attributes of the software product. The following is a partial list of examples:
+% a) Reliability - Specify the factors required to establish the required reliability of the software system at time
+% of delivery.
+% b) Availability - Specify the factors required to guarantee a defined availability level for the entire system
+% such as checkpoint, recovery, and restart.
+% c) Security - Specify the requirements to protect the software from accidental or malicious access, use
+% modification, destruction, or disclosure. Specific requirements in this area could include the need to:
+%   1) Utilize certain cryptographic techniques;
+%   2) Keep specific log or history data sets;
+%   3) Assign certain functions to different modules;
+%   4) Restrict communications between some areas of the program;
+%   5) Check data integrity for critical variables;
+%   6) Assure data privacy.
+% d) Maintainability - Specify attributes of software that relate to the ease of maintenance of the software itself.
+% These may include requirements for certain modularity, interfaces, or complexity limitation. Requirements
+% should not be placed here just because they are thought to be good design practices.
+% e) Portability - Specify attributes of software that relate to the ease of porting the software to other host
+% machines and/or operating systems, including:
+%   1) Percentage of elements with host-dependent code;
+%   2) Percentage of code that is host dependent;
+%   3) Use of a proven portable language;
+%   4) Use of a particular compiler or language subset;
+%   5) Use of a particular operating system.
+\subsection{Software system attributes}
+
+
+% The SRS should contain additional supporting information including
+% a) Sample input/output formats, descriptions of cost analysis studies, or results of user surveys;
+% b) Supporting or background information that can help the readers of the SRS;
+% c) A description of the problems to be solved by the software;
+% d) Special packaging instructions for the code and the media to meet security, export, initial loading, or other
+% requirements.
+% The SRS should explicitly state whether or not these information items are to be considered part of the
+% requirements.
+\subsection{Supporting information}
+
+
+\section{Verification}
+
+\subsection{External interfaces}
+
+\subsection{Functions}
+
+\subsection{Usability requirements}
+
+\subsection{Performance requirements}
+
+\subsection{Logical database requirements}
+
+\subsection{Design constraints}
+
+\subsection{Software system attributes}
+
+\subsection{Supporting information}
+
+
+\section{Appendices}
+
+
+% List each of the factors that affect the requirements stated in the SRS. These factors are not design
+% constraints on the software but any changes to these factors can affect the requirements in the SRS. For
+% example, an assumption may be that a specific operating system will be available on the hardware designated
+% for the software product. If, in fact, the operating system is not available, the SRS would then have to change
+% accordingly.
+\subsection{Assumptions and dependencies}
+
+\subsection{Acronyms and abbreviations}
+
+%\subsection{Traceability Matrix}
+
+\end{document}
+
