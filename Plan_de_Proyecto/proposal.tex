@@ -115,13 +115,35 @@ requirements. However, results will not be published until the end of the projec
 % las investigaciones sobre el tema en cuestión.
 \section{Problem description}
 
-An ASIP is a processor that uses an application-specific instruction set, this means 
+In the current era where sophisticated applications are widely used (e.g. GPS systems, 
+speech recognition, etc.) approximate computing helps delivering acceptable
+output while keeping metrics such as response time or energy efficiency at better levels. 
+For a given error-tolerant system, the framework on figure \ref{fig:ap} can be applied to 
+include the approximate computing paradigm \cite{xu2018approximate}.
+
+\begin{figure}
+\begin{center}
+ \includegraphics[scale=0.3]{APframework}
+ \caption{General framework of approximate computing \cite{xu2018approximate}} \label{fig:ap}
+ \end{center}
+\end{figure}
+
+
+The key elements of figure \ref{fig:ap} consist of approximate kernels, which are
+the implementation of the approximate functions; the identification of the error-tolerant parts
+and its specific details; and the quality management which implies an evaluation to determine
+if the application meets the desired requirements \cite{xu2018approximate}.
+
+
+One way to implement approximate computing is through ASIPs. An ASIP is a processor that uses an application-specific instruction set, this means 
 that, although it can execute a wide range of applications, it is optimized for a 
 specific one, in which the ASIP can execute with improved performance (for instance, 
-energy consumption or execution time) compared to a General Purpose Proccesor (GPP). 
-Although Application Specific Integrated Circuits (ASICs) present better performance 
-results, ASIPs possess flexibility. Optimizations for an ASIP can be seen in different forms, 
-including \cite{henkel2003closing}: 
+energy consumption or execution time would be lower) compared to a General Purpose Proccesor (GPP).
+With the use of ASIPs, instructions and even functions where there is error tolerance can be
+implemented as special approximated instructions, that reduce the resource consumption 
+while keeping the error from the approximation under an acceptable threshold. Although Application Specific Integrated Circuits (ASICs) show better performance 
+results, ASIPs possess more flexibility. Optimizations for an ASIP can be seen in different forms, 
+including \cite{henkel2003closing}:
 
 \begin{itemize}
  \item Instruction extension: Customized instructions can be made to extend the base Instruction Set Architecture (ISA).
@@ -136,33 +158,29 @@ including \cite{henkel2003closing}:
 
 ASICs represent a hardware solution to a problem which is very limited and have high 
 costs and a high time-to-market, but achieve the greatest performance. Contrary, GPPs 
-are seen as a software solution which are very flexible but they are the least efficient. 
-ASIPs are in the middle of these two as they balance flexibility and performance to have a 
+are seen as a software solution which are very flexible but they are the least efficient. ASIPs
+are in the middle of these two as they balance flexibility and performance to have a 
 good trade-off between those variables. 
 
 
 The relationship between GPPs, ASIPs, and ASICs is shown in figure \ref{fig:gaa}.
 Approximate computing can also be implemented on GPPs, due to their extremely flexible nature,
-however, since they execute everything in software, specialized hardware modules cannot help
-the performance of these systems. ASIPs can adjust to specific requirements of
-a given application (through extended instructions) so that the best balance between cost savings and 
-amount of error is achieved. This project focuses on that goal, to design ASIPs for a set 
+however, because they are designed for any kind of computation, it falls on the programmers, or compilers, not on specialized hardware modules,
+to make the performance of software running on these systems as high as possible. On the other hand, since ASICs are a pure hardware solution,
+approximate hardware modules would be difficult to manage in terms of quality evaluation,
+this could cause high cost of development, since the hardware would not be programmable. ASIPs can adjust to specific requirements of
+a given application (through extended instructions) so that a better balance of cost savings and 
+amount of error is achieved. This project focuses on that goal; to design ASIPs for a set 
 of error-tolerant applications.
+
 
 \begin{figure}
 \begin{center}
- \includegraphics[width=\linewidth]{GPP-ASIP-ASIC}
+ \includegraphics[scale=0.3]{GPP-ASIP-ASIC}
  \caption{Comparison between GPPs, ASIPs, and ASICs \cite{henkel2006design}} \label{fig:gaa}
  \end{center}
 \end{figure}
 
-%ASIPs can also be used to adjust the balance between acceptable amount of error vs. the 
-%cost (economic, area, execution time) of an application; which is is the main focus of 
-%study of the project. Since different types of applications vary significantly in their 
-%requirements and specifications (e.g. where the error-tolerant section is), different ASIPs 
-%have to be build for each one of them so that the best balance between cost savings and 
-%amount of error is achieved. This project focuses on that goal, to design ASIPs for a set 
-%of error-tolerant applications.
 
 
 The environment in which the ASIPs will be developed consists of several software tools 
