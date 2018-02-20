@@ -83,7 +83,8 @@
 % Delineate the purpose of the software to be specified.
 \subsection{Purpose}
 
-
+The purpose of this research is to explore the design of Application-Specific Instruction Set Processors (ASIPs) for 
+error-tolerant applications.
 
 % Describe the scope of the software under consideration by
 % a) Identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
@@ -94,7 +95,15 @@
 % specification), if they exist.
 \subsection{Scope}
 
+This research concerns both application selection and application optmization. For this, ASIP configurations using specific approximated instructions for the 
+ selected applications are expected to be delivered.
+ 
+This project is expected to help make approximated computing a more solid tendency.
 
+
+This research is not merely concerned about
+
+This research is restricted to
 
 
 \subsection{Product overview}
@@ -113,7 +122,13 @@
 % c) Hardware interfaces;
 % d) Software interfaces;
 \subsubsection{Product perspective}
+The system will consist of a studied and selected application where one of its sections or just a instruction
+is replaced for a approximated version to improve execution time, area, and power consumption while
+keeping an acceptable error threshold.
 
+Besides specific contrains of the selected application itself, the desired error threshold will be the only constrain of the system. 
+
+The system will have the following interfaces
 
 
 % Provide a summary of the major functions that the software will perform. For example, an SRS for an
@@ -128,6 +143,15 @@
 % diagram is not intended to show a design of a product, but simply shows the logical relationships among
 % variables.
 \subsubsection{Product functions}
+The ASIPs that will be integrated to an specific application will have the following characteristics:
+
+\begin{itemize}
+ \item Adjustable error threshold:
+ 
+ \item Adjustable resource consumption:
+ 
+ \item Scalable:
+\end{itemize}
 
 
 
@@ -136,6 +160,15 @@
 % description should not state specific requirements, but rather should state the reasons why certain specific
 % requirements are later specified in specific requirements in subclause 9.5.9.
 \subsubsection{User characteristics}
+Since approximated computing is still in its infancy, a lot of research and testing is still needed, 
+so the users of the developed ASIPs are the same research groups of which this 
+project is a part of. The research group members posses, in general, these characteristics:
+
+\begin{itemize}
+ \item Technical knowledge:
+ 
+ \item Access to specialized tools:
+\end{itemize}
 
 
 
@@ -153,8 +186,28 @@
 % k) Safety and security considerations.
 % l) Physical/mental considerations
 \subsubsection{Limitations}
+The following limitations are considered for the ASIPs developed:
+\begin{itemize}
+ \item Performance gain:
+\end{itemize}
+
+
 
 \subsection{Definitions}
+Table \ref{tab:def} contains the specific terms used in this document.
+
+
+\begin{table}[h!]
+\begin{center}
+\caption{Definitions}
+\begin{tabular}{|c|c|} 
+ \hline
+ Term & Definition \\ \hline
+ ASIP & Application .. \\ \hline
+\end{tabular}
+\label{tab:def}
+\end{center}
+\end{table}
 
 
 % Referencias del Background y el Related Work
