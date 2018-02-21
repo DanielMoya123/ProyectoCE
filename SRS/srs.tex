@@ -82,11 +82,10 @@
 
 % Delineate the purpose of the software to be specified.
 \subsection{Purpose}
-
-The purpose of this research is to explore the design of Application-Specific Instruction Set Processors (ASIPs) for 
+The purpose of this research is to evaluate the design of Application-Specific Instruction Set Processors (ASIPs) for 
 error-tolerant applications. The ASIPs are meant to execute with improved performance (for instance, 
 energy consumption or execution time would be lower) compared to a General Purpose Proccesor (GPP) but
-also have a greater flexibility than ASICs.
+also have greater flexibility than ASICs.
 
 % Describe the scope of the software under consideration by
 % a) Identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
@@ -96,16 +95,13 @@ also have a greater flexibility than ASICs.
 % d) Being consistent with similar statements in higher-level specifications (e.g., the system requirements
 % specification), if they exist.
 \subsection{Scope}
-
 This research concerns both application selection and application optmization. For this, ASIP configurations using specific approximated instructions for the 
- selected applications are expected to be delivered.
- 
-This project is expected to help make approximated computing a more solid tendency.
+ selected applications are to be delivered. Furthermore, each ASIP configuration will be described
+ by a set of parameters that the final system will possess, such as energy efficiency, area, execution time, and output error.
+ This project is expected to help make approximated computing a more widespread tendency and generate a strong base knowledge for future projects
+ where there is freedom to choose the parameters of the hardware running a certain type of an application in terms of resource consumption and accepted error. 
 
 
-This research is not merely concerned about
-
-This research is restricted to
 
 
 \subsection{Product overview}
@@ -124,13 +120,15 @@ This research is restricted to
 % c) Hardware interfaces;
 % d) Software interfaces;
 \subsubsection{Product perspective}
-The system will consist of a studied and selected application where one of its sections or just a instruction
-is replaced for a approximated version to improve execution time, area, and power consumption while
-keeping an acceptable error threshold.
+The generated result will consist of studied and selected applications where one of its sections or just an instruction
+is replaced by an approximated version, to improve execution time, area, or power consumption while
+maintaining an acceptable error threshold. This research is a stand-alone project in the sense that the ASIP configurations
+made will be specific to a selected application and will not operate with other interfaces. This means that the configurations
+developed will only be constrained by each specific application's inherent constraints or limitations, for example, which section is error-tolerant or
+which parameter is the most critical. 
 
-Besides specific contrains of the selected application itself, the desired error threshold will be the only constrain of the system. 
 
-The system will have operate with ---- while respecting their own contrains like ....
+
 
 % Provide a summary of the major functions that the software will perform. For example, an SRS for an
 % accounting program may use this part to address customer account maintenance, customer statement, and
@@ -144,19 +142,19 @@ The system will have operate with ---- while respecting their own contrains like
 % diagram is not intended to show a design of a product, but simply shows the logical relationships among
 % variables.
 \subsubsection{Product functions}
-With the research on ASIPs, the approximate computing paradigm will be able to expand, this will 
-enable more personalized applications so the right price in area, power consumption or execution time
-is paid for an allowed error level.
-
+With the research on ASIPs, the approximate computing paradigm will be expanded, which will 
+enable more personalized applications to balance flexibility and performance to have a 
+good trade-off between those variables.
 
 The ASIPs that will be integrated to an specific application will have the following characteristics:
 
 \begin{itemize}
- \item Adjustable error threshold:
+ \item Adjustable error threshold: The error threshold can vary according to a specific ASIP configuration.
  
- \item Adjustable resource consumption:
+ \item Adjustable resource consumption: The resource consumption can vary according to a specific ASIP configuration.
  
- \item Scalable:
+ \item Scalable: Regardless of the amount of hardware used, the ASIP parameters are expected to remain roughly the
+ same.
 \end{itemize}
 
 
@@ -168,12 +166,14 @@ The ASIPs that will be integrated to an specific application will have the follo
 \subsubsection{User characteristics}
 Since approximated computing is still in its infancy, a lot of research and testing is still needed, 
 so the users of the developed ASIPs are the same research groups of which this 
-project is a part of. The research group members posses, in general, these characteristics:
+project is a part of. The research group members possess, in general, these characteristics:
 
 \begin{itemize}
- \item Technical knowledge:
+ \item Technical knowledge: It is expected that users have an in-depth knowledge of the specific application
+ that is being optimized, as well as a fair amount of knowledge of hardware architecture design. 
  
- \item Access to specialized tools:
+ \item Access to specialized tools: Users are expected to have a set of tools that allow them to synthetize
+ and simulate a hardware architecture, as well as a hardware board to implement a desired design. 
 \end{itemize}
 
 
@@ -194,12 +194,18 @@ project is a part of. The research group members posses, in general, these chara
 \subsubsection{Limitations}
 The following limitations are considered for the ASIPs developed:
 \begin{itemize}
- \item Performance gain:
+ \item Performance gain: The gain in any of the four parameters (energy efficiency, area, execution time and output error) can never be
+ greater than the theoretical possible gain given by the Amdahl equation, which is determined by the percentage of the application
+ that is being optimized. 
+ 
+ \item Development time: The 16 weeks of the institutional calendar of the ITCR limit the scope of the project to the configurations that can
+ be developed in such a short amount of time.
 \end{itemize}
 
+The resources needed for the project (e.g hardware platform) are not considered as limitations since they are already given by the research group
+and the academic institutions. 
 
-
-\subsection{Definitions}
+\subsection{Definitions, acronyms and abbreviations}
 Table \ref{tab:def} contains the specific terms used in this document.
 
 
@@ -209,7 +215,12 @@ Table \ref{tab:def} contains the specific terms used in this document.
 \begin{tabular}{|c|c|} 
  \hline
  Term & Definition \\ \hline
- ASIP & Application .. \\ \hline
+ ASIP & \makecell{
+ Application Specific Instruction Set Processors. this means that, although the \\
+ processor can execute a wide range of applications, it is optimized for a specific \\
+ one, in which it can execute with improved performance (for instance, energy \\
+ consumption or execution time would be lower) compared to a General Purpose \\
+ Proccesor (GPP).}  \\ \hline
 \end{tabular}
 \label{tab:def}
 \end{center}
@@ -241,6 +252,8 @@ Table \ref{tab:def} contains the specific terms used in this document.
 % k) Command formats;
 % l) Endmessages.
 \subsection{External interfaces}
+ As explained in section ``Product perspective'', the entire optimizaded application
+will not have external interfaces.
 
 
 
@@ -261,11 +274,28 @@ Table \ref{tab:def} contains the specific terms used in this document.
 % not imply that the software design will also be partitioned that way.
 \subsection{Functions}
 
+\subsubsection{Functional requirement 1.1}
+\textbf{ID: FR-1} \\
+Title: ASIP optimization \\
+Description: The generated knowledge shall provide the user with all the details of a
+specific optimization in a given application, so that the user can take this as a reference.
 
 
 % Define usability (quality in use) requirements. Usability requirements and objectives for the software system
 % include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 \subsection{Usability requirements}
+As explained in section ``User characteristics'', the users are expected to be researchers, for this only few 
+usability requirements are considered:
+
+
+\subsubsection{Usability requirement 1.1}
+\textbf{ID: UR-1} \\
+Title: Knowledge documentation \\
+Description: The research shall present the user a proper documentation for each selected application (application domain, i.e. the 
+application without any modification) and the specific optimizations performed, which include test cases, gain in 
+energy efficiency, area, and power consumption, as well as the output error. 
+
+
 
 
 
@@ -286,6 +316,9 @@ Table \ref{tab:def} contains the specific terms used in this document.
 \subsection{Performance requirements}
 
 
+queremos identificar qué tanto se puede optimizar el rendimiento de un programa tomando en cuenta 
+las variables de tiempo de ejecución, potencia, área y error aceptable
+
 
 %Specify the logical requirements for any information that is to be placed into a database, including:
 % a) Types of information used by various functions;
@@ -295,12 +328,26 @@ Table \ref{tab:def} contains the specific terms used in this document.
 % e) Integrity constraints;
 % f) Data retention requirements.
 \subsection{Logical database requirements}
-
+No database is used for this project, hence, no logical database requirements are presented. 
 
 
 % Specify constraints on the system design imposed by external standards, regulatory requirements, or project
 % limitations.
 \subsection{Design constraints}
+Design contraints are understood as aspects which are fixed for the project. Since this is a research project, minimun design contraints are presented:
+
+\begin{itemize}
+ \item Hardware development board: The project is going to use a Xilinx Virtex-V board, since
+ it corresponds to the hardware that uses the development framework. 
+ 
+ \item Development framework:
+ 
+ \item 	Software architecture:
+ 
+ \item Programming language:
+\end{itemize}
+
+
 
 
 % Specify the required attributes of the software product. The following is a partial list of examples:
@@ -346,6 +393,8 @@ Table \ref{tab:def} contains the specific terms used in this document.
 
 \subsection{Functions}
 
+Xilinx, Mentor y Synopsys
+
 \subsection{Usability requirements}
 
 \subsection{Performance requirements}
@@ -368,8 +417,10 @@ Table \ref{tab:def} contains the specific terms used in this document.
 % for the software product. If, in fact, the operating system is not available, the SRS would then have to change
 % accordingly.
 \subsection{Assumptions and dependencies}
+This project is based on the assumption that, given research and articles in the area of approximate computation,
+it is feasible to introduce functions or approximate blocks in a given application in order to introduce error and
+at the same time have an improvement in resources consumption, so that both variables can be manipulated.
 
-\subsection{Acronyms and abbreviations}
 
 %\subsection{Traceability Matrix}
 
