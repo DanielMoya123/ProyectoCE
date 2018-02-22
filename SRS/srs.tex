@@ -119,8 +119,8 @@ This research concerns both application selection and application optmization. F
 % b) User interfaces;
 % c) Hardware interfaces;
 % d) Software interfaces;
-\subsubsection{Product perspective}
-The generated result will consist of studied and selected applications where one of its sections or just an instruction
+\subsubsection{Product perspective} \label{sec:persp}
+The generated result will consist of studied and selected applications where a set of instructions, going from a single instruction up to an entire section
 is replaced by an approximated version, to improve execution time, area, or power consumption while
 maintaining an acceptable error threshold. This research is a stand-alone project in the sense that the ASIP configurations
 made will be specific to a selected application and will not operate with other interfaces. This means that the configurations
@@ -142,11 +142,11 @@ which parameter is the most critical.
 % diagram is not intended to show a design of a product, but simply shows the logical relationships among
 % variables.
 \subsubsection{Product functions}
-With the research on ASIPs, the approximate computing paradigm will be expanded, which will 
-enable more personalized applications to balance flexibility and performance to have a 
-good trade-off between those variables.
+This research on ASIPs is an attempt to expand on the computing paradigm, which is expected to 
+enable more personalized applications that adjust flexibility and performance to achieve an
+optimal balance between the two variables.
 
-The ASIPs that will be integrated to an specific application will have the following characteristics:
+The ASIPs that will be integrated to a specific application will have the following characteristics:
 
 \begin{itemize}
  \item Adjustable error threshold: The error threshold can vary according to a specific ASIP configuration.
@@ -163,10 +163,10 @@ The ASIPs that will be integrated to an specific application will have the follo
 % that may influence usability, such as educational level, experience, disabilities, and technical expertise. This
 % description should not state specific requirements, but rather should state the reasons why certain specific
 % requirements are later specified in specific requirements in subclause 9.5.9.
-\subsubsection{User characteristics}
+\subsubsection{User characteristics} \label{sec:user}
 Since approximated computing is still in its infancy, a lot of research and testing is still needed, 
-so the users of the developed ASIPs are the same research groups of which this 
-project is a part of. The research group members possess, in general, these characteristics:
+so the users of the developed ASIPs are the same research groups behind this
+project. The research group members possess, in general, these characteristics:
 
 \begin{itemize}
  \item Technical knowledge: It is expected that users have an in-depth knowledge of the specific application
@@ -191,19 +191,20 @@ project is a part of. The research group members possess, in general, these char
 % j) Criticality of the application;
 % k) Safety and security considerations.
 % l) Physical/mental considerations
-\subsubsection{Limitations}
-The following limitations are considered for the ASIPs developed:
+\subsubsection{Limitations} \label{sec:limi}
+The following limitations are considered for the developed ASIPs:
 \begin{itemize}
  \item Performance gain: The gain in any of the four parameters (energy efficiency, area, execution time and output error) can never be
  greater than the theoretical possible gain given by the Amdahl equation, which is determined by the percentage of the application
  that is being optimized. 
  
  \item Development time: The 16 weeks of the institutional calendar of the ITCR limit the scope of the project to the configurations that can
- be developed in such a short amount of time.
+ be developed in that amount of time.
 \end{itemize}
 
-The resources needed for the project (e.g hardware platform) are not considered as limitations since they are already given by the research group
-and the academic institutions. 
+The resources needed for the project (e.g hardware platform) are not considered as limitations since they are already available to the research group
+and the academic institutions.
+
 
 \subsection{Definitions, acronyms and abbreviations}
 Table \ref{tab:def} contains the specific terms used in this document.
@@ -252,7 +253,7 @@ Table \ref{tab:def} contains the specific terms used in this document.
 % k) Command formats;
 % l) Endmessages.
 \subsection{External interfaces}
- As explained in section ``Product perspective'', the entire optimizaded application
+ As explained in section \ref{sec:persp}, the entire optimizaded application
 will not have external interfaces.
 
 
@@ -284,7 +285,7 @@ specific optimization in a given application, so that the user can take this as 
 % Define usability (quality in use) requirements. Usability requirements and objectives for the software system
 % include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 \subsection{Usability requirements}
-As explained in section ``User characteristics'', the users are expected to be researchers, for this only few 
+As explained in section \ref{sec:user}, the users are expected to be researchers, for this only few 
 usability requirements are considered:
 
 
@@ -314,10 +315,11 @@ energy efficiency, area, and power consumption, as well as the output error.
 % rather than,
 % An operator shall not have to wait for the transaction to complete.
 \subsection{Performance requirements}
+Since one of the objetives of this project is to identify how much a
+certain program can be optimized with the use of ASIPs to balance
+resource consumption and output error, therefore no performance requirements are presented because
+this is exactly the area which needs to be explored.
 
-
-queremos identificar qué tanto se puede optimizar el rendimiento de un programa tomando en cuenta 
-las variables de tiempo de ejecución, potencia, área y error aceptable
 
 
 %Specify the logical requirements for any information that is to be placed into a database, including:
@@ -334,21 +336,20 @@ No database is used for this project, hence, no logical database requirements ar
 % Specify constraints on the system design imposed by external standards, regulatory requirements, or project
 % limitations.
 \subsection{Design constraints}
-Design contraints are understood as aspects which are fixed for the project. Since this is a research project, minimun design contraints are presented:
+Design contraints are understood as aspects which are fixed for the project. Since this is a research project, minimun design contraints 
+besides the ones presented in section \ref{sec:limi} are considered:
 
 \begin{itemize}
  \item Hardware development board: The project is going to use a Xilinx Virtex-V board, since
  it corresponds to the hardware that uses the development framework. 
  
- \item Development framework:
+ \item Development framework: The ASIPs are going to be developed with the use of ASIPMeister and Dlxsim, which are the ones
+ already presented in the work environment. 
  
- \item 	Software architecture:
+ \item 	Software architecture: For a selected application, its general software architecture (i.e the algorithm or process done) 
+ is not going to be altered, since the optimizations are going to be implemented by hardware modules. 
  
- \item Programming language:
 \end{itemize}
-
-
-
 
 % Specify the required attributes of the software product. The following is a partial list of examples:
 % a) Reliability - Specify the factors required to establish the required reliability of the software system at time
@@ -374,7 +375,9 @@ Design contraints are understood as aspects which are fixed for the project. Sin
 %   4) Use of a particular compiler or language subset;
 %   5) Use of a particular operating system.
 \subsection{Software system attributes}
-
+Since the selection of an application is part of this project's objetive, no general software system 
+attributes can be described. The ASIPs developed will be designed according to the particular
+system attributes, which will be described in a future document. 
 
 % The SRS should contain additional supporting information including
 % a) Sample input/output formats, descriptions of cost analysis studies, or results of user surveys;
@@ -385,27 +388,44 @@ Design contraints are understood as aspects which are fixed for the project. Sin
 % The SRS should explicitly state whether or not these information items are to be considered part of the
 % requirements.
 \subsection{Supporting information}
+Approximate computing has been studied by several authors, the survey \cite{xu2018approximate} gathers many ways to implement
+this paradigm both by hardware or by software. 	
 
 
 \section{Verification}
 
 \subsection{External interfaces}
 
+The section does not apply for this project.
+
 \subsection{Functions}
 
-Xilinx, Mentor y Synopsys
+Xilinx, Mentor and Synopsys programs will be used to simulate and verify the corresponding optimizations
+produced by the ASIPs, which then will be properly documented. 
 
 \subsection{Usability requirements}
 
+The produced documentation will be carefully revised by the supervisor in order to aprove it.
+
 \subsection{Performance requirements}
+
+The section does not apply for this project.
 
 \subsection{Logical database requirements}
 
+The section does not apply for this project.
+
 \subsection{Design constraints}
+
+The section does not apply for this project.
 
 \subsection{Software system attributes}
 
+The section does not apply for this project.
+
 \subsection{Supporting information}
+
+The section does not apply for this project.
 
 
 \section{Appendices}
