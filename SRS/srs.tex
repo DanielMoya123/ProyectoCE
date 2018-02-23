@@ -82,10 +82,11 @@
 
 % Delineate the purpose of the software to be specified.
 \subsection{Purpose}
-The purpose of this research is to evaluate the design of Application-Specific Instruction Set Processors (ASIPs) for 
-error-tolerant applications. The ASIPs are meant to execute with improved performance (for instance, 
-energy consumption or execution time would be lower) compared to a General Purpose Proccesor (GPP) but
-also have greater flexibility than ASICs.
+The purpose of this research is to evaluate the design of Application-Specific Instruction 
+Set Processors (ASIPs) for error-tolerant applications. The ASIPs are meant to execute 
+with improved performance (for instance, energy consumption or execution time would be 
+lower) compared to a General Purpose Proccesor (GPP) but also with greater flexibility 
+than Application-Specific Integrated Circuits (ASICs).
 
 % Describe the scope of the software under consideration by
 % a) Identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
@@ -95,11 +96,14 @@ also have greater flexibility than ASICs.
 % d) Being consistent with similar statements in higher-level specifications (e.g., the system requirements
 % specification), if they exist.
 \subsection{Scope}
-This research concerns both application selection and application optmization. For this, ASIP configurations using specific approximated instructions for the 
- selected applications are to be delivered. Furthermore, each ASIP configuration will be described
- by a set of parameters that the final system will possess, such as energy efficiency, area, execution time, and output error.
- This project is expected to help make approximated computing a more widespread tendency and generate a strong base knowledge for future projects
- where there is freedom to choose the parameters of the hardware running a certain type of an application in terms of resource consumption and accepted error. 
+This research concerns the selection and optimization of error-tolerant applications. For 
+this, ASIP configurations using specific approximate instructions for the selected 
+applications are to be delivered. Furthermore, each ASIP configuration will be described by 
+a set of parameters that the final system will possess, such as energy efficiency, area, 
+execution time, and output error. This project is expected to help approximate computing 
+to be a more widespread tendency and generate a strong base knowledge for future 
+projects where there is freedom to choose the parameters of hardware running a 
+certain type of application in terms of resource consumption and accepted error. 
 
 
 
@@ -120,12 +124,14 @@ This research concerns both application selection and application optmization. F
 % c) Hardware interfaces;
 % d) Software interfaces;
 \subsubsection{Product perspective} \label{sec:persp}
-The generated result will consist of studied and selected applications where a set of instructions, going from a single instruction up to an entire section
-is replaced by an approximated version, to improve execution time, area, or power consumption while
-maintaining an acceptable error threshold. This research is a stand-alone project in the sense that the ASIP configurations
-made will be specific to a selected application and will not operate with other interfaces. This means that the configurations
-developed will only be constrained by each specific application's inherent constraints or limitations, for example, which section is error-tolerant or
-which parameter is the most critical. 
+The result of this wok will consist of studied and selected applications where a set of 
+instructions, going from a single instruction up to an entire section, are replaced by an 
+approximated version, to improve execution time, area, or power consumption while
+maintaining an acceptable error at the output. This research is a stand-alone project in the 
+sense that ASIP configurations will be specific to a selected application and will not 
+operate with other interfaces. This means that the configurations developed will only be 
+constrained by each specific application's inherent constraints or limitations, for example, 
+which section is error-tolerant or which parameter is the most critical. 
 
 
 
@@ -142,16 +148,18 @@ which parameter is the most critical.
 % diagram is not intended to show a design of a product, but simply shows the logical relationships among
 % variables.
 \subsubsection{Product functions}
-This research on ASIPs is an attempt to expand on the computing paradigm, which is expected to 
-enable more personalized applications that adjust flexibility and performance to achieve an
-optimal balance between the two variables.
+This research on ASIPs is an attempt to expand on the approximate computing paradigm, 
+which is expected to enable more personalized applications that trade-off accuracy and 
+performance to achieve an optimal balance between these two.
 
-The ASIPs that will be integrated to a specific application will have the following characteristics:
+The ASIPs will be integrated to a specific application and they will have the following 
+characteristics:
 
 \begin{itemize}
  \item Adjustable error threshold: The application's error level can vary according to a specific ASIP configuration.
  
- \item Adjustable resource consumption: The application's resource consumption can vary according to a specific ASIP configuration.
+ \item Adjustable resource consumption: The application's resource consumptiond can 
+ vary according to a specific ASIP configuration.
  
  \item Scalable: Regardless of the amount of hardware used, the ASIP parameters are expected to remain roughly the
  same.
@@ -192,14 +200,14 @@ project. The research group members possess, in general, these characteristics:
 % k) Safety and security considerations.
 % l) Physical/mental considerations
 \subsubsection{Limitations} \label{sec:limi}
-The following limitations are considered for the developed ASIPs:
+The following limitations are considered for the ASIPs to be developed:
 \begin{itemize}
- \item Performance gain: The gain in any of the four parameters (energy efficiency, area, execution time and output error) can never be
- greater than the theoretical possible gain given by the Amdahl equation, which is determined by the percentage of the application
- that is being optimized. 
+ \item Performance gain: The gain in energy efficiency, area, and execution time, can never 
+ be greater than the theoretical possible gain given by the Amdahl equation, which is 
+ determined by the percentage of the application that is being optimized. 
  
  \item Development time: The 16 weeks of the institutional calendar of the ITCR limit the scope of the project to the configurations that can
- be developed in that amount of time.
+ be developed in that length of time.
 \end{itemize}
 
 The resources needed for the project (e.g hardware platform) are not considered as limitations since they are already available to the research group
@@ -217,7 +225,7 @@ Table \ref{tab:def} contains the specific terms used in this document.
  \hline
  Term & Definition \\ \hline
  ASIP & \makecell{
- Application Specific Instruction Set Processors. This means that, although the \\
+ Application Specific Instruction Set Processor. This means that, although the \\
  processor can execute a wide range of applications, it is optimized for a specific \\
  one, in which it can execute with improved performance (for instance, energy \\
  consumption or execution time would be lower) compared to a General Purpose \\
@@ -227,7 +235,7 @@ Table \ref{tab:def} contains the specific terms used in this document.
  because all the programs are executed in general-purpose components, but since \\
  they are not optimized, they show less resource efficiency.}  \\ \hline
    ASIC & \makecell{
- Application Specific Integrated Circuits. In general, they show better performance \\
+ Application Specific Integrated Circuit. In general, they show better performance \\
 results than ASIPs, nevertheless, they are less flexible when executing anything \\
 other than the specific application they are meant to.}  \\ \hline
  ITCR & \makecell{
@@ -239,9 +247,6 @@ other than the specific application they are meant to.}  \\ \hline
 \end{table}
 
 
-% Referencias del Background y el Related Work
-\bibliographystyle{sty/plainurl}
-\bibliography{references}
 
 
 \section{Specific Requirements}
@@ -297,8 +302,8 @@ balance between resource consumption and output error.
 % Define usability (quality in use) requirements. Usability requirements and objectives for the software system
 % include measurable effectiveness, efficiency, and satisfaction criteria in specific contexts of use.
 \subsection{Usability requirements}
-As explained in section \ref{sec:user}, the users are expected to be researchers, for this, only a few 
-usability requirements are considered:
+As explained in section \ref{sec:user}, the users are expected to be researchers. For this, 
+only a few usability requirements are considered:
 
 
 \subsubsection{Usability requirement 1.1}
@@ -354,10 +359,10 @@ besides the ones presented in section \ref{sec:limi} are considered:
 \begin{itemize}
  \item Hardware development board: The project is going to use a Xilinx Virtex-V board, since
  it corresponds to the hardware that uses the development framework. 
- 
- \item Development framework: The ASIPs are going to be developed with the use of ASIPMeister and Dlxsim,
- which are already present on the work environment.
- 
+
+ \item Development framework: The ASIPs are going to be developed with the use of 
+ ASIPMeister and Dlxsim, which are already available as part of the work environment.
+
  \item 	Software architecture: For a selected application, its general software architecture (i.e the algorithm or process done) 
  is not going to be altered, because the optimizations are going to be implemented by hardware modules. 
  
@@ -400,8 +405,9 @@ system attributes, which will be described in a future document.
 % The SRS should explicitly state whether or not these information items are to be considered part of the
 % requirements.
 \subsection{Supporting information}
-Approximate computing has been studied by several authors, the survey \cite{xu2018approximate} gathers several ways to implement
-this paradigm both by hardware or by software. 	
+Approximate computing has been studied by several research groups. The survey in 
+\cite{xu2018approximate} gathers several ways to implement this paradigm both by 
+hardware or by software. 	
 
 
 \section{Verification}
@@ -452,6 +458,12 @@ The section does not apply for this project.
 This project is based on the assumption that, given research and articles in the area of approximate computation,
 it is feasible to introduce approximate functions or blocks in a given application in order to introduce error and
 at the same time have an improvement in resources consumption, so that both variables can be manipulated.
+
+
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
 
 
 %\subsection{Traceability Matrix}
