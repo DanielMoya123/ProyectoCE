@@ -149,9 +149,9 @@ optimal balance between the two variables.
 The ASIPs that will be integrated to a specific application will have the following characteristics:
 
 \begin{itemize}
- \item Adjustable error threshold: The error threshold can vary according to a specific ASIP configuration.
+ \item Adjustable error threshold: The application's error level can vary according to a specific ASIP configuration.
  
- \item Adjustable resource consumption: The resource consumption can vary according to a specific ASIP configuration.
+ \item Adjustable resource consumption: The application's resource consumption can vary according to a specific ASIP configuration.
  
  \item Scalable: Regardless of the amount of hardware used, the ASIP parameters are expected to remain roughly the
  same.
@@ -217,11 +217,19 @@ Table \ref{tab:def} contains the specific terms used in this document.
  \hline
  Term & Definition \\ \hline
  ASIP & \makecell{
- Application Specific Instruction Set Processors. this means that, although the \\
+ Application Specific Instruction Set Processors. This means that, although the \\
  processor can execute a wide range of applications, it is optimized for a specific \\
  one, in which it can execute with improved performance (for instance, energy \\
  consumption or execution time would be lower) compared to a General Purpose \\
  Proccesor (GPP).}  \\ \hline
+  GPP & \makecell{
+ General Purpose Proccesor. In general, they show better flexibility than ASIPs \\
+ because all the programs are executed in general-purpose components, but since \\
+ they are not optimized, they show less resource efficiency.}  \\ \hline
+   ASIC & \makecell{
+ Application Specific Integrated Circuits. In general, they show better performance \\
+results than ASIPs, nevertheless, they are less flexible when executing anything \\
+other than the specific application they are meant to.}  \\ \hline
  ITCR & \makecell{
  Instituto Tecnológico de Costa Rica. Place from where this project is being \\
  developed.}  \\ \hline
@@ -280,9 +288,10 @@ will not have external interfaces.
 
 \subsubsection{Functional requirement 1.1}
 \textbf{ID: FR-1} \\
-Title: ASIP optimization \\
-Description: The generated knowledge shall provide the user with all the details of a
-specific optimization in a given application, so that the user can take this as a reference.
+Title: ASIP customization \\
+Description: The ASIP configurations developed shall provide the user flexibility between
+the original version of an application and the optimized one, allowing for a customized
+balance between resource consumption and output error. 
 
 
 % Define usability (quality in use) requirements. Usability requirements and objectives for the software system
@@ -441,7 +450,7 @@ The section does not apply for this project.
 % accordingly.
 \subsection{Assumptions and dependencies}
 This project is based on the assumption that, given research and articles in the area of approximate computation,
-it is feasible to introduce functions or approximate blocks in a given application in order to introduce error and
+it is feasible to introduce approximate functions or blocks in a given application in order to introduce error and
 at the same time have an improvement in resources consumption, so that both variables can be manipulated.
 
 
