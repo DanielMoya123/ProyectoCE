@@ -1,0 +1,185 @@
+%% ---------------------------------------------------------------------------
+%% proposal.tex
+%%
+%% Research Proposal, main document.
+%%
+%% ---------------------------------------------------------------------------
+\documentclass[12pt,letterpaper]{article}
+\usepackage[english]{babel}     % supports english, but default is
+% \usepackage[spanish]{babel}
+% include this if you want to import graphics files with /includegraphics
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+\usepackage[table]{xcolor}
+
+\usepackage{anysize}
+\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
+\usepackage{textcomp}
+\usepackage{url}
+\bibliographystyle{unsrt}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{slashbox}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+% Color and strikethrough
+
+
+
+\usepackage{color}
+\usepackage{soul}
+
+\usepackage{array}
+\usepackage{makecell}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+\definecolor{dblue}{RGB}{0,102,153}
+\newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
+
+
+
+\setlength{\parskip}{1em}
+
+% Nombre del Estudiante
+\newcommand{\scriptAuthor}{Daniel Moya Sánchez}
+
+% Tí­tulo de la tesis
+\newcommand{\scriptTitle}{Design Document v1} 
+
+
+% Keywords
+\newcommand{\scriptKeywords}{key, words, ...}
+
+% Para el PDF (cambiar si se desea otras cosas a lo indicado arriba
+\newcommand{\pdfAuthor}{\scriptAuthor}
+\newcommand{\pdfTitle}{\scriptTitle} 
+\newcommand{\pdfKeywords}{\scriptKeywords}
+
+
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, top color=white, bottom color=yellow!50,very thick, inner sep=1em, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+} 
+
+\begin{document}
+ 
+ \graphicspath{{./}{./fig/}}
+
+ \input{./titlepage.tex}
+
+%  \tableofcontents
+
+ \clearpage
+ 
+ \begin{table}[h!]
+\begin{center}
+\caption{Revision History}
+\begin{tabular}{ | c | c | c | c | } 
+ \hline
+\textbf{Date}	&\textbf{Version}	&\textbf{Description}	&\textbf{Author} \\ \hline
+02 March 2018	&1.0			&\makecell{Design Document for Design of \\  (ASIPs) for Approximate Computing}	&Daniel Moya \\ \hline
+\end{tabular}
+\label{tab:act}
+\end{center}
+\end{table}
+
+
+
+\section{Introduction}
+
+
+
+\subsection{Purpose}
+The primary purpose of this document is to present a detailed description of the design elements
+of an ASIP.
+
+
+
+\subsection{Scope}
+This project is going to be implemented... 
+
+Future users will be able to...
+
+This project will be implemented between ...
+
+
+
+%Systems services and users
+\subsection{Context}
+
+\subsection{Summary}
+
+
+
+
+
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
+
+
+\section{Glossary}
+
+
+% Composition and modular assembly of
+% systems in terms of subsystems and
+% (pluggable) components, buy vs. build,
+% reuse of components
+\section{Composition}
+
+
+
+% Static structure (classes, interfaces, and
+% their relationships)
+% Reuse of types and implementations
+% (classes, data types)
+\section{Logical}
+
+
+% Interconnection, sharing, and
+% parameterization
+\section{Dependency}
+
+
+%Information with data
+% distribution overlay and physical
+% volumetric overlay
+% Persistent information
+\section{Information}
+
+% Reuse of patterns and available
+% Framework template
+\section{Patterns}
+
+
+% Service definition, service access
+\section{Interfaces}
+
+%Service definition, service access
+\subsection{User interface}
+
+% Internal constituents and organization of
+% design subjects, components and classes
+\section{Structure}
+
+\section{Interaction}
+
+\section{State dynamics}
+
+\section{Algorithm}
+
+\section{Resources}
+
+
+
+
+
+\end{document}
+
