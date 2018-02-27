@@ -110,8 +110,22 @@ This project will be implemented between ...
 
 
 
-%Systems services and users
+% Systems services and users
+% Black Bow Design diagrams
+
+% Entities: Actors, stakeholders, case uses
+
+% Relationships: Output and input between actors and design
+
+% constraints: QoS, form and medium of interaction
 \subsection{Context}
+
+
+
+
+constraints
+
+
 
 \subsection{Summary}
 
@@ -128,11 +142,49 @@ This project will be implemented between ...
 \section{Glossary}
 
 
+\begin{table}[h!]
+\begin{center}
+\caption{Definitions}
+\begin{tabular}{|c|c|} 
+ \hline
+ Term & Definition \\ \hline
+ ASIP & \makecell{
+ Application Specific Instruction Set Processor. This means that, although the \\
+ processor can execute a wide range of applications, it is optimized for a specific \\
+ one, in which it can execute with improved performance (for instance, energy \\
+ consumption or execution time would be lower) compared to a General Purpose \\
+ Proccesor (GPP).}  \\ \hline
+  GPP & \makecell{
+ General Purpose Proccesor. In general, they show better flexibility than ASIPs \\
+ because all the programs are executed in general-purpose components, but since \\
+ they are not optimized, they show less resource efficiency.}  \\ \hline
+   ASIC & \makecell{
+ Application Specific Integrated Circuit. In general, they show better performance \\
+results than ASIPs, nevertheless, they are less flexible when executing anything \\
+other than the specific application they are meant to.}  \\ \hline
+ ITCR & \makecell{
+ Instituto Tecnológico de Costa Rica. Place from where this project is being \\
+ developed.}  \\ \hline
+\end{tabular}
+\label{tab:def}
+\end{center}
+\end{table}
+
+
+
 % Composition and modular assembly of
 % systems in terms of subsystems and
 % (pluggable) components, buy vs. build,
 % reuse of components
+
+% Entities: types of constituents of a system: subsystems, components, modules; ports and (provided
+% and required) interfaces; also libraries, frameworks, software repositories, catalogs, and templates.
+
+% Relationships: composition, use, and generalization
+
+% Attributes: identification, type, purpose, function, and definition attribute should be utilized.
 \section{Composition}
+
 
 
 
@@ -140,11 +192,16 @@ This project will be implemented between ...
 % their relationships)
 % Reuse of types and implementations
 % (classes, data types)
+
+%  classes and interfaces with their structural static relationshipsstances of types in outlining design ideas.
 \section{Logical}
 
 
 % Interconnection, sharing, and
 % parameterization
+
+% The Dependency viewpoint specifies the relationships of interconnection and access among entities. These
+% relationships include shared information, order of execution, or parameterization of interfaces.
 \section{Dependency}
 
 
@@ -152,14 +209,24 @@ This project will be implemented between ...
 % distribution overlay and physical
 % volumetric overlay
 % Persistent information
+
+% Entities: data items, data types and classes, data stores, and access mechanisms.
+% Relationships: association, uses, implements. Data attributes, their constraints and static
+% relationships among data entities, aggregates of attributes, and relationships.
+% Attributes: persistence and quality properties.
 \section{Information}
 
 % Reuse of patterns and available
 % Framework template
+
+% Key concerns include reuse at the level of design ideas (design patterns), architectural styles, and
+% framework templates.
 \section{Patterns}
 
 
 % Service definition, service access
+
+%External and internal interfaces (NOT GUI)
 \section{Interfaces}
 
 %Service definition, service access
@@ -167,14 +234,25 @@ This project will be implemented between ...
 
 % Internal constituents and organization of
 % design subjects, components and classes
+
+% Compositional structure of coarse-grained components and reuse of fine-grained components.
 \section{Structure}
 
+% The Interaction viewpoint defines strategies for interaction among entities, regarding why, where, how, and
+% at what level actions occur.
 \section{Interaction}
 
+% System dynamics including modes, states, transitions, and reactions to events.
 \section{State dynamics}
 
+
+% The detailed design description of operations (such as methods and functions), the internal details and logic
+% of each design entity.
 \section{Algorithm}
 
+
+% The purpose of the Resource viewpoint is to model the characteristics and utilization of resources in a
+% design subject.
 \section{Resources}
 
 
