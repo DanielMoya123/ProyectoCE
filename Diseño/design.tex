@@ -99,19 +99,20 @@
 
 \subsection{Purpose}
 The primary purpose of this document is to present a description of the design elements
-of an ASIP in a general approximate application. 
+of an ASIP and its use for implementing error-tolerant applications. 
 
 
 
 \subsection{Scope}
-This research concerns the selection and optimization of error-tolerant applications. For 
-this, ASIP configurations using specific approximate instructions for the selected 
-applications are to be delivered. Furthermore, each ASIP configuration will be described by 
-a set of parameters that the final system will possess, such as energy efficiency, area, 
-execution time, and output error. This project is expected to help approximate computing 
-to be a more widespread tendency and generate a strong base knowledge for future 
-projects where there is freedom to choose the parameters of hardware running a 
-certain type of application in terms of resource consumption and accepted error. 
+This research concerns the selection of error-tolerant applications and their 
+implementations in optimized hardware. For this, ASIP configurations using specific 
+approximate instructions for the selected applications are to be delivered. Furthermore, 
+each ASIP configuration will be described by a set of parameters that the final system will 
+possess, such as energy efficiency, area, execution time, and output error. This project is 
+expected to help approximate computing to be a more widespread tendency and generate 
+a strong base knowledge for future projects where there is freedom to choose the 
+parameters of hardware running a certain type of application in terms of resource 
+consumption and accepted error. 
 
 
 
@@ -125,11 +126,19 @@ certain type of application in terms of resource consumption and accepted error.
 % constraints: QoS, form and medium of interaction
 \subsection{Context}
 
-Since approximated computing is still in its infancy, a lot of research and testing is still needed, 
-so the users of the developed ASIPs are the same research groups behind this
-project. \\
+Since approximated computing is still in its infancy, a lot of research and testing is still 
+needed, so the users of the developed ASIPs are the same research groups behind this
+project.
 
-Figure \ref{fig:cont} shows the general scheme for an approximate possible application.
+Figure \ref{fig:cont} shows the general scheme for an approximate possible application. As 
+depicted, the approximate application is expected to have a pipeline structure, where one 
+of its stages or sections (in that case the $n$-th stage) can be approximate. The purpose 
+of the ASIP configuration is to provide the user flexibility between the original version of 
+an application and the optimized one, allowing for a customized balance between resource 
+consumption and output error. The approximate section needs to perform the original 
+action but with less resource consumption, and still allowing for a acceptable output 
+error, considering that a quality change in a specific section can have a big impact on 
+other sections that depend of it. 
 
 \begin{figure}[h!]
 \centering
@@ -160,12 +169,7 @@ Figure \ref{fig:cont} shows the general scheme for an approximate possible appli
 \end{figure}
 
 
-As shown in figure \ref{fig:cont}, the approximate application is expected to have a pipeline structure, where one of its stages or sections (in that case
-the n-th stage) can be approximate. The purpose of the ASIP configuration is to provide the user flexibility between
-the original version of an application and the optimized one, allowing for a customized
-balance between resource consumption and output error. The approximate section needs to perform the original action but with less resource consumption, and
-still allowing for a acceptable output error, considering that a quality change in a specific section can have a big impact on other sections
-that depend of it. 
+
 
 
 \subsection{Summary}
