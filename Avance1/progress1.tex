@@ -49,7 +49,7 @@
 \newcommand{\scriptAuthor}{Daniel Moya Sánchez}
  
 % Tí­tulo de la tesis
-\newcommand{\scriptTitle}{Progress report \#1 for the project Design of (ASIPs) for Approximate Computing} 
+\newcommand{\scriptTitle}{Progress report \#1 for the project: Design of (ASIPs) for Approximate Computing} 
 
 
 % Keywords
@@ -81,17 +81,17 @@
 
 \begin{enumerate}
  \item \textbf{Get to know the software platform}: Several laboratory scripts have been followed to get to know the software tools from which the ASIPs are going
- to be build. However, some server errors have slowed down the process which implies a little change in the schedule, as explained in section \ref{change}.
- This laboratory scripts consist of several excercises and questions (an answer sheet is available for comparison) to get a student through all the necessary 
+ to be built. However, some server errors have slowed down the process which means there will be a little change in the schedule, as explained in section \ref{change}.
+ These laboratory scripts consist of several excercises and questions (an answer sheet is available for comparison) to get a student through all the necessary 
  knowledge for building ASIPs, from the basics of an assembly program to an audio application which needs to be optimized. 
  
  \item \textbf{Find appropiate error-tolerant applications}:
  
  \item \textbf{Redact Project Plan document}: The project plan document was revised and corrected according to the professor's observations. 
  
- \item \textbf{Redact Requirements document}: The requirements document was redacted and send to the professor for his possible pre-review.
+ \item \textbf{Redact Requirements document}: The requirements document was redacted and sent to the professor for his possible pre-review.
  
- \item \textbf{Redact Design document}: The design document is currently being redacted and it is expected that it could be delivered to the professor
+ \item \textbf{Redact Design document}: The design document is currently being redacted and it is expected to be delivered to the professor
  on friday to obtain a possible pre-review. 
 \end{enumerate}
 
@@ -99,11 +99,12 @@
 \section{Change of scope/activities} \label{change}
 
 The activity ID \emph{01} ``Get to know the software platform'' was affected by server errors like permissions and general configuration of the environment. The
-corresponding laboratory sessions made for this task are not completely finished, nevertheless, it is expected to work on the sessions on parallel to the activity ID
-\emph{02}, because they do not depend on each other, also, the main concepts have been already learned from the currently done laboratory sessions. 
+corresponding laboratory sessions made for this task are not completely finished, it is nevertheless expected to work on the sessions on parallel to the activity ID
+\emph{02}, because they do not depend on each other, and the main concepts have been already learned from the currently done laboratory sessions. 
 
 \section{Gained value analysis}
 
+Table \ref{tab:gain} summarizes the gained value analysis. 
 
 \begin{table}[h!]
 \begin{center}
@@ -113,21 +114,70 @@ corresponding laboratory sessions made for this task are not completely finished
 \makecell{Activity\\ID}	&Activity	&Budget	&\makecell{\%Planned\\Value}	&PV	&AC	&\makecell{\%Completed\\work}	&EV	
 &CPI	&SPI	&\makecell{Initial planned\\date}	&\makecell{Ending\\date}	&\makecell{Initial real\\date}	&\makecell{Real ending} \\ \hline
 
-01	&\makecell{Get to\\ know the\\ software\\ platform}	&100,000	&50\%	&PV	&AC	&\makecell{\%Trabajo\\completado}	&EV	
-&CPI	&SPI	&\makecell{Fecha inicio\\planeada}	&\makecell{Finalización\\planeada}	&\makecell{Fecha inicio\\real}	&\makecell{Finalización\\real} \\ \hline
 
-04	&\makecell{Redact Project\\Plan document}	&100,000	&50\%	&PV	&AC	&\makecell{\%Trabajo\\completado}	&EV	
-&CPI	&SPI	&\makecell{Fecha inicio\\planeada}	&\makecell{Finalización\\planeada}	&\makecell{Fecha inicio\\real}	&\makecell{Finalización\\real} \\ \hline
+01	&\makecell{Get to\\ know the\\ software\\ platform}	&32	&100\%	&32	&25	&80\%	&25,6	
+&1,024	&0.8	&Week 1	&Week 2	&Week 1	&Week 3 \\ \hline
 
-05	& \makecell{Redact\\Requirements\\document}	&100,000	&50\%	&PV	&AC	&\makecell{\%Trabajo\\completado}	&EV	
-&CPI	&SPI	&\makecell{Fecha inicio\\planeada}	&\makecell{Finalización\\planeada}	&\makecell{Fecha inicio\\real}	&\makecell{Finalización\\real} \\ \hline
+
+
+04	&\makecell{Redact Project\\Plan document}	&8	&100\%	&8	&10	&100\%	&8
+&0,8	&1	&Week 1	&Week 2	&Week 1	&Week 3 \\ \hline
+
+
+05	& \makecell{Redact\\Requirements\\document}	&8	&100\%	&8	&5	&100\%	&8	
+&1,6	&1	&\makecell{Fecha inicio\\planeada}	&\makecell{Finalización\\planeada}	&\makecell{Fecha inicio\\real}	&\makecell{Finalización\\real} \\ \hline
+
+
+
+
 
 06	& \makecell{Redact Design\\ document}	&100,000	&50\%	&PV	&AC	&\makecell{\%Trabajo\\completado}	&EV	
 &CPI	&SPI	&\makecell{Fecha inicio\\planeada}	&\makecell{Finalización\\planeada}	&\makecell{Fecha inicio\\real}	&\makecell{Finalización\\real} \\ \hline
 \end{tabular}}
-\label{tab:act}
+\label{tab:gain}
 \end{center}
 \end{table}
+
+
+
+
+\section{Encountered difficulties}
+
+As explained in section \ref{change}, several issues have been encountered when executing the laboratory sessions for the activity \emph{01}. The
+time-zone difference between Costa Rica and Germany has slowed down the solutions to these problems, because no matter how small
+a problem is (in terms of time required to solve it) a solution comes, at least until the next day. 
+
+\section{Hard skills required/acquired}
+
+Knowledge in the following software frameworks has been acquired: ASIPMeister, Dlxsim and ModelSim. 
+
+
+\section{Soft skills required/acquired}
+
+The following soft skills have been excercised:
+
+\begin{itemize}
+ \item Communication: Weekly remote communication has been performed with Jorge Castro for the guidance of this project, and
+ with Sajjad Hussain to request technical aid in the server. With both, swift communication was achieved, each topic that
+ was talked was resolved or clarified in very few messages (one or two at most).
+ 
+ \item Self-Motivation: Given that there is no direct round-the-clock supervision, self-motivation has been key in working 
+ continously in the laboratory sessions. 
+ 
+ \item Problem Solving: The laboratory sessions provide several challenges given the theoretical aspects of assembly instructions and
+ processor structure, which need to be addressed and later compared with a given solution.
+\end{itemize}
+
+
+\section{Learned lessons}
+
+\begin{enumerate}
+ \item Special care has to be taken when working with people around the world. Time-zones restrict the options of when a meeting can
+ happen and limit how fast a response can be obtained.
+ 
+ \item When customizing ASIP configurations, special directory structure is needed for the corresponding scripts and software platform in general
+ to work properly. This structure also helps make development of the laboratory sessions more efficient.  
+\end{enumerate}
 
 
 

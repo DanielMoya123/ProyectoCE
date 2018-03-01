@@ -1,0 +1,247 @@
+%% ---------------------------------------------------------------------------
+%% proposal.tex
+%%
+%% Research Proposal, main document.
+%%
+%% ---------------------------------------------------------------------------
+\documentclass[12pt,letterpaper]{article}
+% \usepackage[english]{babel}     % supports english, but default is
+ \usepackage[spanish]{babel}
+% include this if you want to import graphics files with /includegraphics
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+\usepackage[table]{xcolor}
+
+\usepackage{anysize}
+\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
+\usepackage{textcomp}
+\usepackage{url}
+\bibliographystyle{unsrt}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{slashbox}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+% Color and strikethrough
+
+
+
+\usepackage{color}
+\usepackage{soul}
+
+\usepackage{array}
+\usepackage{makecell}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+\definecolor{dblue}{RGB}{0,102,153}
+\newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
+
+
+
+\setlength{\parskip}{1em}
+
+% Nombre del Estudiante
+\newcommand{\scriptAuthor}{Daniel Moya Sánchez}
+ 
+% Tí­tulo de la tesis
+\newcommand{\scriptTitle}{Computación aproximada en aplicaciones tolerantes a errores con una plataforma multinúcleo y multi-acelerador} 
+
+
+% Keywords
+\newcommand{\scriptKeywords}{key, words, ...}
+
+% Para el PDF (cambiar si se desea otras cosas a lo indicado arriba
+\newcommand{\pdfAuthor}{\scriptAuthor}
+\newcommand{\pdfTitle}{\scriptTitle} 
+\newcommand{\pdfKeywords}{\scriptKeywords}
+
+
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, top color=white, bottom color=yellow!50,very thick, inner sep=1em, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+} 
+
+\begin{document}
+ 
+ \graphicspath{{./}{./fig/}}
+
+ \input{./titlepage.tex}
+
+%  \tableofcontents
+
+ \clearpage
+
+
+ 
+\section{Palabras Clave}
+
+Arquitectura heterogénea, Multi-aceleradores, Multi-núcleo, Caracterización, Calendarización, Computación aproximada, Calidad.
+
+
+\section{Introducción}
+
+
+Los sistemas de Tecnologías de Información (TI) se enfrentan a constantes desafíos, los cuales deben ser superados con el final
+de tener una mejora continua. Entre los problemas más comunes se puede mencionar el costo en área, potencia, tiempo de ejecución y 
+monetario, variables que restringuen la calidad de una aplicación. Idealmente, una aplicación debe ajustarse a las necesidades
+reales del usuario y, en general, del área de aplicación, por lo que, así como no sería conveniente tener una aplicación médica en la
+que ocasionalmente se generen algunos errores, tampoco es óptimo tener un sistema de audio o video sumamente exacto si al final 
+de cuentas el usuario no distingue la diferencia entre uno con menor calidad. \\
+
+Este documento busca comunicar los aspectos esenciales de una propuesta de proyecto para automatizar el proceso de selección
+de partes aproximadas de un sistema tolerable a errores, de tal forma que se presenten una serie de opciones a un usuario
+donde este pueda escoger que versión aproximada del sistema desea utilizar, considerando cuál característica (área, tiempo de ejecución,
+eficiencia energética) considera más crítica en una plataforma multinúcleo y multi-acelerador.
+
+Seguidamente, este documento habla sobre el contexto
+
+\section{Contexto y Antecedentes}
+
+\subsection{Descripción de la empresa}
+
+El Instituto Tecnológico de Karlsruhe surge en 2009 a partir de la unión de la Univerisdad de Karlsruhe,
+fundada en 1825 como Universidad Fridericiana, y el Centro de Invesstigación de Karlsruhe. Se ubica en Karlsruhe, 
+en el estado de Baden-Wüttemberg, al suroeste de Alemania. \\
+
+El Instituto de Ingeniería en Computadores en el KIT abarca grupos de trabajo que abarcan
+los diferentes niveles de abstracción de sistemas computacionales. En el Char for Embedded Systems (CES)
+se investigan diversos aspectos relacionados con el diseño de sistemas embebidos, desde la confiabilidad de circuitos
+hasta el manejo de potencia en sistemas de múltiples y muchos núcleos. 
+
+El proyecto como tal será desarrollado en el Chair for Embedded Systems (CES) bajo
+la tutela de M.Sc. Jorge Alberto Castro Godínez, ingeniero en electrónica, investigador
+y estudiante de doctorado, quien es egresado del Tecnológico de Costa Rica y posee
+más de dos años y medio como investigador en el Instituto Tecnológico de Karlsruhe. 
+
+\subsection{Área de Negocio del Proyecto}
+
+El proyecto se realizará dentro del tema de computación aproximada.Este corresponde
+a un paradigma de diseño que busca explotar la tolerancia a errores en programas al
+disminuir la precisión de los resultados y a la vez reducir los requerimientos computaciones
+para cálculos completamente correctos (e.g. consumo de potencia, área y tiempo
+de ejecución). Se utiliza una plataforma de software para poder determinar
+la combinación de secciones aproximadas en una aplicación con múltiples secciones (i.e. estructura en pipeline)
+que generan un sistema final que cumple con un nivel de error aceptable y a su vez reduce el consumo
+de recursos en alguna forma. 
+
+
+
+\section{Descripción de la Propuesta}
+
+\subsection{Contexto del problema}
+
+En la actualidad, dada la gran cantidad de aplicaciones sofisticadas (e.g sistemas GPS, reconocimiento
+de voz, etc.) la computación ayuda a mantener una salida aceptable mientras se logra que ciertas
+métricas como tiempo de respuesta o eficiencia energética se mejoren. En general, la computación 
+aproximada provee la libertad de escoger entre un cierto nivel de error o degradación de la calidad 
+en la salida final de una aplicación (e.g ruido en la señal de la salida) para mejorar el consumo de energía, 
+el área o el tiempo de ejecución; esto sirve como herramienta a un investigar para que ajuste una aplicación dada a las 
+necesidades reales y específicas de esta. En la figura \ref{fig:ap} se muestra un esquema que puede ser aplicado a sistemas tolerantes a errores para incluir
+en estos la computación aproximada \cite{xu2018approximate}.
+
+
+\begin{figure}
+\begin{center}
+ \includegraphics[scale=0.3]{APframework}
+ \caption{Un marco de trabajo para el uso de computación aproximada \cite{xu2018approximate}.} \label{fig:ap}
+ \end{center}
+\end{figure}
+
+Los elementos clave de la figura \ref{fig:ap} son kernels aproximados, los cuales representan la implementación (técnicas)
+de las funciones aproximadas, estas puede ser realizadas a nivel de hardware o de software; la identificación de 
+la secciones tolerantes a errores y sus características particulares (e.g. análisis de impacto); y el manejo
+de la calidad, el cual implica una evaluación continua para determinar si la aplicación logra los requerimientos deseados.
+
+
+\subsection{Justificación de la necesidad}
+
+El diseño e implementación de un sistema que permita escoger entre una serie de secciones
+aproximadas parametrizadas y, a partir de un límite de calidad establecido por el usuario,
+cuál combinación de estas secciones genera una aplicación final que mejor se ajuste
+a las necesidades de un usuario, es decir, que permita bajar el consumo de recursos sin
+sobrepasar un umbral de error establecido, representa una contribución significativa para el proceso de investigación en el paradigma de
+computación aproximada que se desarrolla en el Instituto Tecnológico de Karlsruhe.
+
+El trabajo de investigación propuesto sigue el enfoque de otros autores de poder proveer soluciones al uso eficiente de los recursos 
+energéticos, de área y de tiempo de ejecución, especialmente considerando el auge que ha tenido el Internet de las Cosas y la Computación
+Ubicua, con sus respectivos retos y limtiaciones. 
+
+\subsection{Enfoque de la solución}
+
+\subsection{Objetivos}
+
+\subsubsection{Objetivo General}
+
+Desarrollar una algoritmo que, a partir de información sobre diferentes versiones de secciones aproximadas
+de un sistema tolerante a errores, pueda determinar cuál combinación de versiones genera un mejor 
+resultado en términos de ahorro de recursos y nivel de error a la salida.
+
+
+\subsubsection{Objetivos Específicos}
+
+\begin{enumerate}
+ \item Investigar los algoritmos y trabajos relacionados al área de computación aproximada, con el fin de tener
+ cierto marco de referencia.
+ 
+ \item Desarrollar un algoritmo que permita la escogencia de secciones toleranes a errores en una aplicación dadas
+ varias posibles versiones aproximadas.
+ 
+ \item Describir detalladamente el proceso de generar una aplicación aproximada a partir de secciones independientes
+ aproximables, de tal forma que dicho conocimiento sea escalable a aplicaciones más grandes. 
+\end{enumerate}
+
+
+\subsection{Supuestos y Limitaciones}
+
+\begin{enumerate}
+ \item Limitación de tiempo: Se espera que el proyecto pueda ser desarrollado entre mediados del mes de Julio y
+ mediados del mes de Noviembre.
+ 
+ 
+ \item Limitación de recursos: El proyecto será desarrollado con herramientas de software gratuitas y aquellas
+ que sean provistas por el CES. Adicionalmente, será necesario una computadora personal, servicios básicos de alimentación,
+ transporte y estadía en Alemania. Se tendrá acceso al material de investigación presente en el KIT y en internet. 
+
+
+\end{enumerate}
+
+
+\section{Propuesta Metodológica}
+
+\subsection{Tipificación del trabajo a realizar}
+
+El proyecto se clasifica como un trabajo de investigación teórico-práctico, donde se deben
+aplicar conocimientos en temas relacionados con sistemas operativos, arquitectura de computadores
+y computación de alto rendimiento. 
+
+\subsection{Descripción del proceso a realizar}
+
+El proyecto iniciará con una etapa de investigación sobre trabajos realizados por varios
+autores en el área de computación aproximada, relacionados con la caracterización
+de sistemas o aplicaciones en las cuales una o varias secciones son aproximables. 
+
+Seguidamente, se implementará un algoritmo que, a partir de una información dada (gracias
+a trabajos previos) almacenada en algún tipo de base de datos, se alimente para determinar
+qué combinación de funciones aproximadas se deben colocar en un sistema en pipeline
+de tal forma que, el resultado al final de las etapas, se mantenga en un nivel de error
+aceptable.
+
+La documentación del proyecto se trabajará a lo largo de todo el proceso de desarrollo, sin 
+embargo, la redacción del artículo científico y demás documentos propios de un trabajo final
+de graduación, se desarrollarán como una etapa adicional.
+
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
+
+
+
+\end{document}
+
