@@ -106,25 +106,28 @@ Seguidamente, este documento habla sobre el contexto
 \subsection{Descripción de la empresa}
 
 El Instituto Tecnológico de Karlsruhe surge en 2009 a partir de la unión de la Univerisdad de Karlsruhe,
-fundada en 1825 como Universidad Fridericiana, y el Centro de Invesstigación de Karlsruhe. Se ubica en Karlsruhe, 
+fundada en 1825 como Universidad Fridericiana, y el Centro de Investigación de Karlsruhe. Se ubica en Karlsruhe, 
 en el estado de Baden-Wüttemberg, al suroeste de Alemania. \\
 
 El Instituto de Ingeniería en Computadores en el KIT abarca grupos de trabajo que abarcan
-los diferentes niveles de abstracción de sistemas computacionales. En el Char for Embedded Systems (CES)
+los diferentes niveles de abstracción de sistemas computacionales. En el Chair for Embedded Systems (CES)
 se investigan diversos aspectos relacionados con el diseño de sistemas embebidos, desde la confiabilidad de circuitos
 hasta el manejo de potencia en sistemas de múltiples y muchos núcleos. 
 
-El proyecto como tal será desarrollado en el Chair for Embedded Systems (CES) bajo
+[Relación de actividades CES con mi trabajo]
+
+
+El proyecto como tal será desarrollado en el CES bajo
 la tutela de M.Sc. Jorge Alberto Castro Godínez, ingeniero en electrónica, investigador
 y estudiante de doctorado, quien es egresado del Tecnológico de Costa Rica y posee
 más de dos años y medio como investigador en el Instituto Tecnológico de Karlsruhe. 
 
 \subsection{Área de Negocio del Proyecto}
 
-El proyecto se realizará dentro del tema de computación aproximada.Este corresponde
+El proyecto se realizará dentro del tema de computación aproximada. Este corresponde
 a un paradigma de diseño que busca explotar la tolerancia a errores en programas al
 disminuir la precisión de los resultados y a la vez reducir los requerimientos computaciones
-para cálculos completamente correctos (e.g. consumo de potencia, área y tiempo
+para cálculos completamente correctos (ej. consumo de potencia, área y tiempo
 de ejecución). Se utiliza una plataforma de software para poder determinar
 la combinación de secciones aproximadas en una aplicación con múltiples secciones (i.e. estructura en pipeline)
 que generan un sistema final que cumple con un nivel de error aceptable y a su vez reduce el consumo
@@ -136,11 +139,11 @@ de recursos en alguna forma.
 
 \subsection{Contexto del problema}
 
-En la actualidad, dada la gran cantidad de aplicaciones sofisticadas (e.g sistemas GPS, reconocimiento
+En la actualidad, dada la gran cantidad de aplicaciones sofisticadas (ej. sistemas GPS, reconocimiento
 de voz, etc.) la computación ayuda a mantener una salida aceptable mientras se logra que ciertas
 métricas como tiempo de respuesta o eficiencia energética se mejoren. En general, la computación 
 aproximada provee la libertad de escoger entre un cierto nivel de error o degradación de la calidad 
-en la salida final de una aplicación (e.g ruido en la señal de la salida) para mejorar el consumo de energía, 
+en la salida final de una aplicación (ej. ruido en la señal de la salida) para mejorar el consumo de energía, 
 el área o el tiempo de ejecución; esto sirve como herramienta a un investigar para que ajuste una aplicación dada a las 
 necesidades reales y específicas de esta. En la figura \ref{fig:ap} se muestra un esquema que puede ser aplicado a sistemas tolerantes a errores para incluir
 en estos la computación aproximada \cite{xu2018approximate}.
@@ -155,22 +158,23 @@ en estos la computación aproximada \cite{xu2018approximate}.
 
 Los elementos clave de la figura \ref{fig:ap} son kernels aproximados, los cuales representan la implementación (técnicas)
 de las funciones aproximadas, estas puede ser realizadas a nivel de hardware o de software; la identificación de 
-la secciones tolerantes a errores y sus características particulares (e.g. análisis de impacto); y el manejo
+la secciones tolerantes a errores y sus características particulares (ej. análisis de impacto); y el manejo
 de la calidad, el cual implica una evaluación continua para determinar si la aplicación logra los requerimientos deseados.
 
 
 \subsection{Justificación de la necesidad}
 
-El diseño e implementación de un sistema que permita escoger entre una serie de secciones
+Se espera entregar una contribución significativa para el proceso de investigación en el paradigma
+de computación aproximada que se desarrolla en el Instituto Tecnológico de Karlsruhe mediante el diseño
+e implementación de un sistema que permita escoger entre una serie de secciones
 aproximadas parametrizadas y, a partir de un límite de calidad establecido por el usuario,
 cuál combinación de estas secciones genera una aplicación final que mejor se ajuste
 a las necesidades de un usuario, es decir, que permita bajar el consumo de recursos sin
-sobrepasar un umbral de error establecido, representa una contribución significativa para el proceso de investigación en el paradigma de
-computación aproximada que se desarrolla en el Instituto Tecnológico de Karlsruhe.
+sobrepasar un umbral de error establecido.
 
 El trabajo de investigación propuesto sigue el enfoque de otros autores de poder proveer soluciones al uso eficiente de los recursos 
 energéticos, de área y de tiempo de ejecución, especialmente considerando el auge que ha tenido el Internet de las Cosas y la Computación
-Ubicua, con sus respectivos retos y limtiaciones. 
+Ubicua, con sus respectivos retos y limitaciones. [DETALLAR]
 
 \subsection{Enfoque de la solución}
 
@@ -186,14 +190,14 @@ resultado en términos de ahorro de recursos y nivel de error a la salida.
 \subsubsection{Objetivos Específicos}
 
 \begin{enumerate}
- \item Investigar los algoritmos y trabajos relacionados al área de computación aproximada, con el fin de tener
+ \item Describir los algoritmos y trabajos relacionados al área de computación aproximada, con el fin de tener
  cierto marco de referencia.
  
- \item Desarrollar un algoritmo que permita la escogencia de secciones toleranes a errores en una aplicación dadas
+ \item Desarrollar un algoritmo que permita la escogencia de secciones tolerantes a errores en una aplicación dadas
  varias posibles versiones aproximadas.
  
- \item Describir detalladamente el proceso de generar una aplicación aproximada a partir de secciones independientes
- aproximables, de tal forma que dicho conocimiento sea escalable a aplicaciones más grandes. 
+ \item Determinar un proceso para generar una aplicación aproximada a partir de secciones independientes
+ aproximables, de tal forma que dicho conocimiento sea escalable y utilizable en aplicaciones más grandes. 
 \end{enumerate}
 
 
@@ -205,7 +209,7 @@ resultado en términos de ahorro de recursos y nivel de error a la salida.
  
  
  \item Limitación de recursos: El proyecto será desarrollado con herramientas de software gratuitas y aquellas
- que sean provistas por el CES. Adicionalmente, será necesario una computadora personal, servicios básicos de alimentación,
+ que sean provistas por el CES. Sserá necesario una computadora personal, servicios básicos de alimentación,
  transporte y estadía en Alemania. Se tendrá acceso al material de investigación presente en el KIT y en internet. 
 
 
@@ -216,11 +220,13 @@ resultado en términos de ahorro de recursos y nivel de error a la salida.
 
 \subsection{Tipificación del trabajo a realizar}
 
-El proyecto se clasifica como un trabajo de investigación teórico-práctico, donde se deben
+El proyecto se clasifica como un trabajo de investigación cualitativa, donde se deben
 aplicar conocimientos en temas relacionados con sistemas operativos, arquitectura de computadores
 y computación de alto rendimiento. 
 
 \subsection{Descripción del proceso a realizar}
+
+[Revisar con objetivos]
 
 El proyecto iniciará con una etapa de investigación sobre trabajos realizados por varios
 autores en el área de computación aproximada, relacionados con la caracterización
@@ -236,6 +242,7 @@ La documentación del proyecto se trabajará a lo largo de todo el proceso de desa
 embargo, la redacción del artículo científico y demás documentos propios de un trabajo final
 de graduación, se desarrollarán como una etapa adicional.
 
+[AMPLIAR]
 
 % Referencias del Background y el Related Work
 \bibliographystyle{sty/plainurl}
