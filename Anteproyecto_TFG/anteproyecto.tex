@@ -25,6 +25,7 @@
 \usepackage[latin1]{inputenc}
 \usepackage{tikz}
 \usetikzlibrary{arrows,positioning}
+\usetikzlibrary{shapes.geometric}
 % Color and strikethrough
 
 
@@ -68,6 +69,8 @@
 } 
 
 \begin{document}
+
+\shorthandoff{>}\shorthandoff{<}
  
  \graphicspath{{./}{./fig/}}
 
@@ -79,71 +82,211 @@
 
 
  
-\section{Palabras Clave}
+%\section{Palabras Clave}
 
-Arquitectura heterogénea, Multi-aceleradores, Multi-núcleo, Caracterización, Calendarización, Computación aproximada, Calidad.
+%Arquitectura heterogénea, Multi-aceleradores, Multi-núcleo, Caracterización, Calendarización, Computación aproximada, Calidad.
 
 
 \section{Introducción}
 
+Los sistemas de Tecnologías de Información (TI) buscan dar una mejor calidad de vida a las personas, en esta tarea han tenido que enfrentar
+ciertos problemas, entre los más comunes se puede mencionar el costo en área, potencia, tiempo de ejecución,
+variables que restringuen el rendimiento de un chip. Idealmente, una aplicación debe ajustarse a las necesidades
+reales del usuario y, en general, del área de aplicación, de forma que se dé un uso óptimo de los recursos. Actualmente, el diseño
+de procesadores no se enfoca tanto en tener más desempeño si no tener un manejo de recursos apropiado; no obstante, algunos desafíos 
+en este campo vienen dados por limitaciones físicas, por ejemplo, las características eléctricas de los CMOS, las cuales
+retringuen el consumo de energía en sistemas embebidos y es un aspecto que deben considerar los diseñadores de componentes
+para propósito específico; la pared de memoria, que corresponde a la diferencia entre el crecimiento de la capacidad de procesamiento
+contra la velocidad de obtención de datos desde memoria; y la pared de utilización, la cual limita el uso máximo de hardware simultáneo
+debido a las capacidades de disipación de calor de un sistema. 
 
-Los sistemas de Tecnologías de Información (TI) se enfrentan a constantes desafíos, los cuales deben ser superados con el final
-de tener una mejora continua. Entre los problemas más comunes se puede mencionar el costo en área, potencia, tiempo de ejecución y 
-monetario, variables que restringuen la calidad de una aplicación. Idealmente, una aplicación debe ajustarse a las necesidades
-reales del usuario y, en general, del área de aplicación, por lo que, así como no sería conveniente tener una aplicación médica en la
-que ocasionalmente se generen algunos errores, tampoco es óptimo tener un sistema de audio o video sumamente exacto si al final 
-de cuentas el usuario no distingue la diferencia entre uno con menor calidad. \\
-
-Este documento busca comunicar los aspectos esenciales de una propuesta de proyecto para automatizar el proceso de selección
-de partes aproximadas de un sistema tolerable a errores, de tal forma que se presenten una serie de opciones a un usuario
-donde este pueda escoger que versión aproximada del sistema desea utilizar, considerando cuál característica (área, tiempo de ejecución,
-eficiencia energética) considera más crítica en una plataforma multinúcleo y multi-acelerador.
-
-Seguidamente, este documento habla sobre el contexto
-
-\section{Contexto y Antecedentes}
-
-\subsection{Descripción de la empresa}
-
-El Instituto Tecnológico de Karlsruhe surge en 2009 a partir de la unión de la Univerisdad de Karlsruhe,
-fundada en 1825 como Universidad Fridericiana, y el Centro de Investigación de Karlsruhe. Se ubica en Karlsruhe, 
-en el estado de Baden-Wüttemberg, al suroeste de Alemania. \\
-
-El Instituto de Ingeniería en Computadores en el KIT abarca grupos de trabajo que abarcan
-los diferentes niveles de abstracción de sistemas computacionales. En el Chair for Embedded Systems (CES)
-se investigan diversos aspectos relacionados con el diseño de sistemas embebidos, desde la confiabilidad de circuitos
-hasta el manejo de potencia en sistemas de múltiples y muchos núcleos. 
-
-[Relación de actividades CES con mi trabajo]
-
-
-El proyecto como tal será desarrollado en el CES bajo
-la tutela de M.Sc. Jorge Alberto Castro Godínez, ingeniero en electrónica, investigador
-y estudiante de doctorado, quien es egresado del Tecnológico de Costa Rica y posee
-más de dos años y medio como investigador en el Instituto Tecnológico de Karlsruhe. 
-
-\subsection{Área de Negocio del Proyecto}
-
-El proyecto se realizará dentro del tema de computación aproximada. Este corresponde
-a un paradigma de diseño que busca explotar la tolerancia a errores en programas al
-disminuir la precisión de los resultados y a la vez reducir los requerimientos computaciones
-para cálculos completamente correctos (ej. consumo de potencia, área y tiempo
-de ejecución). Se utiliza una plataforma de software para poder determinar
-la combinación de secciones aproximadas en una aplicación con múltiples secciones (i.e. estructura en pipeline)
-que generan un sistema final que cumple con un nivel de error aceptable y a su vez reduce el consumo
-de recursos en alguna forma. 
+Para poder atacar los problemas mencionados anteriormente, una de las áreas de investigación actuales corresponde a la 
+Computación Aproximada, un paradigma de diseño que que propone una reducción en la precisión o exactitud de la computación
+para obtener oportunidades de mejora en cuanto al consumo de área, potencia y tiempo de ejecucion. Para aplicar dicho paradigma
+se ocupa la identificación de aplicaciones tolerantes a errores, y más específicamente, cuáles secciones o funciones dentro de estas
+pueden ser sustituidas por versiones aproximadas, de forma que se pueda generar un balance entre la calidad de la salida y el consumo
+general de recursos. 
 
 
 
-\section{Descripción de la Propuesta}
+\subsection{Descripción del problema}
 
-\subsection{Contexto del problema}
+A la hora de tener una aplicación con una estructura en pipeline, es decir, que posee una serie de etapas, donde cada etapa recibe
+su entrada de una etapa anterior y produce una salida para la etapa siguiente, y donde una o más etapas pueden ser aproximables con más
+de una versión aproximable (una versión se puede concentrar en mejorar el consumo de potencia, mientras que otra el tiempo de ejecución, por ejemplo,
+resulta complejo determinar qué combinación de versiones aproximadas utilizar de forma que no se sobrepase el máximo error permitido
+y a la vez se reduzca de manera óptima, el uso de ciertos recursos.  Dicho proceso podría tomar una cantidad considerable
+de tiempo si se decide probar todas las combinaciones posibles de versiones aproximadas, por lo que es importante utilizar un esquema diferente
+de trabajo. 
 
-En la actualidad, dada la gran cantidad de aplicaciones sofisticadas (ej. sistemas GPS, reconocimiento
-de voz, etc.) la computación ayuda a mantener una salida aceptable mientras se logra que ciertas
+Una aplicación puede tener un comportamiento aproximado si alguna de sus etapas se puede aproximar, ya sea toda una sección o únicamente
+una instrucción (dentro de una sección). La figura \ref{fig:problem} muestra una aplicación genérica donde ambas situaciones pueden ocurrir.
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[node distance=1cm, auto]  
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, very thick, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+}  
+\node[mynode] (manufacturer) {Aplicación};  
+\node[mynode, below left =3cm of manufacturer] (section1) {Sección 1}; 
+\node[mynode, below=2.16cm of manufacturer] (section2) {Sección 2};
+\node[mynode, below right=3cm of manufacturer] (section3) {Sección 3};
+
+\node[mynode, below=1cm of section1, dashed] (comment1) {\makecell{Toda esta sección \\ puede ser aproximada}};
+
+\node[mynode, below left=3cm of section3] (instru1) {Instrucción 1};
+\node[mynode, below =2.16cm of section3] (instru2) {Instrucción 2};
+\node[mynode, below right=3cm of section3] (instru3) {Instrucción 3};
+
+\node[mynode, below=1cm of instru2, dashed] (comment2) {\makecell{Esta instrucción específica\\ puede ser reemplazada por \\ una versión aproximada}};
+
+
+\draw[myarrow] (manufacturer.south)  -- ++(0,-1) -|  (section1.north);
+\draw[myarrow] (manufacturer.south)   -|  (section2.north);
+\draw[myarrow] (manufacturer.south)  -- ++(0,-1) -|  (section3.north); 
+
+\draw[->, >=latex', shorten >=1pt, thick, dashed]  (comment1.north) -|  (section1.south); 
+
+\draw[myarrow] (section3.south)  -- ++(0,-1) -|  (instru1.north);
+\draw[myarrow] (section3.south)   -|  (instru2.north);
+\draw[myarrow] (section3.south)  -- ++(0,-1) -|  (instru3.north); 
+ 
+ \draw[->, >=latex', shorten >=1pt, thick, dashed]  (comment2.north) -|  (instru2.south); 
+ 
+\end{tikzpicture} 
+\medskip
+\caption{Una posible situación a resolver con este proyecto.} 
+\label{fig:problem}
+\end{figure}
+
+Como se ve en la figura \ref{fig:problem}, esta aplicación posee tres secciones, de las cuales la primera (ej. una etapa de preprocesamiento)
+puede ser completamente aproximada, la segunda no puede ser aproximada del todo (ej. una sección crítica de la aplicación) y, finalmente, 
+la tercera tiene tres instrucciones específicas, de las cuales únicamente la segunda posee una versión aproximada.
+
+
+\section{Enfoque de la solución}
+
+Se busca desarrollar una herramienta de software que pueda escoger entre
+diferentes versiones una aplicación aproximada (cada versión dada por una combinación
+diferente de versiones específicas para cada sección aproximable), según el criterio
+de un usuario que especifique cuáles recursos son críticos en la aplicación y cuál
+es la cantidad máxima de error permitido. La figura \ref{fig:sol} muestra a grandes
+rasgos el esquema de implementación de esta herramienta. \\
+
+
+\begin{figure}[h!]
+\centering
+\resizebox{\textwidth}{!}{\begin{tikzpicture}[node distance=1cm, auto]  
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, very thick, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+}  
+\node[mynode] (codfuente) {\makecell{Código fuente con anotaciones,\\error permitido y prioridad de recursos}};
+\node[mynode, below =2cm of codfuente] (extraccion) {\makecell{Extracción de información/\\transformación de código}}; 
+
+
+\draw[myarrow] (codfuente.south)  -|  (extraccion.north);
+
+\draw (6,1) ellipse (1.25 and 0.2);
+\draw (4.75,1) -- (4.75,-0.5);
+\draw (4.75,-0.5) arc (180:360:1.25 and 0.2);
+\draw (7.25,-0.5) -- (7.25,1);  
+
+\node[] at (6,0) (bd) {\makecell{Versiones\\aproximadas}}; 
+
+\node[mynode, below = 1.98cm of bd] (deterVersiones) {\makecell{Determinación de\\ versiones óptimas}};
+
+\draw[myarrow] (extraccion.east)  ->  (deterVersiones.west);
+\draw[myarrow] (6,-0.7)  -|  (deterVersiones.north);
+
+\node[mynode, right = 1cm of deterVersiones] (confHardware) {\makecell{Configuración del hardware/\\uso de instrucciones aproximadas}};
+
+\draw[myarrow] (deterVersiones.east)  ->  (confHardware.west);
+
+\node[mynode, right = 1.5cm of confHardware] (final) {Aplicación aproximada final};
+
+\draw[myarrow] (confHardware.east)  ->  (final.west);
+
+\draw[dashed] (-3,-5) -- (-3,-1.5) -- (16,-1.5) -- (16,-5) -- (-3,-5) ;
+
+\end{tikzpicture}}
+\medskip
+\caption{Esquema general de la solución propuesta.} 
+\label{fig:sol}
+\end{figure}
+
+
+Como se muestra en la figura \ref{fig:sol}, se espera recibir un código fuente de una aplicación aproximable, donde previamente
+el usuario ha indicado, a través de pragmas propios, qué funciones del código son tolerantes a errores. Este código es 
+ compilado a una representación intermedia, a través del algoritmo
+que se busca desarrollar, para poder escoger cuáles versiones aproximadas de las posibles que existen se ajustan para cumplir
+a cabalidad con el error permitido y, de la mejor manera, con la priorización de recursos. Una vez identificadas las versiones
+que serán utilizadas, se procede a utilizar el hardware específico que soporte las instrucciones aproximadas correspondientes, para finalmente
+entregar una aplicación final aproximada. 
+
+
+
+\subsection{Objetivos}
+
+\subsubsection{Objetivo General}
+
+Desarrollar una herramienta que, a partir de información sobre diferentes versiones de secciones aproximadas
+de una aplicación tolerante a errores, pueda determinar cuál combinación de versiones genera un mejor 
+resultado en términos de ahorro de recursos y el nivel de error máximo que un usuario estableció como permitido. 
+
+
+\subsubsection{Objetivos Específicos}
+
+\begin{enumerate}
+ \item Generar una representación del código de entrada que sea manipulable a partir de las anotaciones dadas por un usuario.
+ 
+ \item Evaluar las versiones aproximadas de las secciones de una aplicación para saber cuál es su impacto en la aplicación final. 
+ 
+ \item Desarrollar un algoritmo que permita, a partir de funciones indicadas por un usuario, la escogencia de secciones tolerantes a errores en una aplicación según
+ las posibles versiones aproximadas existentes.
+\end{enumerate}
+
+
+\section{Propuesta Metodológica}
+
+\subsection{Tipificación del trabajo a realizar}
+
+El proyecto se clasifica como un trabajo de investigación cualitativa, donde se deben
+aplicar conocimientos en temas relacionados con sistemas operativos, arquitectura de computadores, 
+computación de alto rendimiento y compiladores.
+
+\subsection{Descripción del proceso a realizar}
+
+El proyecto iniciará con una etapa de investigación sobre trabajos realizados por varios
+autores en el área de computación aproximada, relacionados con la caracterización
+de sistemas o aplicaciones en las cuales una o varias secciones son aproximables. Se investigará
+sobre maneras de generar un compilador para un cierto lenguaje y con el reconocmiento
+de pragmas o anotaciones en el código.
+
+Seguidamente, se implementará un algoritmo que, a partir de una información dada (gracias
+a una base de datos) determine qué combinación de funciones aproximadas se deben colocar en un sistema en pipeline
+de tal forma que el resultado al final de todas las etapas se mantenga en un nivel de error
+aceptable. Para esto se tomará información de una base de datos del KIT sobre secciones aproximadas
+independientes, para posteriormente evaluar el impacto final de cada una de ellas en una aplicación completa.
+
+
+La documentación del proyecto se trabajará a lo largo de todo el proceso de desarrollo, sin 
+embargo, la redacción de un artículo científico y demás documentos propios de un trabajo final
+de graduación, se desarrollarán como una etapa adicional.
+
+
+\section{Antecedentes y trabajos relacionados}
+
+En la actualidad, dada la gran cantidad de aplicaciones complejas (por ejemplo sistemas GPS, reconocimiento
+de voz, etc.) la computación aproximada ayuda a mantener una salida aceptable mientras se logra que ciertas
 métricas como tiempo de respuesta o eficiencia energética se mejoren. En general, la computación 
 aproximada provee la libertad de escoger entre un cierto nivel de error o degradación de la calidad 
-en la salida final de una aplicación (ej. ruido en la señal de la salida) para mejorar el consumo de energía, 
+en la salida final de una aplicación (por ejemplo ruido en la señal de la salida) para mejorar el consumo de energía, 
 el área o el tiempo de ejecución; esto sirve como herramienta a un investigar para que ajuste una aplicación dada a las 
 necesidades reales y específicas de esta. En la figura \ref{fig:ap} se muestra un esquema que puede ser aplicado a sistemas tolerantes a errores para incluir
 en estos la computación aproximada \cite{xu2018approximate}.
@@ -156,98 +299,46 @@ en estos la computación aproximada \cite{xu2018approximate}.
  \end{center}
 \end{figure}
 
-Los elementos clave de la figura \ref{fig:ap} son kernels aproximados, los cuales representan la implementación (técnicas)
+Los elementos clave de la figura \ref{fig:ap} son \emph{kernels} aproximados, los cuales representan la implementación (técnicas)
 de las funciones aproximadas, estas puede ser realizadas a nivel de hardware o de software; la identificación de 
-la secciones tolerantes a errores y sus características particulares (ej. análisis de impacto); y el manejo
+la secciones tolerantes a errores y sus características particulares (análisis de impacto); y el manejo
 de la calidad, el cual implica una evaluación continua para determinar si la aplicación logra los requerimientos deseados.
 
+Como se mencionó, la computación aproximada puede ser implementada tanto a nivel de software como de hardware. En software 
+una implementación típica es a través de \emph{Loop Perforation}, en la cual ciertos ciclos (usualmente con un patrón dado, como
+por ejemplo las pares) no son computados, lo cual, por ejemplo en una aplicación de cálculo numérico, reduciría la precisión
+del valor final calculado. A nivel de hardware, se pueden utilizan módulos especializados, por ejemplo aceleradores
+para programas aproximados utilizando redes neuronales. 
 
-\subsection{Justificación de la necesidad}
+El graduado de la carrera Ingeniería en Computadores Juan Carlos Cruz, realizó un trabajo sobre la computación aproximada, donde
+él se dio la tarea de caracterizar y calendarizar programas tolerantes a errores en una plataforma multi-acelerador. Parte
+del actual proyecto busca partir de los resultados generados por Cruz, de forma que se pueda utilizar el conocimiento generado
+sobre secciones ya aproximadas, para poder desarrollar el algoritmo que seleccionará cuál de todas ellas es la mejor
+según las especificaciones de un usuario. 
 
-Se espera entregar una contribución significativa para el proceso de investigación en el paradigma
-de computación aproximada que se desarrolla en el Instituto Tecnológico de Karlsruhe mediante el diseño
-e implementación de un sistema que permita escoger entre una serie de secciones
-aproximadas parametrizadas y, a partir de un límite de calidad establecido por el usuario,
-cuál combinación de estas secciones genera una aplicación final que mejor se ajuste
-a las necesidades de un usuario, es decir, que permita bajar el consumo de recursos sin
-sobrepasar un umbral de error establecido.
-
-El trabajo de investigación propuesto sigue el enfoque de otros autores de poder proveer soluciones al uso eficiente de los recursos 
-energéticos, de área y de tiempo de ejecución, especialmente considerando el auge que ha tenido el Internet de las Cosas y la Computación
-Ubicua, con sus respectivos retos y limitaciones. [DETALLAR]
-
-\subsection{Enfoque de la solución}
-
-\subsection{Objetivos}
-
-\subsubsection{Objetivo General}
-
-Desarrollar una algoritmo que, a partir de información sobre diferentes versiones de secciones aproximadas
-de un sistema tolerante a errores, pueda determinar cuál combinación de versiones genera un mejor 
-resultado en términos de ahorro de recursos y nivel de error a la salida.
-
-
-\subsubsection{Objetivos Específicos}
-
-\begin{enumerate}
- \item Describir los algoritmos y trabajos relacionados al área de computación aproximada, con el fin de tener
- cierto marco de referencia.
- 
- \item Desarrollar un algoritmo que permita la escogencia de secciones tolerantes a errores en una aplicación dadas
- varias posibles versiones aproximadas.
- 
- \item Determinar un proceso para generar una aplicación aproximada a partir de secciones independientes
- aproximables, de tal forma que dicho conocimiento sea escalable y utilizable en aplicaciones más grandes. 
-\end{enumerate}
-
-
-\subsection{Supuestos y Limitaciones}
-
-\begin{enumerate}
- \item Limitación de tiempo: Se espera que el proyecto pueda ser desarrollado entre mediados del mes de Julio y
- mediados del mes de Noviembre.
- 
- 
- \item Limitación de recursos: El proyecto será desarrollado con herramientas de software gratuitas y aquellas
- que sean provistas por el CES. Sserá necesario una computadora personal, servicios básicos de alimentación,
- transporte y estadía en Alemania. Se tendrá acceso al material de investigación presente en el KIT y en internet. 
-
-
-\end{enumerate}
-
-
-\section{Propuesta Metodológica}
-
-\subsection{Tipificación del trabajo a realizar}
-
-El proyecto se clasifica como un trabajo de investigación cualitativa, donde se deben
-aplicar conocimientos en temas relacionados con sistemas operativos, arquitectura de computadores
-y computación de alto rendimiento. 
-
-\subsection{Descripción del proceso a realizar}
-
-[Revisar con objetivos]
-
-El proyecto iniciará con una etapa de investigación sobre trabajos realizados por varios
-autores en el área de computación aproximada, relacionados con la caracterización
-de sistemas o aplicaciones en las cuales una o varias secciones son aproximables. 
-
-Seguidamente, se implementará un algoritmo que, a partir de una información dada (gracias
-a trabajos previos) almacenada en algún tipo de base de datos, se alimente para determinar
-qué combinación de funciones aproximadas se deben colocar en un sistema en pipeline
-de tal forma que, el resultado al final de las etapas, se mantenga en un nivel de error
-aceptable.
-
-La documentación del proyecto se trabajará a lo largo de todo el proceso de desarrollo, sin 
-embargo, la redacción del artículo científico y demás documentos propios de un trabajo final
-de graduación, se desarrollarán como una etapa adicional.
-
-[AMPLIAR]
 
 % Referencias del Background y el Related Work
 \bibliographystyle{sty/plainurl}
 \bibliography{references}
 
+
+\section{Anexos}
+
+\subsection{Descripción de la empresa}
+
+El Instituto Tecnológico de Karlsruhe (KIT) surge en 2009 a partir de la unión de la Univerisdad de Karlsruhe,
+fundada en 1825 como Universidad Fridericiana, y el Centro de Investigación de Karlsruhe. Se ubica en Karlsruhe, 
+en el estado de Baden-Wüttemberg, al suroeste de Alemania. 
+
+El Instituto de Ingeniería en Computadores en el KIT abarca grupos de trabajo que abarcan
+los diferentes niveles de abstracción de sistemas computacionales. En el Chair for Embedded Systems (CES)
+se investigan diversos aspectos relacionados con el diseño de sistemas embebidos, desde la confiabilidad de circuitos
+hasta el manejo de potencia en sistemas multinúcleos. 
+
+El proyecto como tal será desarrollado en el CES bajo
+la tutela del M.Sc. Jorge Alberto Castro Godínez, ingeniero en electrónica, investigador
+y estudiante de doctorado, quien es egresado del Tecnológico de Costa Rica y posee
+más de dos años y medio como investigador en el Instituto Tecnológico de Karlsruhe. 
 
 
 \end{document}

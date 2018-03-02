@@ -85,7 +85,7 @@
 \begin{tabular}{ | c | c | c | c | } 
  \hline
 \textbf{Date}	&\textbf{Version}	&\textbf{Description}	&\textbf{Author} \\ \hline
-02 March 2018	&1.0			&\makecell{Design Document for Design of \\  (ASIPs) for Approximate Computing}	&Daniel Moya \\ \hline
+02 March 2018	&1.0			&\makecell{Initial version of: Design Document for Design\\  of ASIPs) for Approximate Computing}	&Daniel Moya \\ \hline
 \end{tabular}
 \label{tab:act}
 \end{center}
@@ -132,7 +132,7 @@ project.
 
 Figure \ref{fig:cont} shows the general scheme for an approximate possible application. As 
 depicted, the approximate application is expected to have a pipeline structure, where one 
-of its stages or sections (in that case the $n$-th stage) can be approximate. The purpose 
+of its stages or sections (in that case the $N$-th stage) can be approximate. The purpose 
 of the ASIP configuration is to provide the user flexibility between the original version of 
 an application and the optimized one, allowing for a customized balance between resource 
 consumption and output error. The approximate section needs to perform the original 
@@ -174,7 +174,10 @@ other sections that depend of it.
 
 \subsection{Summary}
 
-
+The ASIP configurations that will be developed are expected to impact on the Instruction Set Architecture (ISA)
+and the processor components. The modifications made are specific to an application and must keep the original functionality intact. 
+Since this research concerns about a low-level abstraction solution to the approximate computing paradigm, no
+high-level design is presented.
 
 
 
@@ -199,17 +202,9 @@ other sections that depend of it.
  one, in which it can execute with improved performance (for instance, energy \\
  consumption or execution time would be lower) compared to a General Purpose \\
  Proccesor (GPP).}  \\ \hline
-  GPP & \makecell{
- General Purpose Proccesor. In general, they show better flexibility than ASIPs \\
- because all the programs are executed in general-purpose components, but since \\
- they are not optimized, they show less resource efficiency.}  \\ \hline
-   ASIC & \makecell{
- Application Specific Integrated Circuit. In general, they show better performance \\
-results than ASIPs, nevertheless, they are less flexible when executing anything \\
-other than the specific application they are meant to.}  \\ \hline
- ITCR & \makecell{
- Instituto Tecnológico de Costa Rica. Place from where this project is being \\
- developed.}  \\ \hline
+  ISA & \makecell{
+ Instruction Set Architecture. It refers to the assembly instructions (low-level)\\
+ that can execute in a certain processor. }  \\ \hline
 \end{tabular}
 \label{tab:def}
 \end{center}
@@ -282,9 +277,25 @@ on the high level program. Figure \ref{fig:comp} shows a general scheme for the 
  
 \end{tikzpicture} 
 \medskip
-\caption{Componnent} 
+\caption{Composition level design} 
 \label{fig:comp}
 \end{figure}
+
+
+Figure \ref{fig:comp} shows a level of abstraction from the inside ASIP jigsaw piece (low abstraction) to the outside softwate
+application (high abstraction). The ASIP is shown as a jigsaw piece due to processors and hardware components working together
+in several parts of an architecture, each performing an specific action simultaneosly in a pipeline structure. Added modules
+have to fit in this jigsaw to keep everything else working, and removed hardware has to leave the application
+functionality intact. This means that, ideally, a perfect hardware jigsaw has to be made, where each specific
+piece its relevant and fits well with other pieces. The ISA is shown with fuzzy borders to give the sense that 
+low level instructions can have a direct translation with the high level instructions; for example, a high level
+\emph{add} instruction is pratically the same as its low-level 	counterpart, so no ISA-level optimization can be made,
+however, an \emph{if} structure might be translated as several low-level instructions, so a specialized low-level instruction 
+can be made in order to reduce the total number of assembly instructions that an \emph{if} is translated to. Finally,
+the software application is shown as a box to highlight the fact that it is given as such and it is 
+not modified, in other words, its constraints and specific details are kept. 
+
+
 
 
 % Static structure (classes, interfaces, and
@@ -352,7 +363,7 @@ The interaction between the hardware components will follow a general pipeline s
 
 % System dynamics including modes, states, transitions, and reactions to events.
 \section{State dynamics}
-This section does not apply-
+This section does not apply.
 
 % The detailed design description of operations (such as methods and functions), the internal details and logic
 % of each design entity.
