@@ -259,9 +259,9 @@ final};
 
 Como se muestra en la Figura \ref{fig:sol}, se espera recibir un código fuente
 de una aplicación aproximable, donde previamente el usuario ha indicado, a
-través de pragmas propios, qué funciones del código son tolerantes a errores y
-el cuals es transformado a una representación intermedia. A través del algoritmo
-que se pretende desarrollar, para escoger cuáles versiones aproximadas de
+través de pragmas propios, qué funciones del código son tolerantes a errores; este
+es transformado a una representación intermedia. El algoritmo que se pretende
+desarrollar busca poder escoger cuáles versiones aproximadas de
 las posibles que existen se ajustan para cumplir a cabalidad con el error
 permitido y, de la mejor manera, con la priorización de recursos. Una vez
 identificadas las versiones que serán utilizadas, se procederá a utilizar el
@@ -293,6 +293,10 @@ permitido.
  \item Desarrollar un algoritmo que permita, a partir de funciones indicadas por
  un usuario, la escogencia de secciones tolerantes a errores en una aplicación según
  las posibles versiones aproximadas existentes.
+ 
+ \item Validar que la aplicación final aproximada cumpla con el funcionamiento
+ de la aplicación original y las restricciones dadas por el usuario y por el la
+ aplicación
 \end{enumerate}
 
 
@@ -306,11 +310,14 @@ arquitectura de computadores, computación de alto rendimiento y compiladores.
 
 \subsection{Descripción del proceso a realizar}
 
-El proyecto iniciará con una etapa de investigación sobre trabajos realizados
+La Figura \ref{fig:proceso} resume el proceso que se realizará durante el proyecto.
+Como se puede observar, el proyecto iniciará 
+con una etapa de investigación sobre trabajos realizados
 por varios autores en el área de computación aproximada, relacionados con la
 caracterización de sistemas o aplicaciones en las cuales una o varias secciones
 son aproximables. Se investigará sobre maneras de generar un compilador para un
-cierto lenguaje y con el reconocmiento de pragmas o anotaciones en el código.
+cierto lenguaje y que permita el reconocmiento de pragmas o anotaciones en el código.
+
 
 Seguidamente, se implementará un algoritmo que, a partir de una información dada
 (gracias a una base de datos) determine qué combinación de funciones aproximadas
@@ -320,11 +327,55 @@ se tomará información de una base de datos del KIT sobre secciones aproximadas
 independientes, para posteriormente evaluar el impacto final de cada una de
 ellas en una aplicación completa.
 
+Finalmente, se debe realizar la verificación de la aplicación aproximada final,
+de forma que se garantice un cumplimiento en el nivel de error y una optimización
+apropiada de los recursos. Para esto se realizarán simulaciones y pruebas
+unitarias en plataformas como ModelSim. Si por alguna razón se detectaran
+fallas, se revisará el algoritmo desarrollado con el fin de poder
+corregirlo. 
 
 La documentación del proyecto se trabajará a lo largo de todo el proceso de
-desarrollo, sin embargo, la redacción de un artículo científico y demás
-documentos propios de un trabajo final de graduación, se desarrollarán como una
-etapa adicional.
+desarrollo, de forma que al final se genere un artículo científico y demás
+documentos propios de un trabajo final de graduación.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[node distance=1cm, auto]  
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, very thick, minimum
+    size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+}  
+\node[mynode] (investigacion) {Investigación sobre antecedentes y trabajos previos};
+\node[mynode, below=1cm of investigacion] (compilador) {Generación de compilador para pragmas propios};
+
+\draw[myarrow] (investigacion.south)   -|  (compilador.north);
+
+\node[mynode, below=1cm of compilador] (algoritmo) {\makecell{Desarrollo de algoritmo para evaluar impacto de\\ versiones aproximadas}};
+ 
+ \draw[myarrow] (compilador.south)   -|  (algoritmo.north);
+ 
+ 
+ \node[mynode, below=1cm of algoritmo] (verificacion) {Verificación de versones aproximadas finales};
+ 
+  
+   \draw[<->, >=latex', shorten >=1pt, thick]  (algoritmo.south) -- (verificacion.north); 
+  
+ 
+  
+  \node[mynode, right=1.8cm of investigacion, dashed] (ini) {Documentación};
+
+  \node[mynode, right=2cm of verificacion] (fin) {Documentación final}; 
+  
+ 
+ \draw[->, >=latex', shorten >=1pt, thick, dashed]  (ini.south) -|  (fin.north); 
+
+\end{tikzpicture} 
+\medskip
+\caption{Proceso a realizar en este proyecto.} 
+\label{fig:proceso}
+\end{figure}
 
 
 \section{Antecedentes y trabajos relacionados}
@@ -342,13 +393,16 @@ una aplicación dada a las necesidades reales y específicas de esta. En la Figura
 a errores para incluir en estos la computación aproximada \cite{xu2018approximate}.
 
 
-\begin{figure}
+\begin{figure}[h!]
 \begin{center}
  \includegraphics[scale=0.3]{APframework}
  \caption{Un marco de trabajo para el uso de computación aproximada. Tomado de
  \cite{xu2018approximate}.} \label{fig:ap}
  \end{center}
 \end{figure}
+
+
+
 
 Los elementos clave de la Figura \ref{fig:ap} son \emph{kernels} aproximados,
 los cuales representan la implementación (técnicas) de las funciones
@@ -374,6 +428,10 @@ generados por Cruz, de forma que se pueda utilizar el conocimiento generado
 sobre secciones ya aproximadas, para poder desarrollar el algoritmo que
 seleccionará cuál de todas ellas es la mejor según las especificaciones de un
 usuario. 
+
+
+
+
 
 
 % Referencias del Background y el Related Work
