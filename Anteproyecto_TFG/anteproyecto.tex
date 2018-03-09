@@ -144,7 +144,8 @@ lo que es importante utilizar un esquema de trabajo diferente.
 
 Una aplicación puede tener un comportamiento aproximado si alguna de sus etapas
 se puede aproximar, ya sea toda una sección o únicamente una instrucción (dentro
-de una sección). La Figura \ref{fig:problem} muestra una aplicación genérica
+de una sección). La Figura \ref{fig:problem} muestra como ejemplo 
+una aplicación genérica
 donde ambas situaciones pueden ocurrir.
 
 
@@ -187,7 +188,7 @@ instrucción específica\\ puede ser reemplazada por \\ una versión aproximada}};
  
 \end{tikzpicture} 
 \medskip
-\caption{Una posible situación a resolver en este proyecto.} 
+\caption{Una posible aplicación aproximada genérica analizada en este proyecto.} 
 \label{fig:problem}
 \end{figure}
 
@@ -197,6 +198,19 @@ puede ser completamente aproximada, la segunda no puede ser aproximada del todo
 (por ejemplo, una sección crítica de la aplicación) y, finalmente, la tercera
 tiene tres instrucciones específicas, de las cuales únicamente la segunda posee
 una versión aproximada.
+
+En el caso hipotético de la Figura \ref{fig:problem} donde se tenga más de una
+versión aproximada para la sección 1 y para la instrucción 2 de la sección 3,
+es complicado (dicha complejidad aumenta con la cantidad de versiones aproximadas)
+determinar qué combinación de versiones aproximadas produce la mejor aplicación 
+aproximada final, debido a que, por ejemplo,
+un cambio en la sección 1 puede impactar
+severamente las secciones 2 y 3; inclusive, puede que la versión 
+aproximada de la instrucción 2 determine que tipo de versiones aproximadas son las 
+más convenientes (según las especificaciones del usuario)
+en la sección 1 para no impactar en gran medida la calidad
+de la aplicación. 
+
 
 
 \section{Enfoque de la solución}
@@ -376,6 +390,35 @@ documentos propios de un trabajo final de graduación.
 \caption{Proceso a realizar en este proyecto.} 
 \label{fig:proceso}
 \end{figure}
+
+\section{Entregables del proyecto}
+
+La tabla \ref{tab:entrega} presenta la asociación entre entregables y objetivos del proyectos, según los mencionados
+anteriormente. 
+
+
+\begin{table}[h!]
+\begin{center}
+\caption{Entregables del proyecto}
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|} 
+ \hline
+Objetivo	&Entregable \\ \hline \hline
+
+\makecell{Generar una representación del código de entrada que sea \\ manipulable a
+ partir de las anotaciones dadas por un usuario}	&Generación de compilador con pragmas propios \\ \hline
+ \makecell{Evaluar las versiones aproximadas de las secciones de una \\ aplicación para
+ saber cuál es su impacto en la aplicación final}	&\makecell{Desarrollo de algoritmo para evaluar impacto de\\ versiones aproximadas} \\ \hline
+ \makecell{Desarrollar un algoritmo que permita, a partir de funciones indicadas \\ por
+ un usuario, la escogencia de secciones tolerantes a errores en \\ una aplicación según
+ las posibles versiones aproximadas existentes}	&\makecell{Desarrollo de algoritmo para evaluar impacto de\\ versiones aproximadas} \\ \hline
+ \makecell{Validar que la aplicación final aproximada cumpla con el funcionamiento \\
+ de la aplicación original y las restricciones dadas por el usuario y por el la \\
+ aplicación}	&Documentación \\ \hline
+
+\end{tabular}}
+\label{tab:entrega}
+\end{center}
+\end{table}
 
 
 \section{Antecedentes y trabajos relacionados}
