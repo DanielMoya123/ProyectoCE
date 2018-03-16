@@ -1,0 +1,169 @@
+%% ---------------------------------------------------------------------------
+%% proposal.tex
+%%
+%% Research Proposal, main document.
+%%
+%% ---------------------------------------------------------------------------
+\documentclass[12pt,letterpaper]{article}
+\usepackage[english]{babel}     % supports english, but default is
+% \usepackage[spanish]{babel}
+% include this if you want to import graphics files with /includegraphics
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+\usepackage[table]{xcolor}
+
+\usepackage{anysize}
+\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
+\usepackage{textcomp}
+\usepackage{url}
+\bibliographystyle{unsrt}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{slashbox}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+% Color and strikethrough
+
+
+
+\usepackage{color}
+\usepackage{soul}
+
+\usepackage{array}
+\usepackage{makecell}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+\definecolor{dblue}{RGB}{0,102,153}
+\newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
+
+
+
+\setlength{\parskip}{1em}
+
+% Nombre del Estudiante
+\newcommand{\scriptAuthor}{Daniel Moya Sánchez}
+ 
+% Tí­tulo de la tesis
+\newcommand{\scriptTitle}{Progress report \#2 for the project: Design of (ASIPs) for Approximate Computing} 
+
+
+% Keywords
+\newcommand{\scriptKeywords}{key, words, ...}
+
+% Para el PDF (cambiar si se desea otras cosas a lo indicado arriba
+\newcommand{\pdfAuthor}{\scriptAuthor}
+\newcommand{\pdfTitle}{\scriptTitle} 
+\newcommand{\pdfKeywords}{\scriptKeywords}
+
+
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, top color=white, bottom color=yellow!50,very thick, inner sep=1em, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+} 
+
+\begin{document}
+ 
+ \graphicspath{{./}{./fig/}}
+
+ \input{./titlepage.tex}
+
+%  \tableofcontents
+
+ \clearpage
+
+\section{Performed activities} \label{act}
+
+\begin{enumerate}
+ \item \textbf{Get to know the software platform}:  
+ 
+ \item \textbf{Find appropiate error-tolerant applications}:  
+ 
+ \item \textbf{Redact Design document}: The final design document was send to the professor.
+
+ \end{enumerate}
+ 
+
+\section{Change of scope} \label{change}
+
+
+
+\section{Gained value analysis}
+
+Table \ref{tab:gain} summarizes the gained value analysis. 
+
+\begin{table}[h!]
+\begin{center}
+\caption{Revision History}
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} 
+ \hline
+\makecell{Activity\\ID}	&Activity	&Budget	&\makecell{\%Planned\\Value}	&PV	&AC	&\makecell{\%Completed\\work}	&EV	
+&CPI	&SPI	&\makecell{Initial planned\\date}	&\makecell{Ending\\date}	&\makecell{Initial real\\date}	&\makecell{Real ending} \\ \hline
+
+
+01	&\makecell{Get to\\ know the\\ software\\ platform}	&32	&100\%	&32	&30	&95\%	&$30.4$
+&$1.01$	&0.95	&Week 1	&Week 3	&Week 1	&- \\ \hline
+
+02	&\makecell{Find appropiate\\ error-tolerant\\ applications}	&32	&100\%	&32	&20	&70\%	&22.4
+&1.12	&0.7	&Week 4	&Week 7	&Week 4	&- \\ \hline
+
+06	& \makecell{Redact Design\\ document}	&8	&100\%	&8	&7	&100\%	&8
+&1.14	&1	&\makecell{Week 3}	&\makecell{Week 4}	&\makecell{Week 3}	&\makecell{Week 5} \\ \hline
+\end{tabular}}
+\label{tab:gain}
+\end{center}
+\end{table}
+
+
+
+
+\section{Encountered difficulties}
+
+
+
+\section{Hard skills required/acquired}
+
+Knowledge in the following software frameworks has been acquired:  Dlxsim, ModelSim and Xilinx ISE. 
+
+
+\section{Soft skills required/acquired}
+
+The following soft skills have been excercised:
+
+\begin{itemize}
+ \item Communication: Weekly remote communication has been performed with Jorge Castro for the guidance of this project, and
+ with Sajjad Hussain to request technical aid in the server. With both, swift communication was achieved, each topic that
+ was talked was resolved or clarified in very few messages (one or two at most).
+ 
+ \item Self-Motivation: Given that there is no direct round-the-clock supervision, self-motivation has been key in working 
+ continously in the laboratory sessions. 
+ 
+ \item Problem Solving: The laboratory sessions provide several challenges given the theoretical aspects of assembly instructions and
+ processor structure, which need to be addressed and later compared with a given solution.
+ 
+ \item Problem Solving: Since there are a lot of approximable applications, careful analysis of existing applications has been key in
+ reducing the search space to be manageable. 
+\end{itemize}
+
+
+\section{Learned lessons}
+
+\begin{enumerate}
+ \item S
+\end{enumerate}
+
+
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
+
+
+
+\end{document}
+
