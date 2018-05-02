@@ -24,6 +24,8 @@
 %\usepackage{slashbox}
 \usepackage[latin1]{inputenc}
 \usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{float}
 \usetikzlibrary{arrows,positioning}
 % Color and strikethrough
 
@@ -49,7 +51,7 @@
 \newcommand{\scriptAuthor}{Daniel Moya Sánchez}
  
 % Tí­tulo de la tesis
-\newcommand{\scriptTitle}{Progress report \#3 for the project: Design of (ASIPs) for Approximate Computing} 
+\newcommand{\scriptTitle}{Progress report \#4 for the project: Design of (ASIPs) for Approximate Computing} 
 
 
 % Keywords
@@ -80,24 +82,33 @@
 \section{Performed activities} \label{act}
 
 \begin{enumerate}
- \item \textbf{Familiarization with the software platform (ID 01)}: The laboratory sessions were reviewed and mostly completed.
- An agreement was made, so the remaining parts of the laboratory script will not be finished,
- this is because they either require a device (which is not needed yet) or are repetitions of previous work (but with different conditions). 
   
- \item \textbf{Find appropiate error-tolerant applications (ID 02)}: The possible approximate applications delivered to Jorge Castro were reviewed with him. The 
- proposed applications are K-means and KNN, a third is yet to be confirmed (this is dependent on whether the first two approximated implementations produce correct output).
- The source code of the aforementioned applications (programmed in C) was analyzed, but compilation failed at the linking phase, some unexpected errors 
- appeared as described in section \ref{dif}. 
+ \item \textbf{Implement the ASIPs in the error tolerant applications found (ID 03)}: The \emph{eucl} assembly instruction was made for the K-Means algorithm.
+ This allows to compute the following operation in a single cycle:
+ \begin{align}
+  rd = (rs0 - rs1)^2
+ \end{align}
+ The operation described in (1) allows the execution of the euclidean distance, which is a key calcution in the K-Means algorithm. No other special instructions
+ have been made because it was not possible to have a meeting in the last week with the supervisor Jorge Castro. 
+ 
+ \item \textbf{Find appropiate error-tolerant applications (ID 02)}: The scope of this task is expected to be limited due to the actual project delay. No progress was
+ achieved for this task because getting into an agreement about the scope limitation with the supervisor Jorge Castro is expected. 
+
 
  \end{enumerate}
  
 
 \section{Scope Changes} \label{change}
 
-No scope changes have been made, however, because of the difficulties explained in section \ref{dif}, scope changes are 
-expected in the next report. 
+No scope changes have been officially made, because there was no meeting with the supervisor Jorge Castro
+on week 10, however, scope changes are expected, which include the limitation of the total number of approximate applications
+and the scope of the approximations, giving the limitations explained on section \ref{dif}. This changes could solve the actual delay of the project. 
 
 \section{Earned Value analysis}
+
+The tasks ID with 02 and 03 have been delayed because of the problems reported in section \ref{dif} and in previous reports. In general, the project
+has a delay of approximately two weeks, despite having overestimated the cost of tasks (without the configurations problems), which have been
+done in less time than planned. 
 
 Table \ref{tab:gain} summarizes the gained value analysis. 
 
@@ -116,6 +127,9 @@ Table \ref{tab:gain} summarizes the gained value analysis.
 02	&\makecell{Find appropiate\\ error-tolerant\\ Applications}	&32	&100\%	&32	&20	&85\%	&27.2
 &1.36	&0.85	&Week 4	&Week 6	&Week 4	&- \\ \hline
 
+03	&\makecell{Implement the\\ ASIPs in the\\ error tolerant\\ applications\\ found}	&64	&66.7\%	&42.7	&15	&40\%	&25.6
+&1.71	&0.60	&Week 7	&Week 12	&Week 9	&- \\ \hline
+
 
 04	&\makecell{Write Project\\Plan Document}	&8	&100\%	&8	&10	&100\%	&8
 &0,8	&1	&Week 1	&Week 2	&Week 1	&Week 3 \\ \hline
@@ -128,8 +142,8 @@ Table \ref{tab:gain} summarizes the gained value analysis.
 06	& \makecell{Write Design\\ Document}	&8	&100\%	&8	&7	&100\%	&8
 &1.14	&1	&\makecell{Week 3}	&\makecell{Week 4}	&\makecell{Week 3}	&\makecell{Week 5} \\ \hline
 
-& Total	& &100\%	&88	&77	&87.5\%	&83.2
-&1.08	&0.95	&	&	&	& \\ \hline
+& Total	& &	&130.7	&92	&	&108.8
+&1.18	&0.83	&	&	&	& \\ \hline
 \end{tabular}}
 \label{tab:gain}
 \end{center}
@@ -141,15 +155,19 @@ Table \ref{tab:gain} summarizes the gained value analysis.
 \section{Difficulties Encountered} \label{dif}
 
 \begin{itemize} 
- \item The selected code for the K-means algorithm needed to be compiled with the CoSy compiler into assembly code. Several restrictions for the source code
-in the C lenguage exist (for example, it cannot contain void functions or if-else structures), which were taken into account, but when compiling some errors appeared,
- after some testing additional limitations were discovered. Finally, the code
- was compiled but not assembled/linked because of an unkmown error. An e-mail describing the error has already been sent and its response is still being
- waited on. 
+
+\item No official response has been received regarding the errors of the CoSy compiler, so in the meantime, a manually-wrriten assembly program has been made,
+containing only
+the special assembly instruction for testing purposes. If the errors of the CoSy compiler are not dealt with, the final result will contain only a manually-wrriten version
+made in assembly, which, due to schedule limitations, will not be the full program (only the calculation process). 
  
  
- \item Supervisor Jorge Castro was quite busy for the reported period, which delayed the possible approximate applications' selection and the 
- analysis of the error presented with the CoSy compiler. 
+ \item Approximation at a hardware level could not be done for the K-Means algorithm, since the framework ASIPMeister handles a ``Flexible Hardware Model'' (FHM),
+ which are files with xml and perl code, which were not expected (the understanding of that code is still needed), in their place, HDL code was expected.
+ 
+ 
+ \item The supervisor Jorge Castro was quite busy for the reported period, which delayed the next possible special instruction's selection and the 
+ analysis of the area and power results obtained from the usage of the first special instruction. 
 \end{itemize}
 
 
@@ -158,10 +176,8 @@ in the C lenguage exist (for example, it cannot contain void functions or if-els
 \section{Hard Skills Required/Acquired}
 
 \begin{itemize}
- \item Knowledge in the following software frameworks has been acquired:  dlxsim and CoSy compiler. 
+ \item Knowledge in the following software frameworks has been acquired: ASIPMeister and Dlxsim. 
  
- \item Further knowledge in the implementation of the K-means algorithm has been acquired. 
-
 \end{itemize}
 
 
@@ -172,17 +188,15 @@ in the C lenguage exist (for example, it cannot contain void functions or if-els
 The following soft skills have been excercised:
 
 \begin{itemize}
- \item Communication: Remote communication has been performed with Jorge Castro for the guidance of this project, and
- with Sajjad Hussain to request technical aid in the server.
  
  \item Self-Motivation: Given that there is no direct round-the-clock supervision, self-motivation has been key in working 
- continously with the CoSy compiler and the analysis of the possible approximate applications.
+ continously with the ASIPMeister and Dlxsim on the creation of special instructions for the approximate applications.
  
 \end{itemize}
 
 
 \section{Lessons Learned}
-
+There are no lessons learned for the reported period. 
 
 
 % Referencias del Background y el Related Work
