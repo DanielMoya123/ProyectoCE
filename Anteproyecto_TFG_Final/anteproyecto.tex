@@ -210,12 +210,13 @@ Karlsruhe.
 
 El área de conocimiento principal del proyecto es computación aproximada
 (explicada brevemente en la sección de Contexto del Problema), la cual
-incluye aspectos tanto de software como de hardware; esta se encuentra dentro
-de las área de investigación del CES. Las áreas de conocimiento de ingeniería
-específica que se tratan son: conocimiento sobre aspectos de arquitectura
-y micro-arquitectura de procesadores, computación de alto rendimiento, sistemas operativos, desarrollo de compiladores y comprensión
-de posibles aproximaciones de algoritmos en código de bajo nivel (por ejemplo, 
-en el lenguaje de programación C). 
+incluye aspectos tanto de software como de hardware, dado que involucra aspectos
+tanto de modificación del ISA como creación de ASIPs para la computación
+de ciertos algoritmos. Las áreas de conocimiento de ingeniería
+que se tratan son: conocimiento sobre aspectos de arquitectura
+y micro-arquitectura de procesadores (por lo mencionado anteriormente), desarrollo de compiladores, dado que se modificará el compilador de front-end Clang, finalmente,
+análisis de posibles aproximaciones en algoritmos en código escritos en el lenguaje de programación C, donde se espera agregar identificadores a las
+funciones que se busquen aproximar, para posteriormente ser procesadas de manera especial en la representación intermedia del código que se genere.
 
 
 \section{Descripción de la Propuesta}
@@ -355,7 +356,7 @@ más convenientes (según las especificaciones del usuario)
 en la sección 1 para no impactar en gran medida la calidad
 de la aplicación. 
 
-
+Negocio
 \subsubsection{Justificación de la Necesidad}
 
 Debido a la creciente necesidad por un consumo eficiente de recursos, ya sea energía,
@@ -365,6 +366,12 @@ de trabajo para la realización de aplicaciones personalizadas mediante el uso de
 aproximada puede traer nuevos conocimientos a esta área de investigación y 
 potenciar la creación de más aplicaciones, especializadas según los requerimientos
 específicos de los usuarios. 
+
+Con este proyecto, el conocimiento generado en Alemania se puede traer para obtener grandes
+beneficios en Costa Rica, de tal forma que se incentive la investigación, e inclusive una posible inversión
+en esta área. Actualmente no existe una herramienta académica que realice lo que se plantea en esta propuesta,
+por lo que se espera que el proyecto incentive muchos otros proyectos en el área de generación de procesadores
+con instrucciones especializadas. 
 
 
 \subsection{Enfoque de la solución}
@@ -407,7 +414,7 @@ de\\ versiones óptimas}};
 \draw[myarrow] (6,-0.7)  -|  (deterVersiones.north);
 
 \node[mynode, right = 1cm of deterVersiones] (confHardware) {
-\makecell{Configuración del hardware/\\uso de instrucciones aproximadas}};
+\makecell{Sustitución de código/\\uso de instrucciones aproximadas}};
 
 \draw[myarrow] (deterVersiones.east)  ->  (confHardware.west);
 
@@ -432,8 +439,8 @@ es transformado a una representación intermedia. El algoritmo que se pretende
 desarrollar busca poder escoger cuáles versiones aproximadas de
 las posibles que existen se ajustan para cumplir a cabalidad con el error
 permitido y, de la mejor manera, con la priorización de recursos. Una vez
-identificadas las versiones que serán utilizadas, se procederá a utilizar el
-hardware específico que cuente con el soporte para las instrucciones aproximadas
+identificadas las versiones que serán utilizadas, se procederá a sustituir el
+código específico que cuente con el soporte para las instrucciones aproximadas
 correspondientes, para finalmente entregar una aplicación final aproximada. 
 
 \subsection{Especificación de Objetivos}
@@ -450,15 +457,14 @@ permitido.
 \subsubsection{Objetivos Específicos}
 
 \begin{enumerate}
+\item Modificar el compilador de front-end Clang de forma que se reconozcan las anotaciones propias
+que se agreguen en el código para establecer qué funciones son aproximables.
+
  \item Generar una representación del código de entrada que sea manipulable a
  partir de las anotaciones dadas por un usuario.
  
- \item Evaluar las versiones aproximadas de las secciones de una aplicación para
- saber cuál es su impacto en la aplicación final. 
- 
- \item Desarrollar un algoritmo que permita, a partir de funciones indicadas por
- un usuario, la escogencia de secciones tolerantes a errores en una aplicación según
- las posibles versiones aproximadas existentes.
+ \item Generar una nueva versión de código ejecutable donde se las anotaciones
+ sean sustituidas por los aceleradores o versiones aproximadas correspondientes.
  
  \item Verificar que la aplicación final aproximada cumpla con el funcionamiento
  de la aplicación original y las restricciones dadas por el usuario y por el la
@@ -507,25 +513,54 @@ en el TEC, además de realizar los trámites correspondientes para la graduación d
 material disponible en el CES. Cualquier material físico del proyecto (como placa FPGA de desarrollo) será provisto por el CES.
 
 \item Disponibilidad de versiones de aplicaciones aproximadas: El proyecto parte de la existencia de diferentes versiones aproximadas
-de algoritmos populares, que se utilizarán como base para el trabajo de personalización de aplicaciones, es decir, selección de específicas
-versiones aproximadas. 
+de algoritmos populares, que se utilizarán como base para el trabajo de personalización de aplicaciones, es decir, selección de versiones diferentes
+aproximadas. 
 
 \end{enumerate}
 
 \subsection{Análisis de Riesgos}
 
+En la tabla \ref{tab:risk} se resumen los riesgos que se consideran para el proyecto.
+
 \begin{table}[h!]
 \begin{center}
 \caption{Posibles riesgos del proyecto.} 
-\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|} 
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|} 
  \hline
-ID	&Categoría	&Descripción	&\makecell{Probabilidad\\ de ocurrencia}	&\makecell{Impacto\\ (horas)}	&Plan de Acción \\ \hline
-1	&Personal	&Descripción	&0.3	&10	&Afrontar \\ \hline
-1	&Herramientas	&\makecell{Carencia de materiales necesarios\\ para el proyecto}	&0.3	&16	&Atacar \\ \hline
+ID	&Descripción	&\makecell{Probabilidad\\ de ocurrencia}	&\makecell{Impacto\\ (horas)}	&Plan de Acción \\ \hline
+1	&\makecell{Falta de disponibilidad de asesores para el\\ proyecto}	&0.4	&16	&Aceptar \\ \hline
+2	&\makecell{Carencia de materiales necesarios para el\\ proyecto}	&0.2	&8	&Evitar \\ \hline
+3	&\makecell{Errores a la hora de modificar Clang}	&0.3	&12	&Mitigar \\ \hline
 \end{tabular}}
 \label{tab:risk}
 \end{center}
 \end{table}
+
+A continuación se explica cada riesgo detalladamente:
+
+\begin{enumerate}
+ \item Falta de disponibilidad de asesores para el proyecto: Corresponde a momentos en que, ya sea el supervisor Jorge Castro o el director de tesis
+ no puedan atender alguna duda o no simplemente no se encuentren disponibles en una semana determinada, lo cual atrase la revisión del trabajo.
+ 
+ \item Carencia de materiales necesarias para el proyecto: El atraso de la entrega o no la presencia de alguno de los materiales (información o programas de software principalmente) que se necesitan
+ para realizar el proyecto, siendo el más importante las versiones aproximadas de las funciones que se analizarán. 
+ 
+ \item Errores a la hora de modificar Clang: Problemas de dependencias o aceptación de las modificaciones pensadas para el compilador de front-end Clang. 
+ 
+\end{enumerate}
+
+Los planes de acción se detallan a continuación:
+
+\begin{enumerate}
+ \item Aceptar: Asumir la responsabildidad correspondiente y continuar trabajando, con más cuidado inclusive y realizando un auto-análisis.
+ 
+ \item Evitar: Definir apenas comience el proyecto los materiales y sus fuentes con las que se contarán, de tal modo que se pueda contar con ellos (o al menos con una copia digitial)
+ para evitar contratiempos de adquisición cuando se necesiten en el proyecto.
+ 
+ \item Mitigar: Se realizará una investigación previa del compilador de Clang y se realizarán cambios iterativos, de tal forma que poco a poco se verifique las nuevas funcionalidades que se agreguen a Clang. 
+ 
+\end{enumerate}
+
 
 
 \section{Propuesta Metodológica}
@@ -533,7 +568,10 @@ ID	&Categoría	&Descripción	&\makecell{Probabilidad\\ de ocurrencia}	&\makecell{I
 \subsection{Tipificación del Trabajo}
 
 El proyecto se clasifica como un trabajo de investigación aplicada,
-con alto porcentaje de experimentación.
+con alto porcentaje de experimentación. Esto se debe a que no existe ninguna herramienta que realice lo que se plantea
+y se busca incursionar en un campo relativamente nuevo (considerando la tecnología del país y la educación recibida hasta el momento),
+donde se espera que los resultados obtenidos inspiren nuevos
+proyectos en el área. 
 
 \subsection{Descripción del Proceso}
 
@@ -575,7 +613,8 @@ documentos propios de un trabajo final de graduación.
     mylabel/.style={text width=7em, text centered} 
 }  
 \node[mynode] (investigacion) {Investigación sobre antecedentes y trabajos previos};
-\node[mynode, below=1cm of investigacion] (compilador) {Generación de compilador con pragmas propios};
+
+\node[mynode, below=1cm of investigacion] (compilador) {Modificación de compilador con pragmas propios};
 
 \draw[myarrow] (investigacion.south)   -|  (compilador.north);
 
@@ -621,8 +660,7 @@ documentos propios de un trabajo final de graduación.
 
 \subsection{Descripción de Entregables}
 
-La tabla \ref{tab:entrega} presenta la asociación entre entregables y objetivos del proyectos, según los apartados mencionados
-anteriormente. 
+La tabla \ref{tab:entrega} presenta la asociación entre entregables y objetivos del proyectos.
 
 
 \begin{table}[h!]
@@ -632,13 +670,12 @@ anteriormente.
  \hline
 Objetivo	&Entregable \\ \hline
 
-\makecell{Generar una representación del código de entrada que sea \\ manipulable a
- partir de las anotaciones dadas por un usuario}	&Generación de compilador con pragmas propios \\ \hline
- \makecell{Evaluar las versiones aproximadas de las secciones de una \\ aplicación para
- saber cuál es su impacto en la aplicación final}	&\makecell{Documentación y desarrollo del algoritmo} \\ \hline
- \makecell{Desarrollar un algoritmo que permita, a partir de funciones \\ indicadas por
- un usuario, la escogencia de secciones tolerantes\\ a errores en una aplicación según
- las posibles versiones \\ aproximadas existentes}	&\makecell{Desarrollo de algoritmo para evaluar impacto de\\ versiones aproximadas} \\ \hline
+\makecell{Modificar el compilador de front-end Clang de forma que se\\ reconozcan las anotaciones propias
+que se agreguen en el \\código para establecer qué funciones son aproximables.}	&Compilador Clang modificado con pragmas propios \\ \hline
+ \makecell{Generar una representación del código de entrada que sea\\ manipulable a partir de las anotaciones
+ dadas por un usuario.}	&\makecell{Código en representación de árbol de llamadas\\ o \emph{function code graph} u otro tipo de \\representación según se determine.} \\ \hline
+ \makecell{Generar una nueva versión de código ejecutable donde se\\ las anotaciones sean sustituidas por
+ los aceleradores o \\versiones aproximadas correspondientes.}	&\makecell{Código generado con anotaciones (pragmas) sustituidas} \\ \hline
  \makecell{Validar que la aplicación final aproximada cumpla con el \\ funcionamiento
  de la aplicación original y las restricciones\\ dadas por el usuario y por el la
  aplicación}	&Aplicación aproximada final y documentación \\ \hline
@@ -651,11 +688,56 @@ Objetivo	&Entregable \\ \hline
 
 \subsection{Estrategias de Verificación y Validación}
 
+Dado que se trata de un proyecto de investigación, cada uno de los entregables mencionados anteriormente tendrá un conjunto de pruebas
+asociado, las cuales corresponden a:
+
+\begin{itemize}
+ \item Pruebas para compilador Clang: se empezará por un código sin ningún version modificada y se irán realizando pruebas unitarias para cada
+ pragma nuevo que se agregue.
+ 
+ \item Pruebas para el código en representación intermedia: se revisará manualmente que el código en esta interpretación sea correcto. 
+ 
+ \item Pruebas para el código final generado (con pragmas sustituidos): el supervisor probará el código y determinará si cumple 
+ con los diferentes tipos de posibles requerimientos de un usuario.
+\end{itemize}
+
+
+Todas las pruebas mencionadas anteriormente serán llevadas a cabo mediante la supervisión de Jorge Castro y la contraparte en el TEC que se asigne. 
+
 
 
 \subsection{Cronograma de Trabajo Propuesto}
 
 
+Considerando los 4 meses (16 semanas) del semestre, el cronograma de trabajo para el proyecto propuesto se muestra en la tabla \ref{tab:schd}. 
+
+
+
+
+\begin{table}[h!]
+\begin{center}
+\caption{Cronograma para el proyecto propuesto}
+\resizebox{\textwidth}{!}{\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c |} 
+ \hline
+   & \multicolumn{16}{|c|}{Semana} \\
+ \hline
+ Actividad & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
+ \makecell{Modificación de Clang}
+ & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5}  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+ \makecell{Generación de representación \\intermedia}
+ &   &  &   &   &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  &  &  &  &  &  &  \\ \hline
+  \makecell{Generación de código con\\ pragmas sustituidas}
+ &   &  &   &   &  &  &  & &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  &  &  \\ \hline
+ \makecell{Validación de aplicación final}
+ &  &   &  &  &  &  &  &  &  &  &\cellcolor[HTML]{5B9BD5} &\cellcolor[HTML]{5B9BD5} &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  \\ \hline
+ \makecell{Documentación final} &  &   &  &  &  &  &  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &
+     \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} &  \\ \hline
+  \makecell{Elaboración de presentación \\para la defensa del Trabajo \\Final de Graduación}
+ &  &   &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} \\ \hline
+ \end{tabular}}
+\label{tab:schd}
+\end{center}
+\end{table}
 
 
 
@@ -685,7 +767,11 @@ Objetivo	&Entregable \\ \hline
 \begin{tabu} to \textwidth {| X[l] | X[l] |}	
  \hline
  Nombre	&Diseño asistido de aplicaciones aproximadas para sistemas computacionales personalizables \bigskip \\ \hline
- Breve descripción	&\\ \hline
+ Breve descripción	&Se desarrollará una herramienta que, a partir de información sobre diferentes
+versiones de secciones aproximadas de una aplicación tolerante a errores, pueda
+determinar cuál combinación de versiones genera un mejor resultado en términos
+de ahorro de recursos y el nivel de error máximo que un usuario estableció como
+permitido. \bigskip \\ \hline
  Fecha de inicio	&Lunes 2 de Julio del 2018 \bigskip \\ \hline
 \end{tabu}
 
