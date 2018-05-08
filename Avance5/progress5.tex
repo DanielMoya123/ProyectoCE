@@ -1,0 +1,225 @@
+%% ---------------------------------------------------------------------------
+%% proposal.tex
+%%
+%% Research Proposal, main document.
+%%
+%% ---------------------------------------------------------------------------
+\documentclass[12pt,letterpaper]{article}
+\usepackage[english]{babel}     % supports english, but default is
+% \usepackage[spanish]{babel}
+% include this if you want to import graphics files with /includegraphics
+
+\usepackage{longtable}
+\usepackage{ifpdf}
+\usepackage[table]{xcolor}
+
+\usepackage{anysize}
+\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
+\usepackage{textcomp}
+\usepackage{url}
+\bibliographystyle{unsrt}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{slashbox}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{float}
+\usetikzlibrary{arrows,positioning}
+% Color and strikethrough
+
+
+
+\usepackage{color}
+\usepackage{soul}
+
+\usepackage{array}
+\usepackage{makecell}
+
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+\definecolor{dblue}{RGB}{0,102,153}
+\newcommand{\dB}[1]{\textcolor{dblue}{\textbf{#1}}}
+
+
+
+\setlength{\parskip}{1em}
+
+% Nombre del Estudiante
+\newcommand{\scriptAuthor}{Daniel Moya Sánchez}
+ 
+% Tí­tulo de la tesis
+\newcommand{\scriptTitle}{Progress report \#5 for the project: Design of (ASIPs) for Approximate Computing} 
+
+
+% Keywords
+\newcommand{\scriptKeywords}{key, words, ...}
+
+% Para el PDF (cambiar si se desea otras cosas a lo indicado arriba
+\newcommand{\pdfAuthor}{\scriptAuthor}
+\newcommand{\pdfTitle}{\scriptTitle} 
+\newcommand{\pdfKeywords}{\scriptKeywords}
+
+
+\tikzset{
+    mynode/.style={rectangle,rounded corners,draw=black, top color=white, bottom color=yellow!50,very thick, inner sep=1em, minimum size=3em, text centered},
+    myarrow/.style={->, >=latex', shorten >=1pt, thick},
+    mylabel/.style={text width=7em, text centered} 
+} 
+
+\begin{document}
+ 
+ \graphicspath{{./}{./fig/}}
+
+ \input{./titlepage.tex}
+
+%  \tableofcontents
+
+ \clearpage
+
+\section{Performed activities} \label{act}
+
+\begin{enumerate}
+  
+ \item \textbf{Implement the ASIPs in the error tolerant applications found (ID 03)}: The \emph{absv} assembly instruction was implemented for the KNN algorithm.
+ This allows computing the following operation in a single cycle:
+ \begin{align}
+  rd = a > b ? a-b : b-a
+ \end{align}
+ The operation described in (1) allows the execution of a subtract operation with an absolute result, which is used frequently in the KNN algorithm (the euclidean distance remains the main operation
+ in this algorithm too). 
+ 
+ \item \textbf{Implement two small assembly codes for each special instruction developed (ID 10)}: The first manually-written version of the assembly codes were implemented. These consists of a simple
+ programs that loads each value of an array (lenght of 100, with all the values explicitly defined) and executes the corresponding operation(\emph{eucl} or \emph{absv}) with the actual special instruction or
+ the equivalent with the common assembly instructions.
+ 
+ \item \textbf{Compare execution time, area and power vs error in selected applications (ID 09)}: Comparison at a simulation level was performed, with a lower total cycles found for the 
+programs with the special instruction implemented (as expected). With the \emph{eucl} instruction nearly a 10\% of the total cycles reduction was achieved and almost 100\% for the \emph{absv} instruction.
+
+ \end{enumerate}
+ 
+
+\section{Scope Changes} \label{change}
+
+The total number of approximate applications has officially been changed from 3 to 2
+and the scope of the approximations is reduced, eliminating the hardware-level approximation in the ASIPs. The following task was eliminated:
+
+\begin{itemize}
+ \item \textbf{Write Test Plan document (ID 07)}: The tests will be performed as the supervisor Jorge Castro requests with a verbal agreement.
+\end{itemize}
+
+\noindent The following task was included:
+
+\begin{itemize}
+ \item \textbf{Implement two small assembly codes for each special instruction developed (ID 10)}: Since the CoSy compiler did not work properly, a reduced manually-written assembly version
+ of the algorithms K-Means and KNN is going to be implemented.
+\end{itemize}
+
+
+\section{Earned Value analysis}
+
+In general, due to the difficulties explained in section \ref{dif}, the project
+has a delay of approximately one week considering the new scope, despite having overestimated the cost of tasks (without the configurations problems), which in general have been
+done in less time than planned. 
+
+Table \ref{tab:gain} summarizes the gained value analysis. 
+
+\begin{table}[h!]
+\begin{center}
+\caption{Earned Value} \bigskip
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} 
+ \hline
+\makecell{Activity\\ID}	&Activity	&Budget	&\makecell{\%Planned\\Value}	&PV	&AC	&\makecell{\%Completed\\work}	&EV	
+&CPI	&SPI	&\makecell{Initial planned\\date}	&\makecell{Ending\\date}	&\makecell{Initial real\\date}	&\makecell{Real ending} \\ \hline
+
+
+01	&\makecell{Get to know \\the software\\ platform}	&32	&100\%	&32	&34	&100\%	&$32$
+&$0.94$	&1	&Week 1	&Week 3	&Week 1	&Week 7 \\ \hline
+
+02	&\makecell{Find appropiate\\ error-tolerant\\ Applications}	&32	&100\%	&32	&20	&100\%	&32
+&1.6	&1	&Week 4	&Week 6	&Week 4	&Week 10 \\ \hline
+
+03	&\makecell{Implement the\\ ASIPs in the\\ error tolerant\\ applications\\ found}	&64	&100\%	&64	&30	&80\%	&51.2
+&1.71	&0.8	&Week 7	&Week 12	&Week 9	&- \\ \hline
+
+
+04	&\makecell{Write Project\\Plan Document}	&8	&100\%	&8	&10	&100\%	&8
+&0,8	&1	&Week 1	&Week 2	&Week 1	&Week 3 \\ \hline
+
+
+05	& \makecell{Write\\Requirements\\Document}	&8	&100\%	&8	&6	&100\%	&8	
+&1,33	&1	&\makecell{Week 2}	&\makecell{Week 3}	&\makecell{Week 2}	&\makecell{Week 4} \\ \hline
+
+
+06	& \makecell{Write Design\\ Document}	&8	&100\%	&8	&7	&100\%	&8
+&1.14	&1	&\makecell{Week 3}	&\makecell{Week 4}	&\makecell{Week 3}	&\makecell{Week 5} \\ \hline
+
+09	& \makecell{Compare execution\\ time, area and\\ power vs error\\ in selected \\applications}	&32	&25\%	&8	&5	&30\%	&9.6
+&1.92	&1.2	&\makecell{Week 12}	&\makecell{Week 16}	&\makecell{Week 12}	&\makecell{-} \\ \hline
+
+10	& \makecell{Implement two \\small assembly \\codes for each\\ special instruction\\ developed}	&16	&66\%	&10.56	&8	&80\%	&12.8
+&1.6	&1.21	&\makecell{Week 11}	&\makecell{Week 13}	&\makecell{Week 11}	&\makecell{-} \\ \hline
+
+& Total	& &	&170.56	&120	&	&161.6
+&1.35	&0.95	&	&	&	& \\ \hline
+\end{tabular}}
+\label{tab:gain}
+\end{center}
+\end{table}
+
+
+
+
+\section{Difficulties Encountered} \label{dif}
+
+\begin{itemize} 
+
+\item The server nodes which are the ones where the tools like ASIPMeister and Dlxsim work properly were disconnected for more than a week. 
+ 
+ 
+ \item The normal meeting on tuesday (01/05/2018) was cancelled due to the holiday, which delayed slightly more the progress on the project.
+ 
+\end{itemize}
+
+
+
+
+\section{Hard Skills Required/Acquired}
+
+\begin{itemize}
+ \item Knowledge in the following software frameworks has been acquired: ASIPMeister and Dlxsim. 
+ 
+ \item Knowledge in HDL has been reinforced.
+\end{itemize}
+
+
+
+
+\section{Soft Skills Required/Acquired}
+
+The following soft skills have been excercised:
+
+\begin{itemize}
+ 
+ \item Self-Motivation: Given that there is no direct round-the-clock supervision, self-motivation has been key in working 
+ continously with the ASIPMeister and Dlxsim on the creation of special instructions for the approximate applications.
+ 
+ \item Communication: Remote communication has been performed with Jorge Castro for the guidance of this project.
+ 
+\end{itemize}
+
+
+\section{Lessons Learned}
+There are no lessons learned for the reported period. 
+
+
+% Referencias del Background y el Related Work
+\bibliographystyle{sty/plainurl}
+\bibliography{references}
+
+
+
+\end{document}
+

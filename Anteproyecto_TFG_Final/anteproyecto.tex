@@ -14,7 +14,6 @@
 \usepackage[table]{xcolor}
 
 \usepackage{anysize}
-\marginsize{2.5cm}{2.5cm}{1cm}{1cm}
 \usepackage{textcomp}
 \usepackage{url}
 \bibliographystyle{unsrt}
@@ -32,7 +31,7 @@
 % For compactenum
 \usepackage{paralist}
 
-\usepackage{geometry}
+\usepackage[margin=0.9in]{geometry}
 \usepackage{marginnote}
 
 \usepackage{color}
@@ -103,7 +102,7 @@ aproximados.
 
 Los sistemas de Tecnologías de Información (TI) buscan dar una mejor calidad de
 vida a las personas. En esta tarea, estos sistemas han tenido que enfrentar
-ciertos problemas, entre lellos el costo en área, potencia y tiempo de ejecución, los cuales 
+ciertos problemas, entre ellos el costo en área, potencia y tiempo de ejecución, los cuales 
 restringen el rendimiento de un chip. Idealmente, una aplicación debe ajustarse a las 
 necesidades reales del usuario y, en general, del área de aplicación, de forma que se dé un 
 uso óptimo de los recursos. Actualmente, el diseño de procesadores no solo se enfoca en
@@ -270,13 +269,14 @@ aplicación de cálculo numérico, reduciría la precisión del valor final
 calculado. A nivel de hardware, se pueden utilizan módulos especializados, por
 ejemplo aceleradores para programas aproximados utilizando redes neuronales.
 
-\marginnote{Pare que harías lo que Juan Carlos hizo, la parte del algoritmo.}[0.1cm]
+%REVISAR
 El graduado de la carrera Ingeniería en Computadores Juan Carlos Cruz, realizó
 un trabajo sobre la computación aproximada, donde él se dio a la tarea de
-caracterizar aplicaciones tolerantes a errores. Parte del actual proyecto busca partir de los 
-resultados generados por Cruz, de forma que se pueda utilizar el conocimiento generado
-sobre secciones ya aproximadas, para poder desarrollar el algoritmo que seleccionará cuál 
-de todas ellas es la mejor según las especificaciones de un usuario. 
+caracterizar aplicaciones tolerantes a errores. Se busca tomar lo que Cruz
+trabajó para usar el conocmiento de qué versión aproximada es la correcta
+y entonces, a través de la modificación de clang, generar un nuevo código 
+C con las sustituciones correspondientes
+
 
 
 \subsubsection{Especificación del Problema}
@@ -358,10 +358,12 @@ instrucción 2 determine qué tipo de versiones aproximadas son las más convenient
 (según las especificaciones del usuario) en la sección 1 para no impactar en gran medida 
 la calidad de la aplicación. 
 
-Negocio \marginnote{¿Negocio?}[0.1cm]
+%REVISAR
+Adicionalmente a la dificultad de conocer el impacto de una sección aproximable
+con otra, se tiene el hecho de que actualmente no existe una herramienta
+que pueda acoplar fácilmente pragmas o anotaciones propias a un código C y que 
+a partir de estas pueda generar un nuevo código con las sustituciones correspondientes.
 
-\emph{NOTA: Hasta aquí es la motivación para lo que Juan Carlos hizo, pero no para lo 
-que vos vas a hacer. Así que falta incluir lo que será tu contribución}
 
 \subsubsection{Justificación de la Necesidad}
 
@@ -383,8 +385,6 @@ con instrucciones especializadas.
 
 \subsection{Enfoque de la solución}
 
-\emph{Se debe cambiar la figura, y ajustar la descripción del enfoque de la solución de 
-acuerdo al nuevo diagrama. Ver diagrama propuesto}
 
 Se busca desarrollar una herramienta de software que pueda escoger entre
 diferentes versiones para una aplicación aproximada (cada versión dada por una
@@ -393,6 +393,7 @@ según el criterio de usuario que especifique cuáles recursos son críticos en
 la aplicación y cuál es la cantidad máxima de error permitido. La Figura 
 \ref{fig:sol} muestra una abstracción de la implementación de esta herramienta.
 
+%REVISAR
 \begin{figure}[t!]
 \centering
 \resizebox{\textwidth}{!}{\begin{tikzpicture}[node distance=1cm, auto]  
@@ -402,38 +403,40 @@ la aplicación y cuál es la cantidad máxima de error permitido. La Figura
     myarrow/.style={->, >=latex', shorten >=1pt, thick},
     mylabel/.style={text width=7em, text centered} 
 }  
-\node[mynode] (codfuente) {\makecell{Código fuente con anotaciones,\\error
-permitido y prioridad de recursos}};
-\node[mynode, below =2cm of codfuente] (extraccion) {\makecell{Extracción de
-información/\\transformación de código}}; 
+\node[mynode] (codfuente) {\makecell{Código fuente en C con anotaciones}};
+\node[mynode, below =2cm of codfuente] (extraccion) {\makecell{Procesamiento de\\ código con \\modificaciones a clang}}; 
 
 
 \draw[myarrow] (codfuente.south)  -|  (extraccion.north);
 
-\draw (6,1) ellipse (1.25 and 0.2);
-\draw (4.75,1) -- (4.75,-0.5);
-\draw (4.75,-0.5) arc (180:360:1.25 and 0.2);
-\draw (7.25,-0.5) -- (7.25,1);  
+\draw (12.4,1) ellipse (1.25 and 0.2);
+\draw (11.15,1) -- (11.15,-0.5);
+\draw (11.15,-0.5) arc (180:360:1.25 and 0.2);
+\draw (13.65,-0.5) -- (13.65,1);  
 
-\node[] at (6,0) (bd) {\makecell{Versiones\\aproximadas}}; 
+\node[] at (12.4,0) (bd) {\makecell{Modelos de\\aceleradores}}; 
 
-\node[mynode, below = 1.98cm of bd] (deterVersiones) {\makecell{Determinación
-de\\ versiones óptimas}};
+\node[] at (8.9,0) (qc) {\makecell{Restricción de\\calidad}}; 
+
+\node[mynode, right = 1cm of extraccion] (deterVersiones) {\makecell{Creación de árbol\\ de llamadas y generación\\ de representación intermedia}};
 
 \draw[myarrow] (extraccion.east)  ->  (deterVersiones.west);
-\draw[myarrow] (6,-0.7)  -|  (deterVersiones.north);
+
 
 \node[mynode, right = 1cm of deterVersiones] (confHardware) {
-\makecell{Sustitución de código/\\uso de instrucciones aproximadas}};
+\makecell{Sustitución de código\\ y uso de instrucciones\\ aproximadas}};
+
+\draw[myarrow] (12.4,-0.7)  -|  (confHardware.55);
+
+\draw[myarrow] (8.9,-0.7) -- (8.9,-1.1)  -|  (confHardware.120);
 
 \draw[myarrow] (deterVersiones.east)  ->  (confHardware.west);
 
-\node[mynode, right = 1.5cm of confHardware] (final) {Aplicación aproximada
-final};
+\node[mynode, right = 1.5cm of confHardware] (final) {Nuevo código C};
 
 \draw[myarrow] (confHardware.east)  ->  (final.west);
 
-\draw[dashed] (-3,-5) -- (-3,-1.5) -- (16,-1.5) -- (16,-5) -- (-3,-5) ;
+\draw[dashed] (-3,-5) -- (-3,-1.5) -- (14.5,-1.5) -- (14.5,-5) -- (-3,-5) ;
 
 \end{tikzpicture}}
 \medskip
@@ -441,29 +444,29 @@ final};
 \label{fig:sol}
 \end{figure}
 
-
+%REVISAR
 Como se muestra en la Figura \ref{fig:sol}, se espera recibir un código fuente
 de una aplicación aproximable, donde previamente el usuario ha indicado, a
 través de pragmas propios, qué funciones del código son tolerantes a errores; este
-es transformado a una representación intermedia. El algoritmo que se pretende
-desarrollar busca poder escoger cuáles versiones aproximadas de
-las posibles que existen se ajustan para cumplir a cabalidad con el error
-permitido y, de la mejor manera, con la priorización de recursos. Una vez
+es transformado a una representación intermedia, el cual consistirá de un árbol (o la
+estructura que se considere apropiada) con las llamadas de las funciones. Se toma el
+algoritmodesarrollado por Juan Carlos Cruz para poder escoger cuáles versiones
+aproximadas delas posibles que existen se ajustan para cumplir a cabalidad con
+el errorpermitido y, de la mejor manera, con la priorización de recursos. Una vez
 identificadas las versiones que serán utilizadas, se procederá a sustituir el
 código específico que cuente con el soporte para las instrucciones aproximadas
-correspondientes, para finalmente entregar una aplicación final aproximada. 
+correspondientes, para finalmente entregar una nuevo código fuente. 
+
 
 \subsection{Especificación de Objetivos}
 
 \subsubsection{Objetivo General}
-Desarrollar una herramienta que, a partir de información sobre diferentes
-versiones de secciones aproximadas de una aplicación tolerante a errores, pueda
-determinar cuál combinación de versiones genera un mejor resultado en términos
-de ahorro de recursos y el nivel de error máximo que un usuario estableció como
-permitido.
+%REVISAR
+Desarrollar una herramienta que, a partir un algoritmo que determina cuáles
+versiones de secciones aproximadas corresponden en cierta aplicación, se pueda
+generar una representación intermedia del código para finalmente generar
+una versión modificada del código. 
 
-\emph{Este es el objetivo del trabajo de Juan Carlos. Hay que adaptarlo a los objetivos 
-que hablamos en la última reunión.}
 
 
 \subsubsection{Objetivos Específicos}
@@ -473,21 +476,19 @@ que hablamos en la última reunión.}
  anotaciones propias que se agreguen en el código para establecer qué funciones son  
  aproximables.
 
- \item Generar una representación del código de entrada que sea manipulable a
- partir de las anotaciones dadas por un usuario.
+ %REVISAR
+ \item Generar una representación intermedia del código mediante un árbol de llamadas
+ o la estructura que se considere apropiada, que tome en cuenta las anotaciones
+ dadas por el usuario.
  
  \item Generar una nueva versión de código ejecutable donde se las anotaciones
  sean sustituidas por los aceleradores o versiones aproximadas correspondientes.
  
- \item Verificar que la aplicación final aproximada cumpla con el funcionamiento
- de la aplicación original y las restricciones dadas por el usuario y por el la
- aplicación.
+ %\item Verificar que la aplicación final aproximada cumpla con el funcionamiento
+ %de la aplicación original y las restricciones dadas por el usuario de la
+ %aplicación.
 \end{enumerate}
 
-\emph{El objetivo 2 no es claro. El objetivo 4 implica que tendriamos que correr la nueva 
-version en la plataforma final y además es confuso en su redacción. Para fines del TEC 
-habíamos dicho que quedaría fuera, pero podemos incluirlo. En general tenemos que 
-revisar la redacción de estos objetivos.}
 
 
 
@@ -604,20 +605,13 @@ resultados obtenidos inspiren nuevos proyectos en el área.
 
 \subsection{Descripción del Proceso}
 
+%REVISAR
 La Figura \ref{fig:proceso} resume el proceso que se realizará durante el proyecto.
-Como se puede observar, el proyecto iniciará 
-con una etapa de investigación sobre trabajos realizados
-por varios autores en el área de computación aproximada, relacionados con la
+Como se puede observar, el proyecto iniciará con una breve investigación sobre trabajos
+realizados por varios autores en el área de computación aproximada, relacionados con la
 caracterización de sistemas o aplicaciones en las cuales una o varias secciones
-son aproximables. Se investigará sobre maneras de generar un compilador para un
-cierto lenguaje y que permita el reconocimiento de pragmas o anotaciones en el código.
-
-\emph{La parte de investigación sobre otros trabajos relacionados será mínima, también la 
-parte de generar un compilador para un cierto lenguaje, eso es algo muy extenso. Lo que 
-nos interesa es poder modificar clang para que pueda manejar ciertos pragmas y los 
-pueda poner como metadata en la representación intermedia. Luego tu herramienta 
-determinará que hacer con la información que obtenga de esos pragmas.}
-
+son aproximables. Se investigará sobre maneras de modificar el compilador de \emph{frontend}
+clang para permitir reconocimiento de pragmas o anotaciones personalizadas en el código.
 
 \begin{figure}[t!]
 \centering
@@ -628,18 +622,18 @@ determinará que hacer con la información que obtenga de esos pragmas.}
     myarrow/.style={->, >=latex', shorten >=1pt, thick},
     mylabel/.style={text width=7em, text centered} 
 }  
-\node[mynode] (investigacion) {Investigación sobre antecedentes y trabajos previos};
+\node[mynode] (investigacion) {Investigación sobre antecedentes y trabajos relacionados};
 
 \node[mynode, below=1cm of investigacion] (compilador) {Modificación de compilador con pragmas propios};
 
 \draw[myarrow] (investigacion.south)   -|  (compilador.north);
 
-\node[mynode, below=1cm of compilador] (algoritmo) {\makecell{Desarrollo de algoritmo para evaluar impacto de\\ versiones aproximadas}};
+\node[mynode, below=1cm of compilador] (algoritmo) {\makecell{Estudio y programación de estructura de\\ datos para representación intermedia del código}};
  
  \draw[myarrow] (compilador.south)   -|  (algoritmo.north);
  
  
- \node[mynode, below=1cm of algoritmo] (verificacion) {Verificación de versones aproximadas finales};
+ \node[mynode, below=1cm of algoritmo] (verificacion) {Generación de versión final del código};
  
   
    \draw[<->, >=latex', shorten >=1pt, thick]  (algoritmo.south) -- (verificacion.north); 
@@ -659,30 +653,19 @@ determinará que hacer con la información que obtenga de esos pragmas.}
 \label{fig:proceso}
 \end{figure}
 
+%REVISAR
+Seguidamente, se analizará qué estructura es la más apropiada para manejar una 
+representación intermedia del código, de manera que sea fácilmente manipulable y
+considere las anotaciones dadas por el usuario. Para esta tarea
+se tomará información de una base de datos del KIT sobre aceleradores, para finalmente
+generar una nueva versión del código la cual contenga todos los detalles necesarios
+para simplemente ejecutarse con las versiones de secciones aproximadas seleccionadas.
 
+Se parte de que el algoritmo que determinará qué versión de sección aproximada permite cumplir
+con los requerimientos del usuario con respecto al área, energía o calidad
+estará disponible (desarrollado por Cruz) y se realizará la adaptación de dicho algoritmo
+a la herramienta que se plantea crear. 
 
-Seguidamente, se implementará un algoritmo que, a partir de una información dada
-(gracias a una base de datos) determine qué combinación de funciones aproximadas
-se deben colocar en un sistema en pipeline de tal forma que el resultado al
-final de todas las etapas se mantenga en un nivel de error aceptable. Para esto
-se tomará información de una base de datos del KIT sobre secciones aproximadas
-independientes, para posteriormente evaluar el impacto final de cada una de
-ellas en una aplicación completa.
-
-\emph{Debe quedar claro que el algoritmo "ya va a estar disponible" y que tu labor es 
-"portearlo" a esta herramienta.}
-
-\emph{Hace falta mencionar, previo a usar el algoritmo, que de la representación 
-intermedia del código se debe extraer/generar un arbol de llamadas (o por el estilo) que 
-nos permita representar los bloques/funciones del programa, sobre los cuales el algoritmo 
-va a trabajar. Esto te lo puedo explicar con más detalle si aún no te queda claro.}
-
-Finalmente, se debe realizar la verificación de la aplicación aproximada final,
-de forma que se garantice un cumplimiento en el nivel de error y una optimización
-apropiada de los recursos. Para esto se realizarán simulaciones y pruebas
-unitarias en plataformas como ModelSim. Si por alguna razón se detectaran
-fallas, se revisará el algoritmo desarrollado con el fin de poder
-corregirlo. 
 
 La documentación del proyecto se trabajará a lo largo de todo el proceso de
 desarrollo, de forma que al final se genere un artículo científico y demás
@@ -697,9 +680,8 @@ documentos propios de un trabajo final de graduación.
  
  \item Sistema operativo: Se utilizará Ubuntu 17.10.
  
+ %REVISAR
  \item Compiladores: Se utilizará la versión 7.2.0 para GCC/G++ 
- \emph{clang puede no funcionar con versiones tan nuevas de gcc/g++, esto es, puede 
- generar errores cuando se vaya a compilar el frontend}
  
  \item Editor de texto: Para la documentación se utilizará LaTeX, con el ambiente de desarrollo Kile y compartido
  a través de Git. Para programar, se utilizará principalmente el editor en terminal Vim.
@@ -777,7 +759,7 @@ Considerando los 4 meses (16 semanas) del semestre, el cronograma de trabajo par
  &   &  &   &   &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  &  &  &  &  &  &  \\ \hline
   \makecell{Generación de código con\\ pragmas sustituidas}
  &   &  &   &   &  &  &  & &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  &  &  \\ \hline
- \makecell{Validación de aplicación final}
+ \makecell{Validación de la herramienta}
  &  &   &  &  &  &  &  &  &  &  &\cellcolor[HTML]{5B9BD5} &\cellcolor[HTML]{5B9BD5} &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  \\ \hline
  \makecell{Documentación final} &  &   &  &  &  &  &  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &
      \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5} &  \\ \hline
@@ -816,11 +798,10 @@ Considerando los 4 meses (16 semanas) del semestre, el cronograma de trabajo par
 \begin{tabu} to \textwidth {| X[l] | X[l] |}	
  \hline
  Nombre	&Diseño asistido de aplicaciones aproximadas para sistemas computacionales personalizables \bigskip \\ \hline
- Breve descripción	&Se desarrollará una herramienta que, a partir de información sobre diferentes
-versiones de secciones aproximadas de una aplicación tolerante a errores, pueda
-determinar cuál combinación de versiones genera un mejor resultado en términos
-de ahorro de recursos y el nivel de error máximo que un usuario estableció como
-permitido. \bigskip \\ \hline
+ Breve descripción	&Se desarrollará una herramienta que, a partir un algoritmo
+ que determina cuáles versiones de secciones aproximadas corresponden en cierta 
+ aplicación, se pueda generar una representación intermedia del código para finalmente generar
+una versión modificada del código. \bigskip \\ \hline
  Fecha de inicio	&Lunes 2 de Julio del 2018 \bigskip \\ \hline
 \end{tabu}
 
