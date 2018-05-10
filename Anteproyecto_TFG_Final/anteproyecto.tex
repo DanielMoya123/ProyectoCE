@@ -124,7 +124,7 @@ por ejemplo:
  simultáneamente debido a las capacidades de disipación de calor de un sistema.
 \end{compactitem}
 
-Para poder enfrentar los problemas mencionados anteriormente, una área de
+Para poder enfrentar los problemas mencionados anteriormente, un área de
 investigación actual corresponde a \emph{computación aproximada}, un
 paradigma de diseño que propone una reducción en la precisión o exactitud de
 la computación para obtener oportunidades de mejora en cuanto al consumo de
@@ -145,7 +145,7 @@ computadores en general.
 
 En la siguiente sección se presenta el contexto y los antecedentes del proyecto, que 
 incluye una descripción de la institución donde se realizará el trabajo final de graduación y 
-el área de negocio específica de este. Seguidamente, se realiza la justificación del 
+el área de conocimiento específica de este. Seguidamente, se realiza la justificación del 
 problema, la especificación  de los objetivos, la mención de los beneficios y beneficiarios 
 con los resultados del proyecto, los supuestos y limitaciones sobre los que parte el 
 proyecto y un análisis de riesgos del mismo. Finalmente, se detalla la metodología que se 
@@ -214,11 +214,11 @@ en el Instituto Tecnológico de Karlsruhe.
 El área de conocimiento principal del proyecto es computación aproximada (explicada 
 brevemente en la sección de Contexto del Problema), la cual incluye aspectos tanto de 
 software como de hardware, dado que involucra aspectos tanto de modificación del ISA 
-como creación de ASIPs y aceleradores para la computación de ciertos algoritmos. Las 
+como uso de ASIPs y aceleradores para la computación de ciertos algoritmos. Las 
 áreas de conocimiento de ingeniería que se tratan son: conocimiento sobre aspectos de 
 arquitectura y micro-arquitectura de procesadores (por lo mencionado anteriormente), 
 desarrollo de compiladores, dado que se modificará el \emph{frontend} de un compilador 
-(clang), finalmente, análisis de posibles aproximaciones en algoritmos en código escritos 
+(Clang), finalmente, análisis de posibles aproximaciones Clang algoritmos en código escritos 
 en el lenguaje de programación C, donde se espera agregar identificadores a las funciones 
 que se busquen aproximar, para posteriormente ser procesadas de manera especial en la 
 representación intermedia del código que se genere.
@@ -274,7 +274,7 @@ El graduado de la carrera Ingeniería en Computadores Juan Carlos Cruz, realizó
 un trabajo sobre la computación aproximada, donde él se dio a la tarea de
 caracterizar aplicaciones tolerantes a errores. Se busca partir de lo que Cruz
 trabajó y usar el conocmiento de qué versión aproximada es la correcta
-para entonces, a través de la modificación de clang, generar un nuevo código 
+para entonces, a través de la modificación de Clang, generar un nuevo código 
 C con las sustituciones correspondientes.
 
 
@@ -293,9 +293,14 @@ si se decide probar todas las posibles combinaciones posibles de versiones aprox
 por lo que es importante utilizar un esquema de trabajo diferente.
 
 Una aplicación puede tener un comportamiento aproximado si alguna de sus etapas se 
-puede aproximar, ya sea toda una sección o únicamente una instrucción (dentro de una 
+puede aproximar, ya sea toda una sección o únicamente una función (dentro de una 
 sección). La Figura \ref{fig:problem} muestra como ejemplo una aplicación genérica donde 
-ambas situaciones pueden ocurrir.
+ambas situaciones pueden ocurrir. En esta aplicación se tienen tres
+secciones, de las cuales la primera (por ejemplo, una etapa de preprocesamiento)
+puede ser completamente aproximada, la segunda no puede ser aproximada del todo 
+(por ejemplo, una sección crítica de la aplicación) y, finalmente, la tercera
+tiene tres funciones específicas, de las cuales únicamente la segunda posee
+una versión aproximada.
 
 
 \begin{figure}[t!]
@@ -315,12 +320,12 @@ ambas situaciones pueden ocurrir.
 \node[mynode, below=1cm of section1, dashed] (comment1) {\makecell{Toda esta
 sección \\ puede ser aproximada}};
 
-\node[mynode, below left=3cm of section3] (instru1) {Instrucción 1};
-\node[mynode, below =2.16cm of section3] (instru2) {Instrucción 2};
-\node[mynode, below right=3cm of section3] (instru3) {Instrucción 3};
+\node[mynode, below left=3cm of section3] (instru1) {Función 1};
+\node[mynode, below =2.16cm of section3] (instru2) {Función 2};
+\node[mynode, below right=3cm of section3] (instru3) {Función 3};
 
 \node[mynode, below=1cm of instru2, dashed] (comment2) {\makecell{Esta
-instrucción específica\\ puede ser reemplazada por \\ una versión aproximada}};
+función específica\\ puede ser reemplazada por \\ una versión aproximada}};
 
 
 \draw[myarrow] (manufacturer.south)  -- ++(0,-1) -|  (section1.north);
@@ -341,28 +346,24 @@ instrucción específica\\ puede ser reemplazada por \\ una versión aproximada}};
 \label{fig:problem}
 \end{figure}
 
-Como se muestra en la Figura \ref{fig:problem}, esta aplicación posee tres
-secciones, de las cuales la primera (por ejemplo, una etapa de preprocesamiento)
-puede ser completamente aproximada, la segunda no puede ser aproximada del todo 
-(por ejemplo, una sección crítica de la aplicación) y, finalmente, la tercera
-tiene tres instrucciones específicas, de las cuales únicamente la segunda posee
-una versión aproximada.
+
 
 En el caso hipotético de la Figura \ref{fig:problem} donde se tenga más de una
-versión aproximada para la sección 1 y para la instrucción 2 de la sección 3,
+versión aproximada para la sección 1 y para la función 2 de la sección 3,
 es dificulta determinar qué combinación de versiones aproximadas produce la mejor 
 aplicación aproximada final, debido a que, por ejemplo, un cambio en la sección 1 puede 
 impactar severamente las secciones 2 y 3, pues dicha complejidad aumenta con la 
 cantidad de versiones aproximadas; inclusive, puede que la versión aproximada de la 
-instrucción 2 determine qué tipo de versiones aproximadas son las más convenientes 
+función 2 determine qué tipo de versiones aproximadas son las más convenientes 
 (según las especificaciones del usuario) en la sección 1 para no impactar en gran medida 
 la calidad de la aplicación. 
 
 %REVISAR
-Adicionalmente a la dificultad de conocer el impacto de una sección aproximable
-con otra, se tiene el hecho de que actualmente no existe una herramienta
-que pueda acoplar fácilmente pragmas o anotaciones propias a un código C y que, 
-a partir de estas, pueda generar un nuevo código con las sustituciones correspondientes.
+Actualmente, existe una manera premiliminar de hacer la exploración y determinar
+qué versión de una sección corresponde a ser utilizada según las restricciones
+del usuario; no obstante, no existe una herramienta que permita ingresar un código C con anotaciones
+propias y que, a partir de este, genere un nuevo código con las sustituciones correspondientes;
+es decir, una marco de trabajo más completo.
 
 
 \subsubsection{Justificación de la Necesidad}
@@ -380,7 +381,7 @@ grandes beneficios en Costa Rica, de tal forma que se incentive la investigación
 inclusive una posible inversión en esta área. Actualmente no existe una herramienta 
 académica que realice lo que se plantea en esta propuesta, por lo que se espera que el 
 proyecto incentive muchos otros proyectos en el área de generación de procesadores
-con instrucciones especializadas. 
+con funciones especializadas. 
 
 
 \subsection{Enfoque de la solución}
@@ -388,7 +389,8 @@ con instrucciones especializadas.
 
 Se busca desarrollar una herramienta de software que pueda escoger entre
 diferentes versiones para una aplicación aproximada (cada versión dada por una
-combinación diferente de versiones específicas para cada sección aproximable),
+combinación diferente de versiones específicas para cada sección aproximable) y
+que como producto genere un nuevo código ejecutable,
 según el criterio de usuario que especifique cuáles recursos son críticos en
 la aplicación y cuál es la cantidad máxima de error permitido. La Figura 
 \ref{fig:sol} muestra una abstracción de la implementación de esta herramienta.
@@ -404,7 +406,7 @@ la aplicación y cuál es la cantidad máxima de error permitido. La Figura
     mylabel/.style={text width=7em, text centered} 
 }  
 \node[mynode] (codfuente) {\makecell{Código fuente en C con anotaciones}};
-\node[mynode, below =2cm of codfuente] (extraccion) {\makecell{Procesamiento de\\ código con \\modificaciones a clang}}; 
+\node[mynode, below =2cm of codfuente] (extraccion) {\makecell{Procesamiento de\\ código con \\modificaciones a Clang}}; 
 
 
 \draw[myarrow] (codfuente.south)  -|  (extraccion.north);
@@ -424,7 +426,7 @@ la aplicación y cuál es la cantidad máxima de error permitido. La Figura
 
 
 \node[mynode, right = 1cm of deterVersiones] (confHardware) {
-\makecell{Sustitución de código\\ y uso de instrucciones\\ aproximadas}};
+\makecell{Sustitución de código\\ y uso de funciones\\ aproximadas}};
 
 \draw[myarrow] (12.4,-0.7)  -|  (confHardware.55);
 
@@ -452,10 +454,13 @@ es transformado a una representación intermedia, el cual consistirá de un árbol 
 estructura que se considere apropiada) con las llamadas de las funciones. Se toma el
 algoritmo desarrollado por Juan Carlos Cruz para poder escoger cuáles versiones
 aproximadas de las posibles que existen se ajustan para cumplir a cabalidad con
-el error permitido y, de la mejor manera, con la priorización de recursos. Una vez
-identificadas las versiones que serán utilizadas, se procederá a sustituir el
-código específico que cuente con el soporte para las instrucciones aproximadas
-correspondientes, para finalmente entregar una nuevo código fuente. 
+el error permitido (restricción de ecalidad) y, de la mejor manera, con la 
+priorización de recursos. Una vez identificadas las versiones que serán utilizadas,
+se procederá a sustituir el código específico que cuente con el soporte para
+las funciones aproximadas correspondientes, utilizando modelos funcionales de 
+de aceleradores, los cuales son representaciones a nivel de software del
+hardware especialmente. Como producto final, se espera entregar una nuevo código fuente
+con todas las sustituciones correspondientes.
 
 
 \subsection{Especificación de Objetivos}
@@ -463,26 +468,32 @@ correspondientes, para finalmente entregar una nuevo código fuente.
 \subsubsection{Objetivo General}
 %REVISAR
 Desarrollar una herramienta que, a partir un algoritmo que determina cuáles
-versiones de secciones aproximadas corresponden en cierta aplicación, se pueda
+versiones de secciones aproximadas corresponden en cierta aplicación, pueda
 generar una representación intermedia del código para finalmente generar
-una versión modificada del código. 
+una versión modificada del mismo. 
 
 
 
 \subsubsection{Objetivos Específicos}
 
 \begin{enumerate}
- \item Modificar el \emph{frontend} (clang) de un compilador de forma que se reconozca  
+ \item Modificar el \emph{frontend} (Clang) de un compilador de forma que se reconozca  
  anotaciones propias que se agreguen en el código para establecer qué funciones son  
  aproximables.
 
  %REVISAR
- \item Generar una representación intermedia del código mediante un árbol de llamadas
+ \item Abstraer el código de la representación intermedia a un árbol de llamadas
  o la estructura que se considere apropiada, que tome en cuenta las anotaciones
  dadas por el usuario.
  
+ \item Implementar el algoritmo propuesto para la exploración del espacio de diseño
+ de posibles versiones de secciones aproximadas (aporte de Juan Carlos) en la herramienta
+ a desarrollar.
+ 
  \item Generar una nueva versión de código ejecutable donde se las anotaciones
  sean sustituidas por los aceleradores o versiones aproximadas correspondientes.
+ 
+
  
  %\item Verificar que la aplicación final aproximada cumpla con el funcionamiento
  %de la aplicación original y las restricciones dadas por el usuario de la
@@ -535,12 +546,16 @@ trámites correspondientes para la graduación del 2019.
 \item Disponibilidad de recursos: El proyecto se realizará utilizando herramientas de 
 software libres. Para investigar se utilizará internet y el material disponible en el CES. 
 Cualquier material físico del proyecto (como placa FPGA de desarrollo) será provisto por el 
-CES.
+CES de ser necesario.
 
-\item Disponibilidad de versiones de aplicaciones aproximadas: El proyecto parte de la 
-existencia de diferentes versiones aproximadas de funciones en aplicaciones tolerantes a 
-errores, que se utilizarán como base para el trabajo de personalización de aplicaciones, es 
-decir, selección de versiones diferentes aproximadas.
+\item Disponibilidad de versiones de funciones aproximadas y modelos de aceleradores:
+El proyecto parte de la  existencia de diferentes versiones aproximadas de funciones en
+aplicaciones tolerantes a errores, que se utilizarán en conjunto con los distintos modelos
+de aceleradores como base para alimentar la herramienta propuesta.
+
+\item Disponibilidad de algoritmo de exploración: El proyecto utilizará el algoritmo desarrollado
+por Juan Carlos Cruz para la exploración de posibles versiones de secciones (o funciones) aproximadas,
+el cual será implementado en la herramienta propuesta. 
 \end{enumerate}
 
 
@@ -557,7 +572,8 @@ ID	&Descripción	&\makecell{Probabilidad\\ de ocurrencia}	&\makecell{Impacto\\ (h
 1	&\makecell{Falta de disponibilidad de asesores para el\\ proyecto}	&0.2	&16	
 &Aceptar \\ \hline
 2	&\makecell{Carencia de materiales necesarios para el\\ proyecto}	&0.2	&8	&Evitar \\ \hline
-3	&\makecell{Errores a la hora de modificar clang}	&0.3	&12	&Mitigar \\ \hline
+3	&\makecell{Errores a la hora de modificar Clang}	&0.3	&12	&Mitigar \\ \hline
+4	&\makecell{Dificultades a la hora de implementar \\algoritmo de exploración}	&0.4	&10	&Mitigar \\ \hline
 \end{tabular}}
 \label{tab:risk}
 \end{center}
@@ -566,28 +582,41 @@ ID	&Descripción	&\makecell{Probabilidad\\ de ocurrencia}	&\makecell{Impacto\\ (h
 A continuación se explica cada riesgo detalladamente:
 
 \begin{enumerate}
- \item Falta de disponibilidad de asesores para el proyecto: Corresponde a momentos en que, ya sea el supervisor Jorge Castro o el director de tesis
- no puedan atender alguna duda o no simplemente no se encuentren disponibles en una semana determinada, lo cual atrase la revisión del trabajo.
+ \item Falta de disponibilidad de asesores para el proyecto: Corresponde a momentos en
+ que, ya sea el supervisor Jorge Castro o el director de tesis
+ no puedan atender alguna duda o simplemente no se encuentren disponibles en una semana 
+ determinada, lo cual atrase la revisión del trabajo.
  
- \item Carencia de materiales necesarias para el proyecto: El atraso de la entrega o no la presencia de alguno de los materiales (información o programas de software principalmente) que se necesitan
- para realizar el proyecto, siendo el más importante las versiones aproximadas de las funciones que se analizarán. 
+ \item Carencia de materiales necesarias para el proyecto: El atraso de la entrega o no
+ la presencia de alguno de los materiales (información o programas de software principalmente) que se necesitan
+ para realizar el proyecto, siendo el más importante las versiones aproximadas y los modelos
+ de los acelerados que se utilizarán. 
  
- \item Errores a la hora de modificar clang: Problemas de dependencias o aceptación de las 
- modificaciones pensadas para el \emph{frontend} clang. 
+ \item Errores a la hora de modificar Clang: Problemas de dependencias o aceptación de las 
+ modificaciones realizadas para el \emph{frontend} Clang. 
+ 
+ \item Dificultades a la hora de implementar algoritmo de exploración: Problemas a la
+ hora de entender y adaptar
+ el algoritmo desarrollado por Juan Carlos Cruz en la herramienta propuesta.
  
 \end{enumerate}
 
 Los planes de acción se detallan a continuación:
 
 \begin{enumerate}
- \item Aceptar: Asumir la responsabildidad correspondiente y continuar trabajando, con más cuidado inclusive y realizando un auto-análisis.
+ \item Aceptar: Asumir la responsabildidad correspondiente y continuar trabajando,
+ con más cuidado inclusive y realizando un auto-análisis.
  
- \item Evitar: Definir apenas comience el proyecto los materiales y sus fuentes con las que se contarán, de tal modo que se pueda contar con ellos (o al menos con una copia digitial)
- para evitar contratiempos de adquisición cuando se necesiten en el proyecto.
+ \item Evitar: Definir apenas comience el proyecto los materiales y sus fuentes con 
+ las que se contarán, de tal modo que se pueda contar con ellos (o al menos con una
+ copia digitial) para evitar contratiempos de adquisición cuando se necesiten en el proyecto.
  
- \item Mitigar: Se realizará una investigación previa del \emph{frontend} clang y se 
+ \item Mitigar: Se realizará una investigación previa del \emph{frontend} Clang y se 
  realizarán  cambios iterativos, de tal forma que poco a poco se verifique las nuevas 
- funcionalidades que se agreguen a clang. 
+ funcionalidades que se agreguen a Clang. Por otro lado, para la implementación
+ del algoritmo de exploración, este será estudiado previo a que inicie el proyecto
+ propuesto y se realizarán las consultas respectivas al supervisor Jorge Castro
+ a lo largo del proyecto.
  
 \end{enumerate}
 
@@ -607,11 +636,9 @@ resultados obtenidos inspiren nuevos proyectos en el área.
 
 %REVISAR
 La Figura \ref{fig:proceso} resume el proceso que se realizará durante el proyecto.
-Como se puede observar, el proyecto iniciará con una breve investigación sobre trabajos
-realizados por varios autores en el área de computación aproximada, relacionados con la
-caracterización de sistemas o aplicaciones en las cuales una o varias secciones
-son aproximables. Se investigará sobre maneras de modificar el compilador de \emph{frontend}
-clang para permitir el reconocimiento de pragmas o anotaciones personalizadas en el código.
+Como se puede observar, el proyecto iniciará con una breve investigación  sobre 
+maneras de modificar el compilador de \emph{frontend}
+Clang para permitir el reconocimiento de pragmas o anotaciones personalizadas en el código.
 
 \begin{figure}[t!]
 \centering
@@ -622,7 +649,7 @@ clang para permitir el reconocimiento de pragmas o anotaciones personalizadas en
     myarrow/.style={->, >=latex', shorten >=1pt, thick},
     mylabel/.style={text width=7em, text centered} 
 }  
-\node[mynode] (investigacion) {Investigación sobre antecedentes y trabajos relacionados};
+\node[mynode] (investigacion) {Investigación sobre Clang y su modificación};
 
 \node[mynode, below=1cm of investigacion] (compilador) {Modificación de compilador con pragmas propios};
 
@@ -654,16 +681,17 @@ clang para permitir el reconocimiento de pragmas o anotaciones personalizadas en
 \end{figure}
 
 %REVISAR
-Seguidamente, se analizará qué estructura es la más apropiada para manejar una 
-representación intermedia del código, de manera que sea fácilmente manipulable y
+Seguidamente, se analizará qué estructura es la más apropiada para abstraer el código
+recibido y generar una representación intermedia del mismo, de manera que sea fácilmente
+manipulable y
 considere las anotaciones dadas por el usuario. Para esta tarea
 se tomará información de una base de datos del KIT sobre aceleradores, para finalmente
 generar una nueva versión del código la cual contenga todos los detalles necesarios
 para simplemente ejecutarse con las versiones de secciones aproximadas seleccionadas.
 
-Se parte de que el algoritmo que determinará qué versión de sección aproximada permite cumplir
+Se parte de que el algoritmo (desarrollado por Cruz) que determinará qué versión de sección aproximada permite cumplir
 con los requerimientos del usuario con respecto al área, energía o calidad
-estará disponible (desarrollado por Cruz) y se realizará la adaptación de dicho algoritmo
+estará disponible y se realizará la adaptación de dicho algoritmo
 a la herramienta que se plantea desarrollar. 
 
 
@@ -681,10 +709,12 @@ documentos propios de un trabajo final de graduación.
  \item Sistema operativo: Se utilizará Ubuntu 17.10.
  
  %REVISAR
- \item Compiladores: Se utilizará la versión 7.2.0 para GCC/G++ 
+ \item Compiladores: Se utilizarán los compiladores GCC/G++. Se modificará el compilador de \emph{frontend} Clang para
+ incluir las anotaciones propias.
  
  \item Editor de texto: Para la documentación se utilizará LaTeX, con el ambiente de desarrollo Kile y compartido
  a través de Git. Para programar, se utilizará principalmente el editor en terminal Vim.
+ 
 \end{enumerate}
 
 
@@ -703,14 +733,14 @@ Objetivo	&Entregable \\ \hline
 
 \makecell{Modificar el compilador de front-end Clang de forma que se\\ reconozcan las anotaciones propias
 que se agreguen en el \\código para establecer qué funciones son aproximables.}	&Compilador Clang modificado con pragmas propios \\ \hline
- \makecell{Generar una representación del código de entrada que sea\\ manipulable a partir de las anotaciones
- dadas por un usuario.}	&\makecell{Código en representación de árbol de llamadas\\ o \emph{function code graph} u otro tipo de \\representación según se determine.} \\ \hline
+ \makecell{Abstraer el código de la representación intermedia a un \\árbol de llamadas o la estructura 
+ que se considere apropiada,\\ que tome en cuenta las anotaciones dadas por el usuario}
+ &\makecell{Código en representación de árbol de llamadas\\u otro tipo de representación según se determine} \\ \hline
+  \makecell{Implementar el algoritmo propuesto para la exploración del\\ espacio de diseño de posibles 
+  versiones de secciones \\aproximadas (aporte de Juan Carlos) en la herramienta a\\ desarrollar}
+  &\makecell{Adaptación del algoritmo desarrollado en\\ la herramienta propuesta} \\ \hline 
  \makecell{Generar una nueva versión de código ejecutable donde se\\ las anotaciones sean sustituidas por
- los aceleradores o \\versiones aproximadas correspondientes.}	&\makecell{Código generado con anotaciones (pragmas) sustituidas} \\ \hline
- \makecell{Validar que la aplicación final aproximada cumpla con el \\ funcionamiento
- de la aplicación original y las restricciones\\ dadas por el usuario y por el la
- aplicación}	&Aplicación aproximada final y documentación \\ \hline
-
+ los aceleradores o \\versiones aproximadas correspondientes}	&\makecell{Código generado con anotaciones (pragmas)\\ sustituidas} \\ \hline
 \end{tabular}}
 \label{tab:entrega}
 \end{center}
@@ -723,10 +753,13 @@ Dado que se trata de un proyecto de investigación, cada uno de los entregables m
 asociado, las cuales corresponden a:
 
 \begin{itemize}
- \item Pruebas para compilador Clang: se empezará por un código sin ningún version modificada y se irán realizando pruebas unitarias para cada
+ \item Pruebas para compilador Clang: se empezará por verificar la correcta funcionalidad con un código sin anotaciones y se irán realizando pruebas unitarias para cada
  pragma nuevo que se agregue.
  
  \item Pruebas para el código en representación intermedia: se revisará manualmente que el código en esta interpretación sea correcto. 
+ 
+ \item Pruebas de integración del algoritmo de exploración: el supervisor realizará una revisión de la funcionalidad del algoritmo
+ una vez que se encuentre integrado con la herramienta propuesta. 
  
  \item Pruebas para el código final generado (con pragmas sustituidos): el supervisor probará el código y determinará si cumple 
  con los diferentes tipos de posibles requerimientos de un usuario.
@@ -753,11 +786,11 @@ Considerando los 4 meses (16 semanas) del semestre, el cronograma de trabajo par
    & \multicolumn{16}{|c|}{Semana} \\
  \hline
  Actividad & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
- \makecell{Modificación de clang}
+ \makecell{Modificación de Clang}
  & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5} & \cellcolor[HTML]{5B9BD5}  & \cellcolor[HTML]{5B9BD5}  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
  \makecell{Generación de representación \\intermedia}
  &   &  &   &   &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  &  &  &  &  &  &  \\ \hline
-  \makecell{Generación de código con\\ pragmas sustituidas}
+  \makecell{Generación de código con\\ pragmas sustituidas \\(adaptación de algoritmo\\ de Juan Carlos)}
  &   &  &   &   &  &  &  & &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  &  &  \\ \hline
  \makecell{Validación de la herramienta}
  &  &   &  &  &  &  &  &  &  &  &\cellcolor[HTML]{5B9BD5} &\cellcolor[HTML]{5B9BD5} &\cellcolor[HTML]{5B9BD5}  &\cellcolor[HTML]{5B9BD5}  &  &  \\ \hline
