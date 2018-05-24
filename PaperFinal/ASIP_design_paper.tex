@@ -49,7 +49,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Design of ASIPs for Approximate Computing}
+\title{Towards using of ASIPs for Approximate Computing}
 
 
 % author names and affiliations
@@ -76,6 +76,8 @@ allow the synthesis required for a processor's hardware with its Instruction Set
 in the total cycles were found for almost 10\%, 50\% and even 100\% compared to the original version, while
 adding minimal area and power requirements; which prove that approximate computing and more specific ASIPs,
 can bring improvements and allow the customization of hardware for special instructions. 
+
+\emph{NOTA: el abstract lo terminamos de definir/pulir una vez que el paper este listo.}
 \end{abstract}
 
 
@@ -85,42 +87,50 @@ can bring improvements and allow the customization of hardware for special instr
 
 \section{Introduction}
 
-The Information Technology (IT) systems seek to give a better quality of
+Information Technology (IT) systems seek to give a better quality of
 life to people. In this task, these systems have been facing
-certain problems, among them the cost in area, power and execution time, which
+certain challenges, among them the cost in area, power, and execution time, which
 restrict the performance of a chip. Ideally, an application should fit the
 real needs of the user and, in general, of the area of application, so that an optimal
 use of resources is achieved. Currently, processor design is not only focused on
-having more performance but also having an appropriate resource management;
-however, some challenges in this field are given by physical limitations,
-for example:
+having more performance but also an appropriate resource management;
+however, some challenges in this field are due to physical limitations,
+for instance:
 
 \begin{compactitem}
- \item the electrical characteristics of the CMOS transistors, which
- restrict the emergy consumption in embedded systems and which is an issue
+ \item electrical characteristics of the CMOS transistors, which
+ restrict the energy consumption in embedded systems and which is an issue
  that designers should consider for specific purpose
  components in processors;
  
-
- \item the memory wall, which corresponds to the difference between the growth
- of the processing capacity versus the speed of data gathering
+ \item memory wall, which corresponds to the difference between the growth
+ of processing capacity against the speed of data gathering
  from memory;
 
- \item and the utilization wall, which limits the maximum use of hardware
- simultaneously due to the heat dissipation capabilities of a system.
+ \item and utilization wall, which limits the maximum use of hardware
+ simultaneously due to the heat dissipation capability of a system.
 \end{compactitem}
 
-In order to face the problems mentioned above, an area of
-current research corresponds to approximate computing, a
-design paradigm that proposes a reduction in the accuracy or precision of the
-computation to obtain opportunities for improvement in
+In order to face the problems mentioned above, a current research area corresponds to 
+approximate computing. This is a novel
+design paradigm that proposes a reduction in the accuracy or precision of
+computations to obtain opportunities for improvement in
 area, power and execution time. To apply this paradigm, it is necessary to
 identify error-tolerant applications and determine, in a specific manner,
 which sections or functions within these can be replaced by
-approximate versions, so that a balance can be obtained between the quality
-of the output and the general consumption of resources.
+approximate versions, so that a balance can be obtained between the output quality
+ and the general computing resources required.
 
-This paper evaluates the design performance, in area, power and execution time, of ASIPs
+\emph{NOTA: Podrias mencionar los diferentes niveles de abstraccion a los cuales se ha 
+utilizado AC. Además, el salto a ASIPs se da de manera abrupta en el siguiente párrafo y 
+no queda un enlance entre lo que venis contando. Además, el resumen de la contribución, 
+que a este punto vas a aclarar, debe ser consecuente con lo que finalmente va a 
+presentarse en el documento.}
+
+\vspace{6pt}
+\noindent
+\textbf{Contribution: }
+This work evaluates the design performance, in area, power and execution time, of ASIPs
 for error-tolerant applications. For this purpose, three different error-tolerant applications
 were evaluated and then, for each one, an special instruction, that reflects a recurrent operation 
 in the original code, was implemented. Finally, the performance of each optimization
@@ -131,9 +141,12 @@ code was too costly, only a smaller version which contains the key processing
 was developed for testing purposes. 
 
 
+\emph{NOTA: Una vez que el resto de las secciones estén completas, hay que iterarar 
+nuevamente la introducción para que todo sea consecuente.}
+
 \section{Context and background}
 
-In the current era where sophisticated applications are widely used (e.g. GPS systems, 
+In the current era, where sophisticated applications are widely used (e.g. GPS systems, 
 speech recognition, etc.) approximate computing helps delivering acceptable
 output while keeping metrics such as response time or energy efficiency at better levels. 
 Approximate computing gives the freedom to tradeoff certain error level or allow quality degradation in the final output
@@ -141,6 +154,12 @@ of an application (e.g. noise in the output signal) for lower energy consumption
 giving the researcher a tool to adjust with the real and specific needs of a given application.
 For a given error-tolerant system, the framework on figure \ref{fig:ap} can be applied to 
 include the approximate computing paradigm \cite{xu2018approximate}.
+
+\emph{NOTA: el contenido de este párrafo se puede usar para la introducción y no acá. La 
+idea de esta sección es que sea un Related Work y, como te comenté el otro día, te 
+enfoques en contar algunas tecnicas de computación aproximada que se han aplicado a 
+GPPs y otras a ASICs (ver lista que te envio al respecto), y por ahí dejar la puerta abierta 
+para mencionar que aún no se ha hecho mucho (o nada) a nivel de ASIPs}
 
 \begin{figure}
 \begin{center}
