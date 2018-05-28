@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\usepackage{lmodern}
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
 % \documentclass[conference]{../sty/IEEEtran}
@@ -13,6 +14,7 @@
   \usetikzlibrary{shapes.geometric, positioning, calc}
   \usepackage{pgfplots}
 \usetheme{Madrid}
+
 \usecolortheme{default}
 
 \setbeamertemplate{headline}
@@ -89,9 +91,9 @@
 \column{0.5\textwidth}
 Soluciones en hardware (ASICs):
 \begin{itemize}
-\item SALSA: síntesis de circuito combinacional \cite{venkataramani2012salsa} 
-\item ASLAN: síntesis de circuito secuencial \cite{ranjan2014aslan}
-\item ABACUS: síntesis a partir de descripción de comportamiento \cite{nepal2014abacus}
+\item SALSA: síntesis de circuito combinacional 
+\item ASLAN: síntesis de circuito secuencial 
+\item ABACUS: síntesis a partir de descripción de comportamiento 
 \end{itemize}
 Soluciones en software (GPP):
 \begin{itemize}
@@ -110,7 +112,7 @@ Soluciones en software (GPP):
 \end{figure}
 \vspace*{-1.5cm}
 \begin{center}
- {\tiny \ Tomado de \cite{henkel2006design}}
+ {\tiny \ Tomado de \cite{jorgClosing}}
 \end{center}
 \end{columns}
 
@@ -329,10 +331,74 @@ Métrica	&Instr. \emph{eucl}.	&Instru. \emph{absv}.	&Instru. \emph{sob}.	&No Inst
 \section{Referencias}
 \begin{frame}
 \frametitle{Referencias}
- \bibliographystyle{sty/plainurl}
-\bibliography{references}
+\begin{thebibliography}{9}
+\bibitem{qiang} 
+ Qiang Xu, Todd Mytkowicz, and Nam Sung Kim. Approximate
+computing: A survey. \textit{IEEE Design \& Test}, 2018.
+
+\bibitem{jorgClosing}
+Jörg Henkel. Closing the soc design gap. \textit{Computer}, 36(9):119-121,
+2003.
+
+\bibitem{jorgDesign}
+Jörg Henkel. Design and architectures for embedded systems (esii),
+2006.
+
+\bibitem{swagath}
+Swagath Venkataramani, Amit Sabne, Vivek Kozhikkottu, Kaushik Roy,
+and Anand Raghunathan. Salsa: systematic logic synthesis of approximate
+circuits. In \textit{Proceedings of the 49th Annual Design Automation
+Conference}, pages 796-801. ACM, 2012.
+
+\end{thebibliography}
 \end{frame}
 
+
+\begin{frame}
+\frametitle{Referencias}
+
+\begin{thebibliography}{9}
+
+\bibitem{ashish}
+Ashish Ranjan, Arnab Raha, Swagath Venkataramani, Kaushik Roy,
+and Anand Raghunathan. Aslan: Synthesis of approximate sequential
+circuits. In \textit{Design, Automation and Test in Europe Conference and
+Exhibition (DATE), 2014}, pages 1-6. IEEE, 2014.
+
+ \bibitem{kumud}
+ Kumud Nepal, Yueting Li, R Iris Bahar, and Sherief Reda. Abacus: A
+technique for automated behavioral synthesis of approximate computing
+circuits. In \textit{Design, Automation and Test in Europe Conference and
+Exhibition (DATE), 2014}, pages 1-6. IEEE, 2014.
+
+\bibitem{stelios}
+Stelios Sidiroglou-Douskos, Sasa Misailovic, Henry Hoffmann, and
+Martin Rinard. Managing performance vs. accuracy trade-offs with loop
+perforation. In \textit{Proceedings of the 19th ACM SIGSOFT symposium and
+the 13th European conference on Foundations of software engineering},
+pages 124-134. ACM, 2011.
+
+\end{thebibliography}
+
+\end{frame}
+
+\begin{frame}
+ \frametitle{Referencias}
+ \begin{thebibliography}{9}
+ 
+ \bibitem{cheng}
+Cheng Tan, Thannirmalai Somu Muthukaruppan, Tulika Mitra, and
+Lei Ju. Approximation-aware scheduling on heterogeneous multi-core
+architectures. In \textit{Design Automation Conference (ASP-DAC), 2015 20th
+Asia and South Pacific}, pages 618-623. IEEE, 2015.
+ 
+\bibitem{hadi}
+Hadi, Esmaeilzadeh, Adrian Sampson, Luis Ceze, and Doug BurgerNeural acceleration
+for general-purpose approximate programs. \textit{IEE Micro}, 33(3):16-27, 2013
+
+ \end{thebibliography}
+
+\end{frame}
 
 
 
