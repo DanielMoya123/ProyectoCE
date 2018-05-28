@@ -146,7 +146,9 @@ a software layer; the identification of the error-tolerant parts
 and its specific details (e.g. impact analysis); and the quality management which implies a continuos evaluation to determine
 if the application meets the desired requirements \cite{xu2018approximate}.
 
-One way to implement approximate computing is through ASIPs. An ASIP is a processor that uses an application-specific instruction set, this means 
+One way to implement approximate computing is through Application-Specific Instruction 
+Processors (ASIPs). An ASIP is a processor that uses an application-specific instruction 
+set, this means 
 that, although it can execute a wide range of applications, it is optimized for a 
 specific one, in which the ASIP can execute with improved performance (for instance, 
 energy consumption or execution time would be lower) compared to a General Purpose Proccesor (GPP).
@@ -210,8 +212,10 @@ was developed for testing purposes.
 
 
 The relationship between GPPs, ASIPs, and ASICs is shown in figure \ref{fig:gaa}.
-Approximate computing can also be implemented on GPPs, due to their extremely flexible nature,
-however, because they are designed for any kind of computation, it falls on the programmers, or compilers, not on specialized hardware modules,
+Approximate computing techniques can also be implemented on GPPs, due to their 
+extremely flexible nature.
+However, because they are designed for any kind of computation, it falls on the 
+programmers, or compilers, not on specialized hardware modules,
 to make the performance of software running on these systems as high as possible. On the other hand, since ASICs are a pure hardware solution,
 approximate hardware modules would be difficult to manage in terms of quality evaluation,
 this could cause high cost of development, since the hardware would not be programmable. ASIPs can adjust to specific requirements of
@@ -252,7 +256,8 @@ As explained before, an ASIP is able to execute a wide range of operations but a
 for an specific application. Following this scheme, a general processor with common instructions (for example add,
 substract, shift, among others) was used within the ASIPMeister tool, and one specific instruction was added for each different selected application.
 This is showed in figure \ref{fig:hardware}, where, for certain operations (controlled by the processor signals) the 
-ALU is ignored and instead the result from the special additional hardware is used. 
+ALU is ignored and instead the result from the special additional hardware is used (Special 
+Instruction, SI). 
 
 \begin{figure}[t!]
 \centering
@@ -281,12 +286,13 @@ ALU is ignored and instead the result from the special additional hardware is us
 \draw (alu.220) -- ++(180:10mm) node [left] {Source 1};
 \draw (alu.140) -- ++(180:10mm) node [left] {Source 0};
 
-\node[rectangle, rounded corners,draw=black, very thick, minimum size=3em, above = 1cm of alu] (asip) {\makecell{ASIP\\Logic}};
+\node[rectangle, rounded corners,draw=black, very thick, minimum size=3em, above = 1cm 
+of alu] (asip) {\makecell{SI\\Logic}};
 
 \draw (alu.220) -- ++(180:3mm) -- ++(90:41mm)  -|  (asip.191);
 \draw (alu.140) -- ++(180:8mm) -- ++(90:28mm)  -|  (asip.153);
 
-\draw (asip.east) -- ++(0:15mm) node [right] (asipResult) {\makecell{ASIP\\Result}};
+\draw (asip.east) -- ++(0:15mm) node [right] (asipResult) {\makecell{SI\\Result}};
 
 \draw (alu.122) ++(0:60mm) ellipse (5mm and 10mm) node (mux) {\makecell{M\\U\\X}};
 
