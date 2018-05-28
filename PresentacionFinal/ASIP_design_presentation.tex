@@ -1,0 +1,343 @@
+\documentclass{beamer}
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+ \usepackage{graphicx}
+  \usepackage{array}
+  \usepackage{makecell}
+  \usepackage{multirow}
+  
+  \usepackage{tikz}
+  \usetikzlibrary{shapes.geometric, positioning, calc}
+  \usepackage{pgfplots}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\setbeamertemplate{headline}
+{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{section in head/foot}%
+    \hbox to .5\paperwidth{\hfil\insertsectionhead\hfil}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{subsection in head/foot}%
+    \hbox to .5\paperwidth{\hfil\insertsubsectionhead\hfil}
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{navigation symbols}{} 
+
+ \graphicspath{{./}{./fig/}}
+%
+\title[Uso de ASIPs] %optional
+{Hacia el uso de ASIPs en la Computación Aproximada}
+
+ 
+\author[Daniel Moya] % (optional, for multiple authors)
+{Daniel Moya Sánchez}
+ 
+\institute[ITCR] % (optional)
+{
+  Área de Ingeniería en Computadores\\
+  Instituto Tecnológico de Costa Rica
+}
+ 
+\date[Junio 2018] % (optional)
+{Proyecto de Diseño de Ingeniería en Computadores}
+
+
+ 
+ 
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+
+\section{Contenido}
+\begin{frame}
+ \frametitle{Agenda}
+\tableofcontents
+\end{frame}
+
+\section{Presentación del problema}
+\begin{frame}
+\frametitle{Problemas en el desarrollo de procesadores}
+\begin{itemize}
+ \item Área
+ \item Potencia
+ \item Tiempo de ejecución
+ \item Características eléctricas de los CMOS
+ \item Pared de memoria
+ \item Pared de utilización
+\end{itemize}
+\textbf{Computación Aproximada} como posible solución, implica:
+\begin{itemize}
+ \item Identificar secciones, funciones u operaciones aproximables
+ \item Diseñar implementación en hardware o en software
+ \item Evaluación de la calidad
+\end{itemize}
+
+\end{frame}
+
+\section{Estado del arte del problema}
+\begin{frame}
+\frametitle{Propuestas entorno a la Computación Aproximada}
+
+\begin{columns}
+
+\column{0.5\textwidth}
+Soluciones en hardware (ASICs):
+\begin{itemize}
+\item SALSA: síntesis de circuito combinacional \cite{venkataramani2012salsa} 
+\item ASLAN: síntesis de circuito secuencial \cite{ranjan2014aslan}
+\item ABACUS: síntesis a partir de descripción de comportamiento \cite{nepal2014abacus}
+\end{itemize}
+Soluciones en software (GPP):
+\begin{itemize}
+ \item Perforación de ciclos
+ \item Calendarización de tareas
+ \item Uso de red neuronal
+\end{itemize}
+ 
+\column{0.5\textwidth}
+
+ \begin{figure}
+\begin{center}
+ \includegraphics[width=1\textwidth]{GPP-ASIP-ASIC}
+ \label{fig:gaa}
+ \end{center}
+\end{figure}
+\vspace*{-1.5cm}
+\begin{center}
+ {\tiny \ Tomado de \cite{henkel2006design}}
+\end{center}
+\end{columns}
+
+\end{frame}
+
+\section{Objetivos}
+\begin{frame}
+\frametitle{Objetivos}
+\textbf{Objetivo principal}:
+ \begin{itemize}
+  \item Evaluar el desempeño de Procesadores de Conjunto de Instrucciones para Aplicaciones Específicas (ASIPs) en
+  aplicaciones tolerantes a errores. 
+ \end{itemize}
+\textbf{Objetivos específicos}:
+\begin{itemize}
+ \item Seleccionar tres aplicaciones tolerantes a errores.
+ \item Desarrollar, para cada aplicación encontrada, una instrucción especial que refleje una operación recurrente.
+ \item Evaluar el desempeño e impacto de cada optimización contra la versión original.
+\end{itemize}
+
+\end{frame}
+
+
+\section{Descripción de la solución desarrollada}
+\begin{frame}
+ \frametitle{Solución a nivel de hardware}
+\begin{itemize}
+ \item Se utiliza procesador con instrucciones comunes (sumas, multiplicaciones, etc.)
+ \item Se agrega el hardware especializado según la aplicación
+ \item Para las instrucciones especiales se utiliza el hardware adicional y no la ALU
+\end{itemize}
+
+
+ \begin{figure}[t!]
+\centering
+\resizebox{0.7\textwidth}{!}{\begin{tikzpicture}[%
+    alu/.style={trapezium,
+            trapezium angle=70,
+            shape border rotate=270,
+            minimum width=4cm,
+            minimum height=2cm,
+            trapezium stretches=true,
+            append after command={%
+                    \pgfextra
+                        \draw (\tikzlastnode.top left corner) --
+                           (\tikzlastnode.top right corner) -- 
+                           (\tikzlastnode.bottom right corner) -- 
+                           ($(\tikzlastnode.bottom right corner)!.666!(\tikzlastnode.bottom side)$)--
+                           ([xshift=8mm]\tikzlastnode.bottom side)--
+                           ($(\tikzlastnode.bottom side)!.334!(\tikzlastnode.bottom left corner)$)--
+                           (\tikzlastnode.bottom left corner)--
+                           (\tikzlastnode.top left corner);
+                    \endpgfextra}},
+            ]
+
+\node[alu] (alu) {\makecell{A\\L\\U}};
+\draw (alu.east) -- ++(0:5mm) node [right] (aluResult) {\makecell{Resultado\\ALU}};
+\draw (alu.220) -- ++(180:10mm) node [left] {Fuente 1};
+\draw (alu.140) -- ++(180:10mm) node [left] {Fuente 0};
+
+\node[rectangle, rounded corners,draw=black, very thick, minimum size=3em, above = 1cm of alu] (asip) {\makecell{Lógica\\ASIP}};
+
+\draw (alu.220) -- ++(180:3mm) -- ++(90:41mm)  -|  (asip.191);
+\draw (alu.140) -- ++(180:8mm) -- ++(90:28mm)  -|  (asip.153);
+
+\draw (asip.east) -- ++(0:9mm) node [right] (asipResult) {\makecell{Resultado\\ASIP}};
+
+\draw (alu.122) ++(0:60mm) ellipse (5mm and 10mm) node (mux) {\makecell{M\\U\\X}};
+
+\draw (aluResult.east) -- ++(0:5mm) -- ++(90:12mm) -- ++(0:7mm);
+\draw (asipResult.east) -- ++(0:5mm) -- ++(270:12mm) -- ++(0:6.7mm);
+
+\draw (mux.east) ++(0:2.2mm) -- ++(0:5mm) node [right] {Resultado};
+\end{tikzpicture}}
+\medskip
+\label{fig:hardware}
+\end{figure}
+ 
+\end{frame}
+
+\begin{frame}
+ \frametitle{Solución a nivel de software}
+ 
+ \begin{itemize}
+  \item  Instrucción \emph{eucl}: 
+ \begin{align*}
+ rd = (rs0 - rs1)^2
+\end{align*}
+
+\item Instrucción \emph{absv}:
+\begin{align*}
+ rd = rs0 > rs1 \,?\, rs0-rs1 : rs0-rs1
+\end{align*}
+
+\item Instrucción \emph{sob}:
+ \begin{align*}
+  rd = rs0^2 + rs1^2
+ \end{align*}
+ \end{itemize}
+ 
+\end{frame}
+
+
+
+\section{Resultados obtenidos}
+\begin{frame}
+\frametitle{Resultados en ciclos, área y potencia}
+
+\begin{columns}
+
+\column{0.5\textwidth}
+\vspace*{-1cm}
+\begin{figure}[t!]
+\centering
+\resizebox{0.9\textwidth}{!}{\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    enlargelimits=0.2,
+    legend style={at={(0.5,-0.15)},
+    anchor=north,legend columns=-1},
+    ybar=9pt,% configures `bar shift'
+    bar width=11pt,
+    ylabel={Speedup},
+    symbolic x coords={eucl,absv,sob},
+    xtick=data,
+    nodes near coords,
+    nodes near coords align={vertical},
+    ]
+\addplot coordinates {(eucl,1.08) (absv,1.91) (sob,1.89)};
+\addplot coordinates {(eucl,1.35) (absv,1.89) (sob,1.71)};
+\legend{Total ciclos, Operaciones enteras}
+\end{axis}
+\end{tikzpicture}}
+\label{fig:cycles}
+\end{figure}
+
+\vspace*{-1cm}
+
+\begin{table}[t!]
+\begin{center}
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|} 
+ \hline
+Métrica	&Instr. \emph{eucl}.	&Instru. \emph{absv}.	&Instru. \emph{sob}.	&No Instru. especial \\  \hline
+\# Slices	&3998	&4058	&4223	&3990 \\ \hline
+\% Slices	&5\%	&5\%	&6\%	&5\% \\ \hline
+\# LUTs	&6384	&6465	&6079	&6199 \\ \hline
+\% LUTs	&9\%	&9\%	&8\%	&8\% \\ \hline
+ \end{tabular}}
+\label{tab:area}
+\end{center}
+\end{table}
+
+
+\column{0.5\textwidth}
+
+\vspace*{-0.5cm}
+
+\begin{figure}[t!]
+\centering
+\resizebox{0.7\textwidth}{!}{\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    enlargelimits=0.15,
+    legend style={at={(0.5,-0.15)},
+    anchor=north,legend columns=-1},
+    ylabel={Consumo de potencia dinámica (mW)},
+    symbolic x coords={eucl,absv,sob, none},
+    xtick=data,
+    nodes near coords,
+    nodes near coords align={vertical},
+    ]
+\addplot coordinates {(eucl,335) (absv,333) (sob,333) (none,330)};
+\legend{Potencia Dinámica}
+\end{axis}
+\end{tikzpicture}}
+\label{fig:dynaPower}
+\end{figure}
+
+\vspace*{-0.5cm}
+
+\begin{figure}[t!]
+\centering
+\resizebox{0.7\textwidth}{!}{\begin{tikzpicture}
+\begin{axis}[
+    ybar stacked,
+    enlargelimits=0.15,
+    legend style={at={(0.5,-0.1)},
+      anchor=north,legend columns=-1},
+    ylabel={Consumo de potencia (mW)},
+    symbolic x coords={eucl, absv, sob, none},
+    xtick=data,
+    ]
+\addplot+[ybar] plot coordinates {(eucl,0) (absv,0) 
+  (sob,0) (none,0)};
+\addplot+[ybar] plot coordinates {(eucl,1163) (absv,1163) 
+  (sob,1163) (none,1163)};
+\addplot+[ybar] plot coordinates {(eucl,335) (absv,333) 
+  (sob,333) (none,330)};
+\legend{, Potencia Quiescente, Potencia Dinámica}
+\end{axis}
+\end{tikzpicture}}
+\label{fig:power}
+\end{figure}
+
+\end{columns} 
+\end{frame}
+
+\section{Conclusión}
+\begin{frame}
+\frametitle{Conclusión}
+ 
+\end{frame}
+
+
+
+\section{Referencias}
+\begin{frame}
+\frametitle{Referencias}
+ \bibliographystyle{sty/plainurl}
+\bibliography{references}
+\end{frame}
+
+
+
+
+
+ 
+\end{document}
+
+
