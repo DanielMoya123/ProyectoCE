@@ -266,7 +266,7 @@ de software como de hardware. En software una implementación típica es a través
 de \emph{Loop Perforation}, en la cual ciertos ciclos (usualmente con un patrón
 dado, como por ejemplo las pares) no son computados, lo cual, por ejemplo en una
 aplicación de cálculo numérico, reduciría la precisión del valor final
-calculado. A nivel de hardware, se pueden utilizan módulos especializados, por
+calculado. A nivel de hardware, se pueden utilizar módulos especializados, por
 ejemplo aceleradores para programas aproximados utilizando redes neuronales.
 
 %REVISAR
@@ -359,7 +359,7 @@ función 2 determine qué tipo de versiones aproximadas son las más convenientes
 la calidad de la aplicación. 
 
 %REVISAR
-Actualmente, existe una manera premiliminar de hacer la exploración y determinar
+Actualmente, existe una manera preliminar de hacer la exploración y determinar
 qué versión de una sección corresponde a ser utilizada según las restricciones
 del usuario; no obstante, no existe una herramienta que permita ingresar un código C con anotaciones
 propias y que, a partir de este, genere un nuevo código con las sustituciones correspondientes;
@@ -380,7 +380,7 @@ Con este proyecto, el conocimiento generado en Alemania se puede traer para obte
 grandes beneficios en Costa Rica, de tal forma que se incentive la investigación, e 
 inclusive una posible inversión en esta área. Actualmente no existe una herramienta 
 académica que realice lo que se plantea en esta propuesta, por lo que se espera que el 
-proyecto incentive muchos otros proyectos en el área de generación de procesadores
+proyecto incentive otros proyectos en el área de generación de procesadores
 con funciones especializadas. 
 
 
@@ -454,10 +454,10 @@ es transformado a una representación intermedia, el cual consistirá de un árbol 
 estructura que se considere apropiada) con las llamadas de las funciones. Se toma el
 algoritmo desarrollado por Juan Carlos Cruz para poder escoger cuáles versiones
 aproximadas de las posibles que existen se ajustan para cumplir a cabalidad con
-el error permitido (restricción de ecalidad) y, de la mejor manera, con la 
+el error permitido (restricción de calidad) y, de la mejor manera, con la 
 priorización de recursos. Una vez identificadas las versiones que serán utilizadas,
 se procederá a sustituir el código específico que cuente con el soporte para
-las funciones aproximadas correspondientes, utilizando modelos funcionales de 
+las funciones aproximadas correspondientes, utilizando modelos funcionales
 de aceleradores, los cuales son representaciones a nivel de software del
 hardware especialmente. Como producto final, se espera entregar una nuevo código fuente
 con todas las sustituciones correspondientes.
@@ -490,7 +490,7 @@ una versión modificada del mismo.
  de posibles versiones de secciones aproximadas (aporte de Juan Carlos) en la herramienta
  a desarrollar.
  
- \item Generar una nueva versión de código ejecutable donde se las anotaciones
+ \item Generar una nueva versión de código ejecutable donde las anotaciones
  sean sustituidas por los aceleradores o versiones aproximadas correspondientes.
  
 

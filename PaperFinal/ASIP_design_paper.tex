@@ -29,6 +29,9 @@
 \usepackage{array}
 \usepackage{makecell}
 \usepackage{multirow}
+\usepackage{caption}
+
+\usepackage[]{algorithm2e}
 
 \usepackage{cite}
 \usepackage{tabu}
@@ -320,14 +323,55 @@ as follows (considering \emph{rd} as the destination register, \emph{rs0} and \e
 At a hardware level, this instruction uses a combinatorial block (the ALU is not used), consisting in an adder (which executes a substraction when the second input
 is negated) and a multiplier.
 
+\begin{algorithm}[h!]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+ \Input{Clusters, Number of clusters and coordinates}
+ \Output{Array index of nearest cluster center}
+\BlankLine
+
+% \For{$k\leftarrow 1$ \KwTo number of objects}{
+  $min\_dist\leftarrow \text{eucl$\_$distance}(num\_dims,coord1[0],coord2[0])$\;
+  \For{$j\leftarrow 1$ \KwTo number of clusters}{
+    \For{$i\leftarrow 1$ \KwTo of number of coordinates}{
+    $dist \mathrel{+}= eucl(coord1[i],coord2[i])$\;
+    }
+  \If{$dist < min\_dist$}{$\newline min\_dist \leftarrow dist \newline index \leftarrow i$}
+  }
+  Return $i$ \medskip
+%}
+\caption{K-Means algorithm extract} \label{algo:kmeans}
+\end{algorithm}
+
+
 For the KNN application, the special instruction \emph{absv} was implemented, which executes a subtract operation with an absolute result, 
 which is used frequently in the KNN algorithm (the euclidean distance remains the main operation in this algorithm too). At at high abstraction level,
 this operation executes:
 
 \begin{align}
- rd = rs0 > rs1 \,?\, rs0-rs1 : rs0-rs1
+ rd = rs0 > rs1 \,?\, rs0-rs1 : rs0-rs1 initialization\;
 \end{align}
 At a hardware level, a simple adder (which executes a substraction) and a mux are used, in an additional combinatorial block.
+
+\begin{algorithm}[h!]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+ \Input{Prediction attribute and k value}
+ \Output{Number of correct predictions}
+\BlankLine
+
+  \For{$j\leftarrow 1$ \KwTo number of samples}{
+  $N = \textit{number of validated samples}$\;
+  $actual\leftarrow sample[N].Attributes[Predict\_attr]$\;
+  $result\leftarrow \text{KNN}(N,k_value)$\;
+  \If{$absv(actual,result)/actual < 0.2$}{$correct\_count++$}
+  }
+  Return $correct\_count$ \medskip
+\caption{KNN algorithm extract} \label{algo:knn}
+\end{algorithm}
+
 
 For the last application, the Sobel filter, the special instruction \emph{sob} was developed, which allows computing the following operation in a single cycle:
 
@@ -338,6 +382,24 @@ For the last application, the Sobel filter, the special instruction \emph{sob} w
 The operation described in (3) allows the execution of two multiplications and an addition operation, which is used frequently in the Sobel algorithm. Other operations 
 in this algorithm could not be turned into special instructions (for example, a matrix multiplication) because they require more than two paremeters. 
 At a hardware level, this instruction requires two multipliers and one adder (the ALU is not used).
+
+\begin{algorithm}[h!]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+ \Input{Image array of MxN dimensions and kernel array of IxJ dimensions}
+ \Output{New $s$ value of a pixel}
+\BlankLine
+  \tcp*[h]{Depends on filter direction}\;
+  \For{$k\leftarrow 1$ \KwTo $M$ or $N$}{
+    $sx\leftarrow \text{convolve}(Sub-image, Kernel\_X)$\;
+    $sy\leftarrow \text{convolve}(Sub-image, Kernel\_Y)$\;
+    $s=\sqrt{sob(sx,sy)}$\;
+    \If{$s >= (256 / sqrt(256 * 256 + 256 * 256))$}{$s = 255 / sqrt(256 * 256 + 256 * 256)$}
+}
+   Return $s$ \medskip
+\caption{Sobel algorithm extract} \label{algo:sobel}
+\end{algorithm}
 
 To test these special instructions, small assembly codes were developed which consist in the execution of the selected operation through an array of 100 elements. For the three
 approximate applications found, two assembly codes were developed, one with where the special instruction is used and another equivalent with common assembly instruction to 
