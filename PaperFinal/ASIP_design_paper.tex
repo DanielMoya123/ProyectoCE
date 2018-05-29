@@ -21,7 +21,7 @@
 \usepackage{pgfplots}
 \usepackage{amsmath}
 \usepackage{float}
-\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{arrows,positioning,patterns}
 % Color and strikethrough
 \usepackage{color}
 \usepackage{soul}
@@ -519,9 +519,9 @@ The quiescent power stayed the same for all processor's versions, at 1163 mW.
     symbolic x coords={eucl, absv, sob, none},
     xtick=data,
     ]
-\addplot+[ybar] plot coordinates {(eucl,0) (absv,0) 
+\addplot+[ybar,postaction={pattern=north east lines}] plot coordinates {(eucl,0) (absv,0) 
   (sob,0) (none,0)};
-\addplot+[ybar] plot coordinates {(eucl,1163) (absv,1163) 
+\addplot+[ybar,postaction={pattern=north east lines}] plot coordinates {(eucl,1163) (absv,1163) 
   (sob,1163) (none,1163)};
 \addplot+[ybar] plot coordinates {(eucl,335) (absv,333) 
   (sob,333) (none,330)};
@@ -570,7 +570,7 @@ remained the same for flexibility purposes, while a considerable reduction in ex
 % \caption{Cycles comparison for the \emph{absv} instruction}
 % \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|} 
 %  \hline
-% \multicolumn{2}{|c|}{With the \emph{absv} instruction} &\multicolumn{2}{|c|}{Without the \emph{absv} instruction}\\ \hline
+% \multicolumn{2}{|c|}{With the \emph{absv} instruction} [fill=KITgreen70,postaction={pattern=north east lines}] &\multicolumn{2}{|c|}{Without the \emph{absv} instruction}\\ \hline
 % Total Cycles	&\# Integer Operations	&Total Cycles	&\# Integer Operations	 \\ \hline
 % 1330	&1128	&2534	&2133 \\ \hline
 %  \end{tabular}}
