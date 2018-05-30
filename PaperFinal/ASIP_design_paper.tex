@@ -73,9 +73,9 @@ Email: danielmscr1994@gmail.com}}
 % in the abstract
 \begin{abstract}
 IT systems have been facing certain problems, among them the cost in area, power and execution time, which
-restrict the performance of a chip. Application-Specific Instruction Processors (ASIPs), a solution
-coming from the approximate computing area, is a design paradigm that proposes a reduction in the accuracy
-or precision of the computation to obtain opportunities for improvement in terms of
+restrict the performance of a chip. Application-Specific Instruction Processors (ASIPs) are used to propose
+a solution towards the use of the  approximate computing area, which is a design paradigm that proposes a reduction 
+in the accuracy or precision of the computation to obtain opportunities for improvement in terms of
 area, power and execution time. This paper evaluates the design of Application-Specific Instruction Processors (ASIPs)
 for error-tolerant applications in three specific applications, through the use of ASIPMeister and Dlxsim tools, which
 allow the synthesis required for a processor's hardware with its Instruction Set Architecture (ISA). 
@@ -126,7 +126,7 @@ identify error-tolerant applications and determine, in a specific manner,
 which sections or functions within these can be replaced by
 approximate versions, so that a balance can be obtained between the output quality
  and the general computing resources required. For a given error-tolerant system, 
- the framework on figure \ref{fig:ap} can be applied to 
+ the framework on Figure \ref{fig:ap} can be applied to 
 include the approximate computing paradigm \cite{xu2018approximate}.
 
 %NOTA: Podrias mencionar los diferentes niveles de abstraccion a los cuales se ha 
@@ -143,7 +143,7 @@ include the approximate computing paradigm \cite{xu2018approximate}.
  \end{center}
 \end{figure}
 
-The key elements of figure \ref{fig:ap} consist of approximate kernels, which are
+The key elements of Figure \ref{fig:ap} consist of approximate kernels, which are
 the implementation (techniques) of the approximate functions, these could be done at a hardware layer or at
 a software layer; the identification of the error-tolerant parts
 and its specific details (e.g. impact analysis); and the quality management which implies a continuos evaluation to determine
@@ -181,15 +181,16 @@ good trade-off between those variables.
 \vspace{6pt}
 \noindent
 \textbf{Contribution: }
-This work evaluates the design performance, in area, power and execution time, of ASIPs
+This work evaluates the design performance, in area, power and execution time, of ASIPs with special instructions
 for error-tolerant applications. For this purpose, three different error-tolerant applications
 were evaluated and then, for each one, an special instruction, that reflects a recurrent operation 
 in the original code, was implemented. Finally, the performance of each optimization
-was evaluated agaisnt the original version to determine the impact of the designed ASIPs.
+was evaluated against the original version to determine the impact of the designed ASIPs.
 
 Since translating a whole application from the C programming language to assembly
 code was too costly, only a smaller version which contains the key processing
-was developed for testing purposes. 
+was developed for testing purposes. The ASIPs developed do not use explicitly 
+approximate hardware, this is considered the main future work for this paper.
 
 
 %NOTA: Una vez que el resto de las secciones estén completas, hay que iterarar 
@@ -214,7 +215,7 @@ was developed for testing purposes.
 %para mencionar que aún no se ha hecho mucho (o nada) a nivel de ASIPs
 
 
-The relationship between GPPs, ASIPs, and ASICs is shown in figure \ref{fig:gaa}.
+The relationship between GPPs, ASIPs, and ASICs is shown in Figure \ref{fig:gaa}.
 Approximate computing techniques can also be implemented on GPPs, due to their 
 extremely flexible nature.
 However, because they are designed for any kind of computation, it falls on the 
@@ -234,7 +235,16 @@ of error-tolerant applications.
  \end{center}
 \end{figure}
 
-Many of the research efforts in the approximate computing area focus on hardware solutions, from approximate adders and multipliers to
+
+
+Some of the research efforts in the approximate computing area focus on software solutions, for example, in \cite{sidiroglou2011managing} the loop perforation technique
+is explained, which uses two particular methods, criticality testing (filtering of critical loops) and perforation space exploration (determining the
+best performance for a specific accuracy loss bound). A higher level solution is mentioned in \cite{tan2015approximation}, where a scheduling
+framework for meeting the performance and thermal design power is proposed. Several versions of a task are used by the scheduler to provide
+tradeoffs between different levels of quality of service and performance. A neural network based solution is detailed in \cite{esmaeilzadeh2013neural},
+where a learning model is trained to identify how an approximable region of code behaves for different approximate versions.
+
+On the other hand, hardware solutions have also been proposed; from approximate adders and multipliers to
 the design of ASICs. For example, in \cite{venkataramani2012salsa} a methodology for the automation of creating approximate circuits is proposed.
 The general idea involves using the original circuit as an input and a quality function to adjust and verify an approximate
 circuit so the quality constraint is met for a given hardware configuration. A similar approach is taken in \cite{ranjan2014aslan}, where
@@ -244,13 +254,6 @@ behavioral-level descriptions (and not RTL like the previous proposals); from th
 which is later analyzed and modified to include the approximate circuit logic, so that, as the other methods, the circuit is tested and
 its performance evaluated. 
 
-On the other hand, GPP solutions have also been proposed; for example, in \cite{sidiroglou2011managing} the loop perforation technique
-is explained, which uses two particular methods, criticality testing (filtering of critical loops) and perforation space exploration (determining the
-best performance for a specific accuracy loss bound). A higher level solution is mentioned in \cite{tan2015approximation}, where a scheduling
-framework for meeting the performance and thermal design power is proposed. Several versions of a task are used by the scheduler to provide
-tradeoffs between different levels of quality of service and performance. A neural network based solution is detailed in \cite{esmaeilzadeh2013neural},
-where a learning model is trained to identify how an approximable region of code behaves for different approximate versions.
-
 
 \section{Design of the ASIPs}
 
@@ -258,7 +261,7 @@ where a learning model is trained to identify how an approximable region of code
 As explained before, an ASIP is able to execute a wide range of operations but also some specialized instructions
 for an specific application. Following this scheme, a general processor with common instructions (for example add,
 substract, shift, among others) was used within the ASIPMeister tool, and one specific instruction was added for each different selected application.
-This is showed in figure \ref{fig:hardware}, where, for certain operations (controlled by the processor signals) the 
+This is showed in Figure \ref{fig:hardware}, where, for certain operations (controlled by the processor signals) the 
 ALU is ignored and instead the result from the special additional hardware is used (Special 
 Instruction, SI). 
 
@@ -321,7 +324,8 @@ as follows (considering \emph{rd} as the destination register, \emph{rs0} and \e
 \end{align}
 
 At a hardware level, this instruction uses a combinatorial block (the ALU is not used), consisting in an adder (which executes a substraction when the second input
-is negated) and a multiplier.
+is negated) and a multiplier. At a software level, the \emph{eucl} instruction is used in the inner loop as the main operation in the calculation of the array index of the nearest cluster
+center, as showed in the Algorithm \ref{algo:kmeans}.
 
 \begin{algorithm}[h!]
 \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
@@ -350,9 +354,12 @@ which is used frequently in the KNN algorithm (the euclidean distance remains th
 this operation executes:
 
 \begin{align}
- rd = rs0 > rs1 \,?\, rs0-rs1 : rs0-rs1 initialization\;
+ rd = rs0 > rs1 \,?\, rs0-rs1 : rs0-rs1
 \end{align}
-At a hardware level, a simple adder (which executes a substraction) and a mux are used, in an additional combinatorial block.
+At a hardware level, a simple adder (which executes a substraction) and a mux are used, in an additional combinatorial block. At a software
+level, the \emph{absv} instruction is used to compare the resulting estimate vs the actual prediction given by the user, where if 
+the given prediction is within the 20\% of the resulting estimate, the prediction is considered correct, otherwise wrong, as showed
+in the Algorithm \ref{algo:knn}.
 
 \begin{algorithm}[h!]
 \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
@@ -381,7 +388,10 @@ For the last application, the Sobel filter, the special instruction \emph{sob} w
 
 The operation described in (3) allows the execution of two multiplications and an addition operation, which is used frequently in the Sobel algorithm. Other operations 
 in this algorithm could not be turned into special instructions (for example, a matrix multiplication) because they require more than two paremeters. 
-At a hardware level, this instruction requires two multipliers and one adder (the ALU is not used).
+
+At a hardware level, this instruction requires two multipliers and one adder (the ALU is not used). At a software level, the \emph{sob} instruction is used
+to weight the values from the convolution in both $x$ with $y$ dimensions, the result is used if it is not above a maximum threshold
+(otherwise the maximum value is used), as showed in Algorithm \ref{algo:sobel}.
 
 \begin{algorithm}[h!]
 \SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
@@ -415,7 +425,7 @@ Each assembly code for the approximate applications (both the version using the 
 and integer operations (for example, multiplications, additions, etc.) for comparison. At a hardware level, the architecture with the additional specialized hardware was simulated in order
 to obtain data to compare between the optimized version and the original processor, in terms of area (slices and LUTs) and power. 
 
-The main contribution of the developed ASIPs is the speedup in terms of the total number of cycles and integer operations, as showed in figure \ref{fig:cycles}.
+The main contribution of the developed ASIPs is the speedup in terms of the total number of cycles and integer operations, as showed in Figure \ref{fig:cycles}.
 For the \emph{eucl} instruction, the total cycles were reduced from 5130 to 4730 in the optimized version, and the integer operations from 1528 to 1128. 
 For the \emph{absv} instruction, the total cycles changed from 2534 to 1330 and the integer operations from 2133 to 1128 with the optimized version. Finally,
 the \emph{sob} instruction achieved a reduction in total cycles from 8930 to 4730 and integer operations from 1928 to 1128 in the optimized version.
@@ -439,11 +449,10 @@ the \emph{sob} instruction achieved a reduction in total cycles from 8930 to 473
     nodes near coords align={vertical},
     ]
 \addplot coordinates {(eucl,1.08) (absv,1.91) (sob,1.89)};
-\addplot coordinates {(eucl,1.35) (absv,1.89) (sob,1.71)};
+\addplot[postaction={pattern=north west lines}] coordinates {(eucl,1.35) (absv,1.89) (sob,1.71)};
 \legend{Total cycles,Integer Operations}
 \end{axis}
 \end{tikzpicture}}
-\medskip
 \caption{Cycles comparison.} 
 \label{fig:cycles}
 \end{figure}
@@ -452,7 +461,8 @@ the \emph{sob} instruction achieved a reduction in total cycles from 8930 to 473
 The \emph{eucl} instruction got the smaller reduction because its transformation only combined two separated assembly instructions (substract and then multiply)
 into one operation. The \emph{sob} instruction, although somewhat similar to the \emph{eucl}, got a bigger reduction in number of cycles because it transformed
 tree single assembly operations (two multiplications and one addition) into only one special instruction. Finally, the \emph{absv} got the most significant reduction
-in total cycles since it performs a very specific operation, while the normal assembly instructions' version used branch logical to test for a negative value in the substraction.
+in total cycles since it performs a very specific operation, while the normal assembly instructions' version used branch logic to test for a negative value in the substraction
+and apply the proper operation.
 
 
 The additional area caused by the ASIP hardware had a minimal impact compared to the general processor, as showed in Table \ref{tab:area}.
@@ -480,8 +490,9 @@ Metric	&\emph{eucl} instr.	&\emph{absv} instr.	&\emph{sob} instr.	&No special in
 
 As same as the area, the impact on the power was very low, as showed in Figures \ref{fig:dynaPower} and \ref{fig:power}.
 The maximum difference on power was 5 mW in the dynamic power, as showed in Figure \ref{fig:dynaPower}. 
-The quiescent power stayed the same for all processor's versions, at 1163 mW. 
-
+The quiescent power stayed the same for all processor's versions, at 1163 mW, which added to the dynamic
+power makes a total power between 1493 to 1498 mW; as showed in Figure \ref{fig:power} this difference
+is not noticeable.
 
 \begin{figure}[t!]
 \centering
@@ -501,7 +512,6 @@ The quiescent power stayed the same for all processor's versions, at 1163 mW.
 \legend{Dynamic Power}
 \end{axis}
 \end{tikzpicture}}
-\medskip
 \caption{Cycles comparison.} 
 \label{fig:dynaPower}
 \end{figure}
@@ -519,7 +529,7 @@ The quiescent power stayed the same for all processor's versions, at 1163 mW.
     symbolic x coords={eucl, absv, sob, none},
     xtick=data,
     ]
-\addplot+[ybar,postaction={pattern=north east lines}] plot coordinates {(eucl,0) (absv,0) 
+\addplot+[ybar] plot coordinates {(eucl,0) (absv,0) 
   (sob,0) (none,0)};
 \addplot+[ybar,postaction={pattern=north east lines}] plot coordinates {(eucl,1163) (absv,1163) 
   (sob,1163) (none,1163)};
@@ -528,108 +538,21 @@ The quiescent power stayed the same for all processor's versions, at 1163 mW.
 \legend{, Quiescent Power, Dynamic Power}
 \end{axis}
 \end{tikzpicture}}
-\medskip
 \caption{Power comparison.} 
 \label{fig:power}
 \end{figure}
 
 
-The minimum impact on area and power was mainly due to the main processor having relatively already a lot of hardware
-to support common assembly instruction, and since the whole processor was, for all the three special instructions,
-remained the same for flexibility purposes, while a considerable reduction in execution time was achieved. 
-
-% \begin{table}[h!]
-% \begin{center}
-% \caption{Cycles comparison for the \emph{eucl} instruction}
-% \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|} 
-%  \hline
-% \multicolumn{2}{|c|}{With the \emph{eucl} instruction} &\multicolumn{2}{|c|}{Without the \emph{eucl} instruction}\\ \hline
-% Total Cycles	&\# Integer Operations	&Total Cycles	&\# Integer Operations	 \\ \hline
-% 4730	&1128	&5130	&1528 \\ \hline
-%  \end{tabular}}
-% \label{tab:schd}
-% \end{center}
-% \end{table}
-
-% \begin{table}[h!]
-% \begin{center}
-% \caption{Power comparison for the \emph{eucl} instruction}
-% \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|} 
-%  \hline
-% \multicolumn{3}{|c|}{With the \emph{eucl} instruction} &\multicolumn{3}{|c|}{Without the \emph{eucl} instruction}\\ \hline
-% Total Power 	&Dynamic Power 	&Quiescent Power 	&Total Power 	&Dynamic Power 	&Quiescent Power  \\ \hline
-% 1497 mW	&335 mW	&1163 mW	&1492 mW	&330 mW	&1163 mW \\ \hline
-% \end{tabular}}
-% \label{tab:schd}
-% \end{center}
-% \end{table}
-% 
-% 
-% \begin{table}[h!]
-% \begin{center}
-% \caption{Cycles comparison for the \emph{absv} instruction}
-% \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|} 
-%  \hline
-% \multicolumn{2}{|c|}{With the \emph{absv} instruction} [fill=KITgreen70,postaction={pattern=north east lines}] &\multicolumn{2}{|c|}{Without the \emph{absv} instruction}\\ \hline
-% Total Cycles	&\# Integer Operations	&Total Cycles	&\# Integer Operations	 \\ \hline
-% 1330	&1128	&2534	&2133 \\ \hline
-%  \end{tabular}}
-% \label{tab:schd}
-% \end{center}
-% \end{table}
-% 
-% 
-% 
-% \begin{table}[h!]
-% \begin{center}
-% \caption{Power comparison for the \emph{absv} instruction}
-% \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|} 
-%  \hline
-% \multicolumn{3}{|c|}{With the \emph{absv} instruction} &\multicolumn{3}{|c|}{Without the \emph{absv} instruction}\\ \hline
-% Total Power 	&Dynamic Power 	&Quiescent Power 	&Total Power 	&Dynamic Power 	&Quiescent Power  \\ \hline
-% 1495 mW	&333 mW	&1163 mW	&1492 mW	&330 mW	&1163 mW \\ \hline
-% \end{tabular}}
-% \label{tab:schd}
-% \end{center}
-% \end{table}
-% 
-% \begin{table}[h!]
-% \begin{center}
-% \caption{Cycles comparison for the \emph{sob} instruction}
-% \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|} 
-%  \hline
-% \multicolumn{2}{|c|}{With the \emph{sob} instruction} &\multicolumn{2}{|c|}{Without the \emph{sob} instruction}\\ \hline
-% Total Cycles	&\# Integer Operations	&Total Cycles	&\# Integer Operations	 \\ \hline
-% 4730	&1128	&8930	&1928 \\ \hline
-%  \end{tabular}}
-% \label{tab:schd}
-% \end{center}
-% \end{table}
-% 
-% 
-% 
-% 
-% \begin{table}[h!]
-% \begin{center}
-% \caption{Power comparison for the \emph{sob} instruction}
-% \resizebox{0.5\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|} 
-%  \hline
-% \multicolumn{3}{|c|}{With the \emph{sob} instruction} &\multicolumn{3}{|c|}{Without the \emph{sob} instruction}\\ \hline
-% Total Power 	&Dynamic Power 	&Quiescent Power 	&Total Power 	&Dynamic Power 	&Quiescent Power  \\ \hline
-% 1495 mW	&333 mW	&1163 mW	&1492 mW	&330 mW	&1163 mW \\ \hline
-% \end{tabular}}
-% \label{tab:schd}
-% \end{center}
-% \end{table}
-
+The minimum impact on area and power was mainly due to the main processor having already a lot of hardware
+to support common assembly instructions, and while almost the whole processor remained, for all the three special instructions,
+the same for flexibility purposes, a considerable reduction in execution time was achieved. 
 
 \section{Conclusion}
 
 
-The developed ASIPs showed lower execution times while increasing the overall hardware and power at roughly 1\% compared to the original version.
-
-It is expected that this paper brings new research in the area of ASIPs. Further work involves creating an automated version of this work.
-
+The developed ASIPs showed speedups in total of cycles of almost 2X while increasing the overall hardware area and power at roughly  1\% and 5mW respectively compared to the unmodified version.
+Future work involves implementing hardware-level approximation for the SI logic developed, which will increase the execution time at a cost of output quality, which 
+will further give the ASIPs the freedom to adjust to more type of needs in different scenarios.
 
 
 

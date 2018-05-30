@@ -11,7 +11,7 @@
   \usepackage{multirow}
   
   \usepackage{tikz}
-  \usetikzlibrary{shapes.geometric, positioning, calc}
+  \usetikzlibrary{shapes.geometric, patterns, positioning, calc}
   \usepackage{pgfplots}
 \usetheme{Madrid}
 
@@ -146,7 +146,7 @@ Soluciones en software (GPP):
 \end{itemize}
 
 
- \begin{figure}[t!]
+\begin{figure}[t!]
 \centering
 \resizebox{0.7\textwidth}{!}{\begin{tikzpicture}[%
     alu/.style={trapezium,
@@ -173,21 +173,21 @@ Soluciones en software (GPP):
 \draw (alu.220) -- ++(180:10mm) node [left] {Fuente 1};
 \draw (alu.140) -- ++(180:10mm) node [left] {Fuente 0};
 
-\node[rectangle, rounded corners,draw=black, very thick, minimum size=3em, above = 1cm of alu] (asip) {\makecell{Lógica\\ASIP}};
+\node[rectangle, rounded corners,draw=black, very thick, minimum size=3em, above = 1cm 
+of alu] (asip) {\makecell{Lógica\\de la IS}};
 
 \draw (alu.220) -- ++(180:3mm) -- ++(90:41mm)  -|  (asip.191);
 \draw (alu.140) -- ++(180:8mm) -- ++(90:28mm)  -|  (asip.153);
 
-\draw (asip.east) -- ++(0:9mm) node [right] (asipResult) {\makecell{Resultado\\ASIP}};
+\draw (asip.east) -- ++(0:8mm) node [right] (asipResult) {\makecell{Resultado\\IS}};
 
 \draw (alu.122) ++(0:60mm) ellipse (5mm and 10mm) node (mux) {\makecell{M\\U\\X}};
 
-\draw (aluResult.east) -- ++(0:5mm) -- ++(90:12mm) -- ++(0:7mm);
-\draw (asipResult.east) -- ++(0:5mm) -- ++(270:12mm) -- ++(0:6.7mm);
+\draw (aluResult.east) -- ++(0:5mm) -- ++(90:12mm) -- ++(0:7.7mm);
+\draw (asipResult.east) -- ++(0:5mm) -- ++(270:12mm) -- ++(0:7.5mm);
 
 \draw (mux.east) ++(0:2.2mm) -- ++(0:5mm) node [right] {Resultado};
 \end{tikzpicture}}
-\medskip
 \label{fig:hardware}
 \end{figure}
  
@@ -242,7 +242,7 @@ Soluciones en software (GPP):
     nodes near coords align={vertical},
     ]
 \addplot coordinates {(eucl,1.08) (absv,1.91) (sob,1.89)};
-\addplot coordinates {(eucl,1.35) (absv,1.89) (sob,1.71)};
+\addplot[postaction={pattern=north west lines}] coordinates {(eucl,1.35) (absv,1.89) (sob,1.71)};
 \legend{Total ciclos, Operaciones enteras}
 \end{axis}
 \end{tikzpicture}}
@@ -307,11 +307,11 @@ Métrica	&Instr. \emph{eucl}.	&Instru. \emph{absv}.	&Instru. \emph{sob}.	&No Inst
     ]
 \addplot+[ybar] plot coordinates {(eucl,0) (absv,0) 
   (sob,0) (none,0)};
-\addplot+[ybar] plot coordinates {(eucl,1163) (absv,1163) 
+\addplot+[ybar,postaction={pattern=north east lines}] plot coordinates {(eucl,1163) (absv,1163) 
   (sob,1163) (none,1163)};
 \addplot+[ybar] plot coordinates {(eucl,335) (absv,333) 
   (sob,333) (none,330)};
-\legend{, Potencia Quiescente, Potencia Dinámica}
+\legend{, Potencia Estática, Potencia Dinámica}
 \end{axis}
 \end{tikzpicture}}
 \label{fig:power}
@@ -324,11 +324,12 @@ Métrica	&Instr. \emph{eucl}.	&Instru. \emph{absv}.	&Instru. \emph{sob}.	&No Inst
 \begin{frame}
 \frametitle{Conclusión}
 \begin{itemize} 
- \item Para un overhead casi insiginicativo en área 1\% y un 5mW, se pueden tener hasta 2x se logró tener hasta una mejora de tanto
- 
- \item Esto nos da la oportunidad de que si esta ejecución pueden ser más rápida debido a aproximaciones, todavía se puede generar un mayor speedup
+ \item Se puede obtener una mejora de casi 2X con un costo mínimo de un 1\% en área y hasta 5mW en consumo de potencia.
 \end{itemize}
-
+\bigskip
+\begin{itemize}
+ \item \textbf{Trabajo Futuro}: se puede tener una ejecución más rápida si se utilizan aproximaciones ya sea a nivel de software o hardware.
+\end{itemize}
  
 \end{frame}
 

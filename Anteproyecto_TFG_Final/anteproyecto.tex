@@ -120,8 +120,8 @@ por ejemplo:
  de la capacidad de procesamiento contra la velocidad de obtención de datos
  desde la memoria;
 
- \item y la pared de utilización, la cual limita el uso máximo de hardware
- simultáneamente debido a las capacidades de disipación de calor de un sistema.
+ \item y la pared de utilización, la cual limita el uso simultáneo máximo de hardware
+  debido a las capacidades de disipación de calor en un sistema.
 \end{compactitem}
 
 Para poder enfrentar los problemas mencionados anteriormente, un área de
@@ -140,7 +140,7 @@ anteproyecto para el diseño asistido de aplicaciones aproximadas en sistemas
 computacionales personalizables, considerando una plataforma con multiples aceleradores 
 de hardware disponibles. Con la realización del proyecto se espera constribuir a la 
 investigación en el campo de la computación aproximada, especialmente en el Instituto 
-Tecnológico de Karlsruhe en Alemania, así como en el de área de ingeniería en 
+Tecnológico de Karlsruhe en Alemania, así como en el área de ingeniería en 
 computadores en general.
 
 En la siguiente sección se presenta el contexto y los antecedentes del proyecto, que 
@@ -218,7 +218,7 @@ como uso de ASIPs y aceleradores para la computación de ciertos algoritmos. Las
 áreas de conocimiento de ingeniería que se tratan son: conocimiento sobre aspectos de 
 arquitectura y micro-arquitectura de procesadores (por lo mencionado anteriormente), 
 desarrollo de compiladores, dado que se modificará el \emph{frontend} de un compilador 
-(Clang), finalmente, análisis de posibles aproximaciones Clang algoritmos en código escritos 
+(Clang), finalmente, análisis de posibles aproximaciones de algoritmos en código escritos 
 en el lenguaje de programación C, donde se espera agregar identificadores a las funciones 
 que se busquen aproximar, para posteriormente ser procesadas de manera especial en la 
 representación intermedia del código que se genere.
@@ -264,14 +264,14 @@ requerimientos deseados.
 Como se mencionó, la computación aproximada puede ser implementada tanto a nivel
 de software como de hardware. En software una implementación típica es a través
 de \emph{Loop Perforation}, en la cual ciertos ciclos (usualmente con un patrón
-dado, como por ejemplo las pares) no son computados, lo cual, por ejemplo en una
+dado, como por ejemplo los pares) no son computados, lo cual, por ejemplo en una
 aplicación de cálculo numérico, reduciría la precisión del valor final
 calculado. A nivel de hardware, se pueden utilizar módulos especializados, por
 ejemplo aceleradores para programas aproximados utilizando redes neuronales.
 
 %REVISAR
 El graduado de la carrera Ingeniería en Computadores Juan Carlos Cruz, realizó
-un trabajo sobre la computación aproximada, donde él se dio a la tarea de
+un trabajo sobre la computación aproximada, donde él se dio la tarea de
 caracterizar aplicaciones tolerantes a errores. Se busca partir de lo que Cruz
 trabajó y usar el conocmiento de qué versión aproximada es la correcta
 para entonces, a través de la modificación de Clang, generar un nuevo código 
@@ -282,7 +282,7 @@ C con las sustituciones correspondientes.
 \subsubsection{Especificación del Problema}
 
 Al contar con una aplicación que presenta una estructura en \emph{pipeline}, es decir, que 
-posee una serie de etapas donde cada etapa recibe su entrada de una etapa anterior y 
+posee una serie de etapas, donde cada etapa recibe su entrada de una etapa anterior y 
 produce una salida para la etapa siguiente, y donde una o más etapas pueden ser 
 aproximables con más de una versión aproximable (una versión se puede concentrar en 
 mejorar el consumo de potencia, mientras que otra el tiempo de ejecución, por ejemplo) 
@@ -517,7 +517,7 @@ una versión modificada del mismo.
  
  \item Jorge Alberto Castro Godínez: Profesor tutor en el KIT, Alemania. Es investigador y 
  estudiante de doctorado, a cargo de varios proyectos en el CES. Dentro de los beneficios 
- está el conocimiento que se genere dado a el intercambio de ideas y resultados del 
+ está el conocimiento que se genere debido al intercambio de ideas y resultados del 
  proyecto, que ampliarán las habilidades técnicas tanto a nivel de hardware como de 
  software. 
  
@@ -587,13 +587,13 @@ A continuación se explica cada riesgo detalladamente:
  no puedan atender alguna duda o simplemente no se encuentren disponibles en una semana 
  determinada, lo cual atrase la revisión del trabajo.
  
- \item Carencia de materiales necesarias para el proyecto: El atraso de la entrega o no
+ \item Carencia de materiales necesarios para el proyecto: El atraso de la entrega o no
  la presencia de alguno de los materiales (información o programas de software principalmente) que se necesitan
  para realizar el proyecto, siendo el más importante las versiones aproximadas y los modelos
- de los acelerados que se utilizarán. 
+ de los aceleradores que se utilizarán. 
  
  \item Errores a la hora de modificar Clang: Problemas de dependencias o aceptación de las 
- modificaciones realizadas para el \emph{frontend} Clang. 
+ modificaciones realizadas para el compilador de \emph{frontend} Clang. 
  
  \item Dificultades a la hora de implementar algoritmo de exploración: Problemas a la
  hora de entender y adaptar
@@ -738,8 +738,8 @@ que se agreguen en el \\código para establecer qué funciones son aproximables.}	
  &\makecell{Código en representación de árbol de llamadas\\u otro tipo de representación según se determine} \\ \hline
   \makecell{Implementar el algoritmo propuesto para la exploración del\\ espacio de diseño de posibles 
   versiones de secciones \\aproximadas (aporte de Juan Carlos) en la herramienta a\\ desarrollar}
-  &\makecell{Adaptación del algoritmo desarrollado en\\ la herramienta propuesta} \\ \hline 
- \makecell{Generar una nueva versión de código ejecutable donde se\\ las anotaciones sean sustituidas por
+  &\makecell{Adaptación del algoritmo desarrollado en la\\ herramienta propuesta} \\ \hline 
+ \makecell{Generar una nueva versión de código ejecutable donde\\ las anotaciones sean sustituidas por
  los aceleradores o \\versiones aproximadas correspondientes}	&\makecell{Código generado con anotaciones (pragmas)\\ sustituidas} \\ \hline
 \end{tabular}}
 \label{tab:entrega}
